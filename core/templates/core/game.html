@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vocab Hero</title>
+</head>
+<body>
+    <h1>Translate this word:</h1>
+    <h2>{{ word.english }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="answer" placeholder="Zadej český překlad">
+        <button type="submit">Odeslat</button>
+    </form>
+</body>
+</html>
