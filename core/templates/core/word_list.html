@@ -13,58 +13,134 @@
         background-color: #d4edda;
         color: #155724;
         font-weight: bold;
-    }
-    .difficulty-medium {
-        background-color: #fff3cd;
-        color: #856404;
-        font-weight: bold;
-    }
-    .difficulty-hard {
-        background-color: #f8d7da;
-        color: #721c24;
-        font-weight: bold;
-    }
+        }
+        .difficulty-medium {
+            background-color: #fff3cd;
+            color: #856404;
+            font-weight: bold;
+        }
+        .difficulty-hard {
+            background-color: #f8d7da;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        }
+
+        .word-card {
+            background: #fff9f9;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid #f0e5e5;
+        }
+
+        .word-card:hover {
+            transform: scale(1.03);
+        }
+
+        .word-card h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #444;
+        }
+
+        .word-card p {
+            font-size: 1.1em;
+            color: #888;
+            margin: 8px 0;
+        }
+
+        .label {
+            display: inline-block;
+            font-size: 0.9em;
+            padding: 6px 10px;
+            border-radius: 12px;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .difficulty-easy .label {
+            background-color: #a3e4d7; /* mint */
+        }
+
+        .difficulty-medium .label {
+            background-color: #f9e79f; /* žlutá */
+            color: #555;
+        }
+
+        .difficulty-hard .label {
+            background-color: #f5b7b1; /* růžová */
+        }
+
+        .difficulty-filters input[type="radio"] {
+            display: none;
+        }
+
+        .difficulty-filters label {
+            background-color: #fceef2;
+            color: #333;
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 1px solid #f7c6d2;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-size: 0.95em;
+            user-select: none;
+        }
+
+        .difficulty-filters input[type="radio"]:checked + label {
+            background-color: #f8c8dc;
+            color: #000;
+            border-color: #f5a5bd;
+            font-weight: bold;
+            transform: scale(1.05);
+        }
+
+        .difficulty-filters label:hover {
+            background-color: #fddde8;
+            border-color: #f5a5bd;
+        }
+
     </style>
 </head>
 <body>
     <h1>Slovíčka z databáze 💬</h1>
 
-    <form method="get">
-        <input type="text" name="q" placeholder="Hledat slovo..." value="{{ request.GET.q }}">
-        
-        <select name="difficulty">
-            <option value="">Všechny úrovně</option>
-            <option value="easy" {% if request.GET.difficulty == "easy" %}selected{% endif %}>Začátečník</option>
-            <option value="medium" {% if request.GET.difficulty == "medium" %}selected{% endif %}>Pokročilý</option>
-            <option value="hard" {% if request.GET.difficulty == "hard" %}selected{% endif %}>Expert</option>
-        </select>
+<form method="get" class="difficulty-filters">
+    <input type="radio" id="all" name="difficulty" value="" {% if not selected_difficulty %}checked{% endif %} onchange="this.form.submit()">
+    <label for="all">Vše</label>
 
-        <button type="submit">Filtrovat</button>
-    </form>
+    <input type="radio" id="easy" name="difficulty" value="easy" {% if selected_difficulty == 'easy' %}checked{% endif %} onchange="this.form.submit()">
+    <label for="easy">Začátečník</label>
+
+    <input type="radio" id="medium" name="difficulty" value="medium" {% if selected_difficulty == 'medium' %}checked{% endif %} onchange="this.form.submit()">
+    <label for="medium">Pokročilý</label>
+
+    <input type="radio" id="hard" name="difficulty" value="hard" {% if selected_difficulty == 'hard' %}checked{% endif %} onchange="this.form.submit()">
+    <label for="hard">Expert</label>
+</form>
 
     <table>
-        <tr>
-            <th>Anglicky</th>
-            <th>Česky</th>
-            <th>Obtížnost</th>
-        </tr>
-        {% for word in words %}
-        <tr>
-            <td>{{ word.english }}</td>
-            <td>{{ word.czech }}</td>
-            <td class="
-                {% if word.difficulty == 'easy' %}difficulty-easy
-                {% elif word.difficulty == 'medium' %}difficulty-medium
-                {% elif word.difficulty == 'hard' %}difficulty-hard
-                {% endif %}
-                ">
-                {% if word.difficulty == 'easy' %}Začátečník
-                {% elif word.difficulty == 'medium' %}Pokročilý
-                {% elif word.difficulty == 'hard' %}Expert
-                {% else %}?{% endif %}
-            </td>
-        </tr>
-        {% endfor %}
+        <div class="card-container">
+    {% for word in words %}
+    <div class="word-card difficulty-{{ word.difficulty }}">
+        <h2>{{ word.english }}</h2>
+        <p>{{ word.czech }}</p>
+        <span class="label">
+            {% if word.difficulty == "easy" %}Začátečník
+            {% elif word.difficulty == "medium" %}Pokročilý
+            {% elif word.difficulty == "hard" %}Expert
+            {% else %}?{% endif %}
+        </span>
+    </div>
+    {% endfor %}
+    </div>
     </table>
 </body>
 </html>

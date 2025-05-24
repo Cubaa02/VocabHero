@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .models import Word
 from django.db.models import Q
 
+
 def game_view(request):
     word = random.choice(Word.objects.all())  # náhodné slovo z databáze
     return render(request, 'core/game.html', {'word': word})
@@ -24,4 +25,8 @@ def word_list(request):
     if difficulty:
         words = words.filter(difficulty=difficulty)
 
-    return render(request, 'core/word_list.html', {'words': words})
+    return render(request, 'core/word_list.html', {
+        'words': words,
+        'selected_difficulty': difficulty  
+    })
+    
