@@ -26,18 +26,22 @@
         }
 
         .card-container {
-        display: grid;
+        display: flex;
+        flex-wrap: wrap;
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        justify-content: flex-start; 
         gap: 20px;
         }
 
         .word-card {
+            flex: 1 1 150px;
             background: #fff9f9;
             padding: 20px;
             border-radius: 16px;
             box-shadow: 0 6px 12px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
             border: 1px solid #f0e5e5;
+            max-width: 250px;   /* omezí šířku */
         }
 
         .word-card:hover {
@@ -110,7 +114,16 @@
     </style>
 </head>
 <body>
-    <h1>Slovíčka z databáze 💬</h1>
+    <h1>Slovíčka z databáze </h1>
+
+<input type="text" id="searchInput" placeholder="Hledat slovíčko..." style="
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+">
 
 <form method="get" class="difficulty-filters">
     <input type="radio" id="all" name="difficulty" value="" {% if not selected_difficulty %}checked{% endif %} onchange="this.form.submit()">
@@ -127,7 +140,7 @@
 </form>
 
     <table>
-        <div class="card-container">
+    <div class="card-container">
     {% for word in words %}
     <div class="word-card difficulty-{{ word.difficulty }}">
         <h2>{{ word.english }}</h2>
@@ -142,5 +155,24 @@
     {% endfor %}
     </div>
     </table>
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.word-card');
+
+    searchInput.addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+
+        cards.forEach(card => {
+            const english = card.querySelector('h2').textContent.toLowerCase();
+            const czech = card.querySelector('p').textContent.toLowerCase();
+
+            if (english.includes(filter) || czech.includes(filter)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
 </body>
 </html>
