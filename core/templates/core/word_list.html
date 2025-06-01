@@ -142,7 +142,11 @@
     <table>
     <div class="card-container">
     {% for word in words %}
-    <div class="word-card difficulty-{{ word.difficulty }}">
+    <div class="word-card difficulty-{{ word.difficulty }}" 
+      data-english="{{ word.english }}"
+      data-czech="{{ word.czech }}"
+      data-difficulty="{{ word.difficulty }}"
+      data-example="Např.: I {{ word.english|lower }} my homework.">
         <h2>{{ word.english }}</h2>
         <p>{{ word.czech }}</p>
         <span class="label">
@@ -155,6 +159,17 @@
     {% endfor %}
     </div>
     </table>
+<div id="wordModal" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px);">
+    <div style="background: #fff; max-width: 500px; margin: 80px auto; padding: 30px; border-radius: 20px; position: relative; box-shadow: 0 12px 24px rgba(0,0,0,0.2);">
+        <span id="closeModal" style="position: absolute; top: 10px; right: 20px; cursor: pointer; font-weight: bold; font-size: 24px;">&times;</span>
+        <h2 id="modalEnglish" style="font-size: 2em; color: #333;"></h2>
+        <p style="font-size: 1.2em;"><strong>Překlad:</strong> <span id="modalCzech"></span></p>
+        <p><strong>Obtížnost:</strong> <span id="modalDifficulty" style="font-weight: bold;"></span></p>
+        <p><strong>Příklad věty:</strong></p>
+        <p id="modalExample" style="font-style: italic; color: #555;"></p>
+        <button onclick="document.getElementById('wordModal').style.display='none';" style="margin-top: 20px; padding: 10px 20px; border-radius: 12px; border: none; background: #f5a5bd; color: white; font-weight: bold; cursor: pointer;">Zavřít</button>
+    </div>
+</div>
 <script>
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.word-card');
@@ -172,6 +187,42 @@
                 card.style.display = 'none';
             }
         });
+    });
+
+    const modal = document.getElementById('wordModal');
+    const closeBtn = document.getElementById('closeModal');
+
+    const modalEnglish = document.getElementById('modalEnglish');
+    const modalCzech = document.getElementById('modalCzech');
+    const modalDifficulty = document.getElementById('modalDifficulty');
+    const modalExample = document.getElementById('modalExample');
+
+    document.querySelectorAll('.word-card').forEach(card => {
+        card.addEventListener('click', () => {
+            modalEnglish.textContent = card.dataset.english;
+            modalCzech.textContent = card.dataset.czech;
+
+            const difficultyMap = {
+                'easy': 'Začátečník',
+                'medium': 'Pokročilý',
+                'hard': 'Expert'
+            };
+            modalDifficulty.textContent = difficultyMap[card.dataset.difficulty] || 'Neznámá';
+
+            modalExample.textContent = card.dataset.example;
+
+            modal.style.display = 'block';
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            modal.style.display = 'none';
+        }
     });
 </script>
 </body>
