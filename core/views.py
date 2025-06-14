@@ -14,7 +14,7 @@ def word_list(request):
     query = request.GET.get("q", "")
     difficulty = request.GET.get("difficulty", "")
 
-    words = Word.objects.all()
+    words = Word.ordered_by_difficulty()  # 👈 použijeme vlastní seřazení
 
     if query:
         words = words.filter(
@@ -27,6 +27,5 @@ def word_list(request):
 
     return render(request, 'core/word_list.html', {
         'words': words,
-        'selected_difficulty': difficulty  
+        'selected_difficulty': difficulty
     })
-    

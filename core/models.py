@@ -34,6 +34,14 @@ class Word(models.Model):
         verbose_name="Kategorie",
         help_text="Vyber kategorii (nepovinné)"
     )
+
+    example_sentence = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Příklad věty",
+        help_text="Věta, kde se používá anglické slovo"
+    )
+    
     class Meta:
         verbose_name = "Slovo"
         verbose_name_plural = "Slova"

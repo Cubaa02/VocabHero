@@ -146,7 +146,8 @@
       data-english="{{ word.english }}"
       data-czech="{{ word.czech }}"
       data-difficulty="{{ word.difficulty }}"
-      data-example="Např.: I {{ word.english|lower }} my homework.">
+      data-example="{{ word.example_sentence|default:"No example yet." }}"
+      data-category="{% if word.category %}{{ word.category.name }}{% else %}Bez kategorie{% endif %}">
         <h2>{{ word.english }}</h2>
         <p>{{ word.czech }}</p>
         <span class="label">
@@ -165,6 +166,7 @@
         <h2 id="modalEnglish" style="font-size: 2em; color: #333;"></h2>
         <p style="font-size: 1.2em;"><strong>Překlad:</strong> <span id="modalCzech"></span></p>
         <p><strong>Obtížnost:</strong> <span id="modalDifficulty" style="font-weight: bold;"></span></p>
+        <p><strong>Kategorie:</strong> <span id="modalCategory" style="font-weight: bold;"></span></p>
         <p><strong>Příklad věty:</strong></p>
         <p id="modalExample" style="font-style: italic; color: #555;"></p>
         <button onclick="document.getElementById('wordModal').style.display='none';" style="margin-top: 20px; padding: 10px 20px; border-radius: 12px; border: none; background: #f5a5bd; color: white; font-weight: bold; cursor: pointer;">Zavřít</button>
@@ -196,6 +198,7 @@
     const modalCzech = document.getElementById('modalCzech');
     const modalDifficulty = document.getElementById('modalDifficulty');
     const modalExample = document.getElementById('modalExample');
+    const modalCategory = document.getElementById('modalCategory');
 
     document.querySelectorAll('.word-card').forEach(card => {
         card.addEventListener('click', () => {
@@ -208,6 +211,8 @@
                 'hard': 'Expert'
             };
             modalDifficulty.textContent = difficultyMap[card.dataset.difficulty] || 'Neznámá';
+
+            modalCategory.textContent = card.dataset.category;
 
             modalExample.textContent = card.dataset.example;
 
