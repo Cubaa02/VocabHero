@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Přidat slovíčko | VocabHero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #ffd5ec;
+      --blue: #cceeff;
+      --white: #fff;
+      --glass: rgba(255, 255, 255, 0.5);
+      --border: rgba(255, 255, 255, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(-45deg, var(--pink), var(--blue), #ffeaf5, #fbe5ff);
+      background-size: 400% 400%;
+      animation: dreamyBG 20s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes dreamyBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .form-box {
+      background: var(--glass);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8em;
+      color: #5a4e66;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 4px;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      background: #fffafc;
+      font-size: 1em;
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #e59fcf;
+      box-shadow: 0 0 8px #f3c1e9;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 14px;
+      font-weight: bold;
+      background: linear-gradient(to right, #e0b3ff, #ffc1e3);
+      color: white;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #c68cff, #ff9ed2);
+      box-shadow: 0 0 8px #f7d2f2;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #a36fd0;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .back-link:hover {
+      color: #c678dd;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h1>✨ Přidat nové slovíčko</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">💫 Uložit slovíčko</button>
+    </form>
+    <a href="{% url 'word_list' %}" class="back-link">← Zpět na seznam slovíček</a>
+  </div>
+</body>
+</html>

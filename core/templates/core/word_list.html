@@ -1,234 +1,370 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <title>Word List</title>
-    <style>
-        body { font-family: sans-serif; background: #f5f5f5; padding: 20px; }
-        table { border-collapse: collapse; width: 100%; background: white; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #333; color: white; }
-        form { margin-bottom: 20px; }
-        .difficulty-easy {
-        background-color: #d4edda;
-        color: #155724;
-        font-weight: bold;
-        }
-        .difficulty-medium {
-            background-color: #fff3cd;
-            color: #856404;
-            font-weight: bold;
-        }
-        .difficulty-hard {
-            background-color: #f8d7da;
-            color: #721c24;
-            font-weight: bold;
-        }
+  <meta charset="UTF-8">
+  <title>VocabHero – Slovíčka</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 30px;
+      background: linear-gradient(-45deg, #ffeaf5, #fbe5ff, #e7f7ff, #fff0f7);
+      background-size: 400% 400%;
+      animation: dreamyGradient 20s ease infinite;
+      color: #444;
+    }
 
-        .card-container {
-        display: flex;
-        flex-wrap: wrap;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        justify-content: flex-start; 
-        gap: 20px;
-        }
+    @keyframes dreamyGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        .word-card {
-            flex: 1 1 150px;
-            background: #fff9f9;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-            border: 1px solid #f0e5e5;
-            max-width: 250px;   /* omezí šířku */
-        }
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: #5a4e66;
+    }
 
-        .word-card:hover {
-            transform: scale(1.03);
-        }
+    .topbar {
+      text-align: right;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+    }
 
-        .word-card h2 {
-            margin: 0;
-            font-size: 1.5em;
-            color: #444;
-        }
+    .topbar a,
+    .topbar button {
+      background: none;
+      border: none;
+      font-weight: bold;
+      color: #c678dd;
+      cursor: pointer;
+      text-decoration: underline;
+      font-family: inherit;
+    }
 
-        .word-card p {
-            font-size: 1.1em;
-            color: #888;
-            margin: 8px 0;
-        }
+    .topbar strong {
+      color: #222;
+    }
 
-        .label {
-            display: inline-block;
-            font-size: 0.9em;
-            padding: 6px 10px;
-            border-radius: 12px;
-            color: #fff;
-            margin-top: 10px;
-        }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid #e4c0da;
+      background: #fffafc;
+      margin-bottom: 25px;
+      font-size: 1em;
+    }
 
-        .difficulty-easy .label {
-            background-color: #a3e4d7; /* mint */
-        }
+    .difficulty-filters {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-        .difficulty-medium .label {
-            background-color: #f9e79f; /* žlutá */
-            color: #555;
-        }
+    .difficulty-filters input[type="radio"] {
+      display: none;
+    }
 
-        .difficulty-hard .label {
-            background-color: #f5b7b1; /* růžová */
-        }
+    .difficulty-filters label {
+      background-color: #ffe1f1;
+      color: #444;
+      padding: 8px 16px;
+      border-radius: 18px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-size: 0.95em;
+      transition: all 0.2s ease-in-out;
+      border: 1px solid #f5c0e0;
+    }
 
-        .difficulty-filters input[type="radio"] {
-            display: none;
-        }
+    .difficulty-filters input[type="radio"]:checked + label {
+      background-color: #ffaad9;
+      color: #fff;
+      font-weight: bold;
+      transform: scale(1.05);
+    }
 
-        .difficulty-filters label {
-            background-color: #fceef2;
-            color: #333;
-            padding: 8px 14px;
-            border-radius: 20px;
-            border: 1px solid #f7c6d2;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            font-size: 0.95em;
-            user-select: none;
-        }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
 
-        .difficulty-filters input[type="radio"]:checked + label {
-            background-color: #f8c8dc;
-            color: #000;
-            border-color: #f5a5bd;
-            font-weight: bold;
-            transform: scale(1.05);
-        }
+    .word-card {
+      flex: 1 1 160px;
+      background: #fff9fc;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+      border: 1px solid #f0dce5;
+      max-width: 240px;
+      cursor: pointer;
+    }
 
-        .difficulty-filters label:hover {
-            background-color: #fddde8;
-            border-color: #f5a5bd;
-        }
+    .word-card:hover {
+      transform: scale(1.03);
+    }
 
-    </style>
+    .word-card h2 {
+      margin: 0;
+      font-size: 1.4em;
+      color: #4c3e56;
+    }
+
+    .word-card p {
+      font-size: 1.05em;
+      color: #888;
+      margin: 8px 0;
+    }
+
+    .label {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.85em;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #fff;
+    }
+
+    .difficulty-easy .label {
+      background-color: #aee6da;
+    }
+
+    .difficulty-medium .label {
+      background-color: #ffe58f;
+      color: #664d00;
+    }
+
+    .difficulty-hard .label {
+      background-color: #ffb4d6;
+    }
+
+   .modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  animation: fadeInOverlay 0.3s ease forwards;
+}
+
+.modal-box {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 480px;
+  margin: 80px auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  backdrop-filter: blur(15px);
+  animation: scaleIn 0.4s ease forwards;
+  position: relative;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.modal-close:hover {
+  color: #ff85a2;
+  transform: scale(1.2);
+}
+
+.modal-title {
+  font-size: 2em;
+  color: #8844aa;
+  margin-bottom: 15px;
+}
+
+.modal-highlight {
+  color: #d45588;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.modal-diff {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-weight: bold;
+  font-size: 0.9em;
+  color: white;
+  margin-left: 5px;
+}
+
+.modal-cat {
+  font-style: italic;
+  color: #5a5a5a;
+}
+
+.modal-example {
+  font-style: italic;
+  margin-top: 6px;
+  background: #fff0f6;
+  padding: 10px 14px;
+  border-radius: 14px;
+  color: #6a4c5a;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+  </style>
 </head>
 <body>
-    <h1>Slovíčka z databáze </h1>
 
-<input type="text" id="searchInput" placeholder="Hledat slovíčko..." style="
-    width: 100%;
-    padding: 10px;
-    font-size: 1.1em;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-">
+<div class="topbar">
+  {% if user.is_authenticated %}
+    Přihlášen jako <strong>{{ user.username }}</strong>
+    <form method="post" action="{% url 'logout' %}" style="display: inline;">{% csrf_token %}
+      <button type="submit">Odhlásit se</button>
+    </form>
+  {% else %}
+    <a href="{% url 'login' %}">Přihlásit se</a>
+  {% endif %}
+</div>
+
+<h1>📚 Databáze slovíček</h1>
+
+{% if user.is_authenticated %}
+<div style="max-width: 600px; margin: 0 auto 40px auto; background: #fff0fa; padding: 24px; border-radius: 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.1); border: 2px dashed #ffcce5;">
+  <h2 style="text-align: center; color: #a347a0; margin-bottom: 20px;">✨ Přidat nové slovíčko</h2>
+  <form method="post" action="{% url 'add_word' %}">
+    {% csrf_token %}
+    <input type="text" name="english" placeholder="Anglické slovíčko" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+    <input type="text" name="czech" placeholder="Český překlad" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+    
+    <select name="difficulty" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+      <option value="">-- Vyber obtížnost --</option>
+      <option value="easy">Začátečník</option>
+      <option value="medium">Pokročilý</option>
+      <option value="hard">Expert</option>
+    </select>
+
+    <input type="text" name="category" placeholder="Kategorie (nepovinné)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+    <textarea name="example_sentence" placeholder="Příklad věty (nepovinný)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #e6a6c9;"></textarea>
+
+    <button type="submit" style="width: 100%; background: linear-gradient(to right, #ffa3d1, #d09eff); color: white; padding: 12px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;">Přidat slovíčko 🌸</button>
+  </form>
+</div>
+{% endif %}
+
+<input type="text" id="searchInput" placeholder="Hledat slovíčko...">
 
 <form method="get" class="difficulty-filters">
-    <input type="radio" id="all" name="difficulty" value="" {% if not selected_difficulty %}checked{% endif %} onchange="this.form.submit()">
-    <label for="all">Vše</label>
+  <input type="radio" id="all" name="difficulty" value="" {% if not selected_difficulty %}checked{% endif %} onchange="this.form.submit()">
+  <label for="all">Vše</label>
 
-    <input type="radio" id="easy" name="difficulty" value="easy" {% if selected_difficulty == 'easy' %}checked{% endif %} onchange="this.form.submit()">
-    <label for="easy">Začátečník</label>
+  <input type="radio" id="easy" name="difficulty" value="easy" {% if selected_difficulty == 'easy' %}checked{% endif %} onchange="this.form.submit()">
+  <label for="easy">Začátečník</label>
 
-    <input type="radio" id="medium" name="difficulty" value="medium" {% if selected_difficulty == 'medium' %}checked{% endif %} onchange="this.form.submit()">
-    <label for="medium">Pokročilý</label>
+  <input type="radio" id="medium" name="difficulty" value="medium" {% if selected_difficulty == 'medium' %}checked{% endif %} onchange="this.form.submit()">
+  <label for="medium">Pokročilý</label>
 
-    <input type="radio" id="hard" name="difficulty" value="hard" {% if selected_difficulty == 'hard' %}checked{% endif %} onchange="this.form.submit()">
-    <label for="hard">Expert</label>
+  <input type="radio" id="hard" name="difficulty" value="hard" {% if selected_difficulty == 'hard' %}checked{% endif %} onchange="this.form.submit()">
+  <label for="hard">Expert</label>
 </form>
 
-    <table>
-    <div class="card-container">
-    {% for word in words %}
-    <div class="word-card difficulty-{{ word.difficulty }}" 
-      data-english="{{ word.english }}"
-      data-czech="{{ word.czech }}"
-      data-difficulty="{{ word.difficulty }}"
-      data-example="{{ word.example_sentence|default:"No example yet." }}"
-      data-category="{% if word.category %}{{ word.category.name }}{% else %}Bez kategorie{% endif %}">
-        <h2>{{ word.english }}</h2>
-        <p>{{ word.czech }}</p>
-        <span class="label">
-            {% if word.difficulty == "easy" %}Začátečník
-            {% elif word.difficulty == "medium" %}Pokročilý
-            {% elif word.difficulty == "hard" %}Expert
-            {% else %}?{% endif %}
-        </span>
-    </div>
-    {% endfor %}
-    </div>
-    </table>
-<div id="wordModal" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px);">
-    <div style="background: #fff; max-width: 500px; margin: 80px auto; padding: 30px; border-radius: 20px; position: relative; box-shadow: 0 12px 24px rgba(0,0,0,0.2);">
-        <span id="closeModal" style="position: absolute; top: 10px; right: 20px; cursor: pointer; font-weight: bold; font-size: 24px;">&times;</span>
-        <h2 id="modalEnglish" style="font-size: 2em; color: #333;"></h2>
-        <p style="font-size: 1.2em;"><strong>Překlad:</strong> <span id="modalCzech"></span></p>
-        <p><strong>Obtížnost:</strong> <span id="modalDifficulty" style="font-weight: bold;"></span></p>
-        <p><strong>Kategorie:</strong> <span id="modalCategory" style="font-weight: bold;"></span></p>
-        <p><strong>Příklad věty:</strong></p>
-        <p id="modalExample" style="font-style: italic; color: #555;"></p>
-        <button onclick="document.getElementById('wordModal').style.display='none';" style="margin-top: 20px; padding: 10px 20px; border-radius: 12px; border: none; background: #f5a5bd; color: white; font-weight: bold; cursor: pointer;">Zavřít</button>
-    </div>
+<div class="card-container">
+  {% for word in words %}
+  <div class="word-card difficulty-{{ word.difficulty }}"
+    data-english="{{ word.english }}"
+    data-czech="{{ word.czech }}"
+    data-difficulty="{{ word.difficulty }}"
+    data-example="{{ word.example_sentence|default:"No example yet." }}"
+    data-category="{% if word.category %}{{ word.category.name }}{% else %}Bez kategorie{% endif %}">
+    <h2>{{ word.english }}</h2>
+    <p>{{ word.czech }}</p>
+    <span class="label">
+      {% if word.difficulty == "easy" %}Začátečník
+      {% elif word.difficulty == "medium" %}Pokročilý
+      {% elif word.difficulty == "hard" %}Expert
+      {% else %}?{% endif %}
+    </span>
+  </div>
+  {% endfor %}
 </div>
+
+<div id="wordModal" class="modal-overlay">
+  <div class="modal-box">
+    <span id="closeModal" class="modal-close">&times;</span>
+    <h2 id="modalEnglish" class="modal-title"></h2>
+    <p><strong>Překlad:</strong> <span id="modalCzech" class="modal-highlight"></span></p>
+    <p><strong>Obtížnost:</strong> <span id="modalDifficulty" class="modal-diff"></span></p>
+    <p><strong>Kategorie:</strong> <span id="modalCategory" class="modal-cat"></span></p>
+    <p><strong>Příklad věty:</strong></p>
+    <p id="modalExample" class="modal-example"></p>
+  </div>
+</div>
+
 <script>
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.word-card');
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.word-card');
 
-    searchInput.addEventListener('input', function () {
-        const filter = this.value.toLowerCase();
-
-        cards.forEach(card => {
-            const english = card.querySelector('h2').textContent.toLowerCase();
-            const czech = card.querySelector('p').textContent.toLowerCase();
-
-            if (english.includes(filter) || czech.includes(filter)) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+  searchInput.addEventListener('input', function () {
+    const filter = this.value.toLowerCase();
+    cards.forEach(card => {
+      const english = card.querySelector('h2').textContent.toLowerCase();
+      const czech = card.querySelector('p').textContent.toLowerCase();
+      card.style.display = english.includes(filter) || czech.includes(filter) ? '' : 'none';
     });
+  });
 
-    const modal = document.getElementById('wordModal');
-    const closeBtn = document.getElementById('closeModal');
+const modal = document.getElementById('wordModal');
+const closeBtn = document.getElementById('closeModal');
 
-    const modalEnglish = document.getElementById('modalEnglish');
-    const modalCzech = document.getElementById('modalCzech');
-    const modalDifficulty = document.getElementById('modalDifficulty');
-    const modalExample = document.getElementById('modalExample');
-    const modalCategory = document.getElementById('modalCategory');
+const modalEnglish = document.getElementById('modalEnglish');
+const modalCzech = document.getElementById('modalCzech');
+const modalDifficulty = document.getElementById('modalDifficulty');
+const modalExample = document.getElementById('modalExample');
+const modalCategory = document.getElementById('modalCategory');
 
-    document.querySelectorAll('.word-card').forEach(card => {
-        card.addEventListener('click', () => {
-            modalEnglish.textContent = card.dataset.english;
-            modalCzech.textContent = card.dataset.czech;
+document.querySelectorAll('.word-card').forEach(card => {
+  card.addEventListener('click', () => {
+    modalEnglish.textContent = card.dataset.english;
+    modalCzech.textContent = card.dataset.czech;
+    modalCategory.textContent = card.dataset.category;
+    modalExample.textContent = card.dataset.example;
 
-            const difficultyMap = {
-                'easy': 'Začátečník',
-                'medium': 'Pokročilý',
-                'hard': 'Expert'
-            };
-            modalDifficulty.textContent = difficultyMap[card.dataset.difficulty] || 'Neznámá';
+    const difficultyMap = {
+      'easy': { label: 'Začátečník', color: '#78e2c6' },
+      'medium': { label: 'Pokročilý', color: '#ffe066' },
+      'hard': { label: 'Expert', color: '#f68fb0' }
+    };
 
-            modalCategory.textContent = card.dataset.category;
+    const diff = difficultyMap[card.dataset.difficulty] || { label: 'Neznámá', color: '#ccc' };
+    modalDifficulty.textContent = diff.label;
+    modalDifficulty.style.backgroundColor = diff.color;
 
-            modalExample.textContent = card.dataset.example;
+    modal.style.display = 'block';
+  });
+});
 
-            modal.style.display = 'block';
-        });
-    });
-
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target == modal) {
-            modal.style.display = 'none';
-        }
-    });
+closeBtn.addEventListener('click', () => modal.style.display = 'none');
+window.addEventListener('click', e => {
+  if (e.target === modal) modal.style.display = 'none';
+});
 </script>
 </body>
 </html>
