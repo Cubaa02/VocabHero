@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
   <meta charset="UTF-8">
   <title>Přidat slovíčko | VocabHero</title>
@@ -31,9 +32,17 @@
     }
 
     @keyframes dreamyBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .form-box {
@@ -119,6 +128,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="form-box">
     <h1>✨ Přidat nové slovíčko</h1>
@@ -130,4 +140,5 @@
     <a href="{% url 'word_list' %}" class="back-link">← Zpět na seznam slovíček</a>
   </div>
 </body>
+
 </html>

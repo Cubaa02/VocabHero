@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
   <meta charset="UTF-8">
   <title>VocabHero – Přihlášení</title>
@@ -36,23 +37,42 @@
     }
 
     @keyframes dreamyGradient {
-      0% { background-position: 0% 50%; }
-      25% { background-position: 50% 100%; }
-      50% { background-position: 100% 50%; }
-      75% { background-position: 50% 0%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      25% {
+        background-position: 50% 100%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      75% {
+        background-position: 50% 0%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     @keyframes fadeInBody {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .login-box {
       background: var(--glass);
       padding: 40px;
       border-radius: 24px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
       border: 1px solid var(--border);
       backdrop-filter: var(--blur);
       -webkit-backdrop-filter: var(--blur);
@@ -64,8 +84,15 @@
     }
 
     @keyframes fadeInBox {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .sparkle {
@@ -75,8 +102,13 @@
     }
 
     @keyframes sparkleAnim {
-      from { transform: scale(1) rotate(0deg); }
-      to { transform: scale(1.08) rotate(2deg); }
+      from {
+        transform: scale(1) rotate(0deg);
+      }
+
+      to {
+        transform: scale(1.08) rotate(2deg);
+      }
     }
 
     h2 {
@@ -140,6 +172,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="login-box">
     <div class="sparkle">✨</div>
@@ -151,4 +184,5 @@
     </form>
   </div>
 </body>
+
 </html>

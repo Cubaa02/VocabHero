@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
   <meta charset="UTF-8">
   <title>VocabHero – Slovíčka</title>
@@ -16,9 +17,17 @@
     }
 
     @keyframes dreamyGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     h1 {
@@ -80,7 +89,7 @@
       border: 1px solid #f5c0e0;
     }
 
-    .difficulty-filters input[type="radio"]:checked + label {
+    .difficulty-filters input[type="radio"]:checked+label {
       background-color: #ffaad9;
       color: #fff;
       font-weight: bold;
@@ -99,7 +108,7 @@
       background: #fff9fc;
       padding: 20px;
       border-radius: 18px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease;
       border: 1px solid #f0dce5;
       max-width: 240px;
@@ -145,226 +154,245 @@
       background-color: #ffb4d6;
     }
 
-   .modal-overlay {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
-  animation: fadeInOverlay 0.3s ease forwards;
-}
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      animation: fadeInOverlay 0.3s ease forwards;
+    }
 
-.modal-box {
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 20px;
-  padding: 30px;
-  max-width: 480px;
-  margin: 80px auto;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  backdrop-filter: blur(15px);
-  animation: scaleIn 0.4s ease forwards;
-  position: relative;
-  font-family: 'Quicksand', sans-serif;
-}
+    .modal-box {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 480px;
+      margin: 80px auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(15px);
+      animation: scaleIn 0.4s ease forwards;
+      position: relative;
+      font-family: 'Quicksand', sans-serif;
+    }
 
-.modal-close {
-  position: absolute;
-  top: 12px;
-  right: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #999;
-  cursor: pointer;
-  transition: 0.2s;
-}
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #999;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-.modal-close:hover {
-  color: #ff85a2;
-  transform: scale(1.2);
-}
+    .modal-close:hover {
+      color: #ff85a2;
+      transform: scale(1.2);
+    }
 
-.modal-title {
-  font-size: 2em;
-  color: #8844aa;
-  margin-bottom: 15px;
-}
+    .modal-title {
+      font-size: 2em;
+      color: #8844aa;
+      margin-bottom: 15px;
+    }
 
-.modal-highlight {
-  color: #d45588;
-  font-weight: bold;
-  font-size: 1.1em;
-}
+    .modal-highlight {
+      color: #d45588;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
 
-.modal-diff {
-  display: inline-block;
-  padding: 5px 12px;
-  border-radius: 16px;
-  font-weight: bold;
-  font-size: 0.9em;
-  color: white;
-  margin-left: 5px;
-}
+    .modal-diff {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 16px;
+      font-weight: bold;
+      font-size: 0.9em;
+      color: white;
+      margin-left: 5px;
+    }
 
-.modal-cat {
-  font-style: italic;
-  color: #5a5a5a;
-}
+    .modal-cat {
+      font-style: italic;
+      color: #5a5a5a;
+    }
 
-.modal-example {
-  font-style: italic;
-  margin-top: 6px;
-  background: #fff0f6;
-  padding: 10px 14px;
-  border-radius: 14px;
-  color: #6a4c5a;
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
-}
+    .modal-example {
+      font-style: italic;
+      margin-top: 6px;
+      background: #fff0f6;
+      padding: 10px 14px;
+      border-radius: 14px;
+      color: #6a4c5a;
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+    }
 
-@keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+    @keyframes fadeInOverlay {
+      from {
+        opacity: 0;
+      }
 
-@keyframes scaleIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-<div class="topbar">
-  {% if user.is_authenticated %}
+  <div class="topbar">
+    {% if user.is_authenticated %}
     Přihlášen jako <strong>{{ user.username }}</strong>
     <form method="post" action="{% url 'logout' %}" style="display: inline;">{% csrf_token %}
       <button type="submit">Odhlásit se</button>
     </form>
-  {% else %}
+    {% else %}
     <a href="{% url 'login' %}">Přihlásit se</a>
+    {% endif %}
+  </div>
+
+  <h1>📚 Databáze slovíček</h1>
+
+  {% if user.is_authenticated %}
+  <div style="text-align: center; margin-bottom: 30px;">
+    <button onclick="toggleAddForm()" style="background: linear-gradient(to right, #ffa3d1, #d09eff); border: none; padding: 12px 24px; border-radius: 14px; color: white; font-weight: bold; cursor: pointer;">+ Přidat nové slovíčko</button>
+  </div>
+
+  <div id="addFormContainer" style="display: none;">
+    <div style="max-width: 600px; margin: 0 auto 40px auto; background: #fff0fa; padding: 24px; border-radius: 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.1); border: 2px dashed #ffcce5;">
+      <h2 style="text-align: center; color: #a347a0; margin-bottom: 20px;">✨ Přidat nové slovíčko</h2>
+      <form method="post" action="{% url 'add_word' %}">
+        {% csrf_token %}
+        <input type="text" name="english" placeholder="Anglické slovíčko" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+        <input type="text" name="czech" placeholder="Český překlad" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+        <select name="difficulty" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+          <option value="">-- Vyber obtížnost --</option>
+          <option value="easy">Začátečník</option>
+          <option value="medium">Pokročilý</option>
+          <option value="hard">Expert</option>
+        </select>
+        <input type="text" name="category" placeholder="Kategorie (nepovinné)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+        <textarea name="example_sentence" placeholder="Příklad věty (nepovinný)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #e6a6c9;"></textarea>
+        <button type="submit" style="width: 100%; background: linear-gradient(to right, #ffa3d1, #d09eff); color: white; padding: 12px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;">Přidat slovíčko 🌸</button>
+      </form>
+    </div>
+  </div>
   {% endif %}
-</div>
 
-<h1>📚 Databáze slovíček</h1>
+  <input type="text" id="searchInput" placeholder="Hledat slovíčko...">
 
-{% if user.is_authenticated %}
-<div style="max-width: 600px; margin: 0 auto 40px auto; background: #fff0fa; padding: 24px; border-radius: 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.1); border: 2px dashed #ffcce5;">
-  <h2 style="text-align: center; color: #a347a0; margin-bottom: 20px;">✨ Přidat nové slovíčko</h2>
-  <form method="post" action="{% url 'add_word' %}">
-    {% csrf_token %}
-    <input type="text" name="english" placeholder="Anglické slovíčko" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
-    <input type="text" name="czech" placeholder="Český překlad" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
-    
-    <select name="difficulty" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
-      <option value="">-- Vyber obtížnost --</option>
-      <option value="easy">Začátečník</option>
-      <option value="medium">Pokročilý</option>
-      <option value="hard">Expert</option>
-    </select>
+  <form method="get" class="difficulty-filters">
+    <input type="radio" id="all" name="difficulty" value="" {% if not selected_difficulty %}checked{% endif %} onchange="this.form.submit()">
+    <label for="all">Vše</label>
 
-    <input type="text" name="category" placeholder="Kategorie (nepovinné)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
-    <textarea name="example_sentence" placeholder="Příklad věty (nepovinný)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #e6a6c9;"></textarea>
+    <input type="radio" id="easy" name="difficulty" value="easy" {% if selected_difficulty == 'easy' %}checked{% endif %} onchange="this.form.submit()">
+    <label for="easy">Začátečník</label>
 
-    <button type="submit" style="width: 100%; background: linear-gradient(to right, #ffa3d1, #d09eff); color: white; padding: 12px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;">Přidat slovíčko 🌸</button>
+    <input type="radio" id="medium" name="difficulty" value="medium" {% if selected_difficulty == 'medium' %}checked{% endif %} onchange="this.form.submit()">
+    <label for="medium">Pokročilý</label>
+
+    <input type="radio" id="hard" name="difficulty" value="hard" {% if selected_difficulty == 'hard' %}checked{% endif %} onchange="this.form.submit()">
+    <label for="hard">Expert</label>
   </form>
-</div>
-{% endif %}
 
-<input type="text" id="searchInput" placeholder="Hledat slovíčko...">
-
-<form method="get" class="difficulty-filters">
-  <input type="radio" id="all" name="difficulty" value="" {% if not selected_difficulty %}checked{% endif %} onchange="this.form.submit()">
-  <label for="all">Vše</label>
-
-  <input type="radio" id="easy" name="difficulty" value="easy" {% if selected_difficulty == 'easy' %}checked{% endif %} onchange="this.form.submit()">
-  <label for="easy">Začátečník</label>
-
-  <input type="radio" id="medium" name="difficulty" value="medium" {% if selected_difficulty == 'medium' %}checked{% endif %} onchange="this.form.submit()">
-  <label for="medium">Pokročilý</label>
-
-  <input type="radio" id="hard" name="difficulty" value="hard" {% if selected_difficulty == 'hard' %}checked{% endif %} onchange="this.form.submit()">
-  <label for="hard">Expert</label>
-</form>
-
-<div class="card-container">
-  {% for word in words %}
-  <div class="word-card difficulty-{{ word.difficulty }}"
-    data-english="{{ word.english }}"
-    data-czech="{{ word.czech }}"
-    data-difficulty="{{ word.difficulty }}"
-    data-example="{{ word.example_sentence|default:"No example yet." }}"
-    data-category="{% if word.category %}{{ word.category.name }}{% else %}Bez kategorie{% endif %}">
-    <h2>{{ word.english }}</h2>
-    <p>{{ word.czech }}</p>
-    <span class="label">
-      {% if word.difficulty == "easy" %}Začátečník
-      {% elif word.difficulty == "medium" %}Pokročilý
-      {% elif word.difficulty == "hard" %}Expert
-      {% else %}?{% endif %}
-    </span>
+  <div class="card-container">
+    {% for word in words %}
+    <div class="word-card difficulty-{{ word.difficulty }}" data-english="{{ word.english }}" data-czech="{{ word.czech }}" data-difficulty="{{ word.difficulty }}" data-example="{{ word.example_sentence|default:" No example yet." }}" data-category="{% if word.category %}{{ word.category.name }}{% else %}Bez kategorie{% endif %}">
+      <h2>{{ word.english }}</h2>
+      <p>{{ word.czech }}</p>
+      <span class="label">
+        {% if word.difficulty == "easy" %}Začátečník
+        {% elif word.difficulty == "medium" %}Pokročilý
+        {% elif word.difficulty == "hard" %}Expert
+        {% else %}?{% endif %}
+      </span>
+      <a href="{% url 'edit_word' word.id %}" style="display: block; margin-top: 10px; color: #c678dd; text-decoration: underline;">Upravit ✏️</a>
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
 
-<div id="wordModal" class="modal-overlay">
-  <div class="modal-box">
-    <span id="closeModal" class="modal-close">&times;</span>
-    <h2 id="modalEnglish" class="modal-title"></h2>
-    <p><strong>Překlad:</strong> <span id="modalCzech" class="modal-highlight"></span></p>
-    <p><strong>Obtížnost:</strong> <span id="modalDifficulty" class="modal-diff"></span></p>
-    <p><strong>Kategorie:</strong> <span id="modalCategory" class="modal-cat"></span></p>
-    <p><strong>Příklad věty:</strong></p>
-    <p id="modalExample" class="modal-example"></p>
+  <div id="wordModal" class="modal-overlay">
+      <div class="modal-box">
+      <span id="closeModal" class="modal-close">&times;</span>
+      <h2 id="modalEnglish" class="modal-title"></h2>
+      <p><strong>Překlad:</strong> <span id="modalCzech" class="modal-highlight"></span></p>
+      <p><strong>Obtížnost:</strong> <span id="modalDifficulty" class="modal-diff"></span></p>
+      <p><strong>Kategorie:</strong> <span id="modalCategory" class="modal-cat"></span></p>
+      <p><strong>Příklad věty:</strong></p>
+      <p id="modalExample" class="modal-example"></p>
+    </div>
   </div>
-</div>
 
-<script>
-  const searchInput = document.getElementById('searchInput');
-  const cards = document.querySelectorAll('.word-card');
+  <script>
+    function toggleAddForm() {
+      const container = document.getElementById('addFormContainer');
+      container.style.display = container.style.display === 'none' ? 'block' : 'none';
+    }
 
-  searchInput.addEventListener('input', function () {
-    const filter = this.value.toLowerCase();
-    cards.forEach(card => {
-      const english = card.querySelector('h2').textContent.toLowerCase();
-      const czech = card.querySelector('p').textContent.toLowerCase();
-      card.style.display = english.includes(filter) || czech.includes(filter) ? '' : 'none';
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.word-card');
+
+    searchInput.addEventListener('input', function () {
+      const filter = this.value.toLowerCase();
+      cards.forEach(card => {
+        const english = card.querySelector('h2').textContent.toLowerCase();
+        const czech = card.querySelector('p').textContent.toLowerCase();
+        card.style.display = english.includes(filter) || czech.includes(filter) ? '' : 'none';
+      });
     });
-  });
 
-const modal = document.getElementById('wordModal');
-const closeBtn = document.getElementById('closeModal');
+    const modal = document.getElementById('wordModal');
+    const closeBtn = document.getElementById('closeModal');
+    const modalEnglish = document.getElementById('modalEnglish');
+    const modalCzech = document.getElementById('modalCzech');
+    const modalDifficulty = document.getElementById('modalDifficulty');
+    const modalExample = document.getElementById('modalExample');
+    const modalCategory = document.getElementById('modalCategory');
 
-const modalEnglish = document.getElementById('modalEnglish');
-const modalCzech = document.getElementById('modalCzech');
-const modalDifficulty = document.getElementById('modalDifficulty');
-const modalExample = document.getElementById('modalExample');
-const modalCategory = document.getElementById('modalCategory');
+    document.querySelectorAll('.word-card').forEach(card => {
+      card.addEventListener('click', () => {
+        modalEnglish.textContent = card.dataset.english;
+        modalCzech.textContent = card.dataset.czech;
+        modalCategory.textContent = card.dataset.category;
+        modalExample.textContent = card.dataset.example;
 
-document.querySelectorAll('.word-card').forEach(card => {
-  card.addEventListener('click', () => {
-    modalEnglish.textContent = card.dataset.english;
-    modalCzech.textContent = card.dataset.czech;
-    modalCategory.textContent = card.dataset.category;
-    modalExample.textContent = card.dataset.example;
+        const difficultyMap = {
+          'easy': { label: 'Začátečník', color: '#78e2c6' },
+          'medium': { label: 'Pokročilý', color: '#ffe066' },
+          'hard': { label: 'Expert', color: '#f68fb0' }
+        };
 
-    const difficultyMap = {
-      'easy': { label: 'Začátečník', color: '#78e2c6' },
-      'medium': { label: 'Pokročilý', color: '#ffe066' },
-      'hard': { label: 'Expert', color: '#f68fb0' }
-    };
+        const diff = difficultyMap[card.dataset.difficulty] || { label: 'Neznámá', color: '#ccc' };
+        modalDifficulty.textContent = diff.label;
+        modalDifficulty.style.backgroundColor = diff.color;
 
-    const diff = difficultyMap[card.dataset.difficulty] || { label: 'Neznámá', color: '#ccc' };
-    modalDifficulty.textContent = diff.label;
-    modalDifficulty.style.backgroundColor = diff.color;
+        modal.style.display = 'block';
+      });
+    });
 
-    modal.style.display = 'block';
-  });
-});
-
-closeBtn.addEventListener('click', () => modal.style.display = 'none');
-window.addEventListener('click', e => {
-  if (e.target === modal) modal.style.display = 'none';
-});
-</script>
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', e => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
