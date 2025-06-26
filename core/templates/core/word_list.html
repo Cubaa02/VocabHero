@@ -291,7 +291,7 @@
           <option value="hard">Expert</option>
         </select>
         <input type="text" name="category" placeholder="Kategorie (nepovinné)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
-        <textarea name="example_sentence" placeholder="Příklad věty (nepovinný)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #e6a6c9;"></textarea>
+        <textarea name="example_sentence" placeholder="Příklad věty (nepovinný)" style="width: 100%; max-width: 100%; resize: vertical; padding: 10px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #e6a6c9;"></textarea>
         <button type="submit" style="width: 100%; background: linear-gradient(to right, #ffa3d1, #d09eff); color: white; padding: 12px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;">Přidat slovíčko 🌸</button>
       </form>
     </div>
@@ -325,7 +325,9 @@
         {% elif word.difficulty == "hard" %}Expert
         {% else %}?{% endif %}
       </span>
+      {% if user.is_authenticated %}
       <a href="{% url 'edit_word' word.id %}" style="display: block; margin-top: 10px; color: #c678dd; text-decoration: underline;">Upravit ✏️</a>
+      {% endif %}
     </div>
     {% endfor %}
   </div>
