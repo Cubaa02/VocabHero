@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>VocabHero | PLAY!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    height: 100vh;
+    background: linear-gradient(-45deg, #ffeaf5, #fbe5ff, #e7f7ff, #fff0f7);
+    background-size: 400% 400%;
+    animation: dreamyBG 20s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @keyframes dreamyBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes pulseShadow {
+    0% {
+      box-shadow: 0 0 0 10px white,
+                  0 0 30px rgba(255, 255, 255, 0.5),
+                  0 0 60px rgba(255, 184, 224, 0.6);
+    }
+    50% {
+      box-shadow: 0 0 0 18px white,
+                  0 0 50px rgba(255, 255, 255, 0.6),
+                  0 0 80px rgba(255, 184, 224, 0.8);
+    }
+    100% {
+      box-shadow: 0 0 0 10px white,
+                  0 0 30px rgba(255, 255, 255, 0.5),
+                  0 0 60px rgba(255, 184, 224, 0.6);
+    }
+  }
+
+  .menu-container {
+    position: relative;
+    width: 800px;
+    height: 800px;
+  }
+
+  .play-circle {
+    width: 520px;
+    height: 520px;
+    background: #ffb8e0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4.2em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: white;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    animation: pulseShadow 2s infinite ease-in-out;
+    transition: transform 0.4s ease, left 0.6s ease;
+  }
+
+  .play-circle:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  .menu-option {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    padding: 20px 60px;
+    border-radius: 30px;
+    background: linear-gradient(to right, #ffa3d1, #d09eff);
+    color: white;
+    font-weight: 700;
+    font-size: 1.4em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.8s ease;
+    white-space: nowrap;
+    z-index: 9;
+    min-width: 480px;
+    text-align: right;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-option:hover {
+    transform: translate(-50%, -50%) scale(1.03);
+    background: linear-gradient(to right, #e68ecb, #b98dff);
+  }
+
+  /* Rozmístění tlačítek */
+  .menu-active .option1 {
+    top: calc(50% - 120px);
+    left: calc(50% + 180px);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-active .option2 {
+    top: calc(50% - 30px);
+    left: calc(50% + 180px);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-active .option3 {
+    top: calc(50% + 60px);
+    left: calc(50% + 180px);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-active .option4 {
+    top: calc(50% + 150px);
+    left: calc(50% + 180px);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .menu-active .play-circle {
+  left: calc(50% - 100px); /* Posunutí kruhu doleva při aktivním menu */
+  }
+
+  .user-info {
+  position: absolute;
+  top: calc(50% + 405px); /* těsně pod kruhem */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #a44fb9;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  backdrop-filter: blur(12px);
+  z-index: 15;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+  <div class="menu-container" id="menuContainer">
+    <div class="play-circle" onclick="toggleMenu()">VOCABHERO</div>
+
+    {% if user.is_authenticated %}
+  <div class="user-info">
+    Přihlášen jako <strong>{{ user.username }}</strong>
+  </div>
+    {% endif %}
+
+    <!-- Menu Options -->
+    <button class="menu-option option1" onclick="window.location.href='/game/'">🎮 Hrát</button>
+    <button class="menu-option option2" onclick="window.location.href='/practice/'">📚 Procvičování</button>
+    <button class="menu-option option3" onclick="window.location.href='/words/'">🗂️ Databáze</button>
+
+    {% if user.is_authenticated %}
+    <form id="logoutForm" method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+    </form>
+    <button class="menu-option option4" onclick="document.getElementById('logoutForm').submit()">🚪 Odhlásit se</button>
+    {% else %}
+     <button class="menu-option option4" onclick="window.location.href='{% url 'login' %}'">🔐 Přihlásit se</button>
+    {% endif %}
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menuContainer").classList.toggle("menu-active");
+    }
+  </script>
+</body>
+
+</html>

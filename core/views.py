@@ -3,10 +3,11 @@ import random
 from django.shortcuts import render
 from .models import Word
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect
 from .models import Word
 from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from .forms import WordForm  
 
 @login_required
@@ -44,7 +45,11 @@ def word_list(request):
         'selected_difficulty': difficulty
     })
 
+def is_admin(user):
+    return user.is_staff or user.is_superuser
+
 @login_required
+@user_passes_test(is_admin)
 def edit_word(request, word_id):
     word = Word.objects.get(id=word_id)
     if request.method == 'POST':
@@ -59,3 +64,6 @@ def edit_word(request, word_id):
 
 def delete_word(request, word_id):
     return HttpResponse("Mazání slovíčka zatím není hotové.")
+
+def home(request):
+    return render(request, 'core/home.html')

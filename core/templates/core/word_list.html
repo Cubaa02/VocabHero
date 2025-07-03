@@ -271,8 +271,13 @@
   </div>
 
   <h1>📚 Databáze slovíček</h1>
+    <div style="text-align: center; margin-bottom: 30px;">
+    <a href="{% url 'home' %}" style="display: inline-block; background: linear-gradient(to right, #ffaad9, #b29eff); padding: 12px 24px; border-radius: 16px; color: white; font-weight: bold; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.2s ease;">
+    ⬅️ Zpět na úvodní stránku
+    </a>
+    </div>
 
-  {% if user.is_authenticated %}
+  {% if user.is_staff or user.is_superuser %}
   <div style="text-align: center; margin-bottom: 30px;">
     <button onclick="toggleAddForm()" style="background: linear-gradient(to right, #ffa3d1, #d09eff); border: none; padding: 12px 24px; border-radius: 14px; color: white; font-weight: bold; cursor: pointer;">+ Přidat nové slovíčko</button>
   </div>
@@ -325,7 +330,7 @@
         {% elif word.difficulty == "hard" %}Expert
         {% else %}?{% endif %}
       </span>
-      {% if user.is_authenticated %}
+      {% if user.is_staff or user.is_superuser %}
       <a href="{% url 'edit_word' word.id %}" style="display: block; margin-top: 10px; color: #c678dd; text-decoration: underline;">Upravit ✏️</a>
       {% endif %}
     </div>
