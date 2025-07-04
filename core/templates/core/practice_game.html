@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Procvičování – {{ level|title }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(-45deg, #ffeaf5, #e0f7ff, #ffe9f1, #f3faff);
+      background-size: 400% 400%;
+      animation: dreamyBG 20s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    @keyframes dreamyBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 40px;
+      color: #4c3a55;
+    }
+
+    .choices {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .choice-btn {
+      padding: 16px 28px;
+      background: linear-gradient(to right, #ffa3d1, #d09eff);
+      border: none;
+      border-radius: 20px;
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 180px;
+    }
+
+    .choice-btn:hover {
+      background: linear-gradient(to right, #e68ecb, #b98dff);
+      transform: scale(1.05);
+    }
+
+    .word-box {
+      font-size: 2em;
+      margin-bottom: 30px;
+      padding: 20px 30px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      color: #5a4e66;
+    }
+
+    .back-link {
+      margin-top: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #c678dd;
+    }
+
+    .back-link:hover {
+      color: #a347a0;
+    }
+  </style>
+</head>
+<body>
+
+  {% if error %}
+    <h1>{{ error }}</h1>
+    <a class="back-link" href="{% url 'practice_difficulty' %}">← Zpět na výběr obtížnosti</a>
+  {% else %}
+    <div class="word-box">
+      Jak přeložíš: <strong>{{ word.english }}</strong>?
+    </div>
+
+    <div class="choices">
+      {% for option in choices %}
+        <button class="choice-btn" onclick="checkAnswer(this, '{{ option.czech }}', '{{ word.czech }}')">
+          {{ option.czech }}
+        </button>
+      {% endfor %}
+    </div>
+
+    <a class="back-link" href="{% url 'practice_difficulty' %}">← Zpět na výběr</a>
+
+    <script>
+      function checkAnswer(button, selected, correct) {
+        if (selected === correct) {
+          button.style.background = '#91e6b3';  // zelená
+          alert('Správně! 🎉');
+        } else {
+          button.style.background = '#ff8da1';  // červená
+          alert('Špatně 😢. Správně bylo: ' + correct);
+        }
+      }
+    </script>
+  {% endif %}
+</body>
+</html>

@@ -65,5 +65,51 @@ def edit_word(request, word_id):
 def delete_word(request, word_id):
     return HttpResponse("Mazání slovíčka zatím není hotové.")
 
+
 def home(request):
     return render(request, 'core/home.html')
+
+
+def practice_menu(request):
+    return render(request, 'core/practice.html')
+
+
+def practice_difficulty(request):
+    return render(request, 'core/practice_difficulty.html')
+
+
+def practice_start(request, level):
+    words = Word.objects.filter(difficulty=level)
+    return render(request, 'core/practice_start.html', {
+        'words': words,
+        'level': level
+    })
+
+
+def practice_game(request, level):
+    # Všechna slovíčka podle zvolené obtížnosti
+    words = list(Word.objects.filter(difficulty=level))
+
+    if len(words) < 4:
+        return render(request, 'core/practice_game.html', {
+            'error': 'Tahle sada potřebuje alespoň 4 slovíčka!'
+        })
+
+    # Vyber náhodné hlavní slovíčko
+    current_word = random.choice(words)
+
+    # Vytvoř možnosti (včetně správné)
+    choices = [current_word]
+    while len(choices) < 4:
+        option = random.choice(words)
+        if option not in choices:
+            choices.append(option)
+
+    # Zamíchej možnosti
+    random.shuffle(choices)
+
+    return render(request, 'core/practice_game.html', {
+        'word': current_word,
+        'choices': choices,
+        'level': level
+    })

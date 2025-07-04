@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>VocabHero | Procvičování</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(-45deg, #ffeaf5, #fbe5ff, #e7f7ff, #fff0f7);
+      background-size: 400% 400%;
+      animation: dreamyBG 20s ease infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #4a3b4e;
+    }
+
+    @keyframes dreamyBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      color: #8a3d8f;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .menu-buttons {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .menu-button {
+      padding: 20px 40px;
+      border-radius: 20px;
+      background: linear-gradient(to right, #ffa3d1, #d09eff);
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 220px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    }
+
+    .menu-button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #ff89c4, #be8cff);
+    }
+
+    .menu-button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧠 Vyber si režim procvičování</h1>
+
+  <div class="menu-buttons">
+    <button class="menu-button" onclick="window.location.href='/practice/difficulty/'">🎯 Podle obtížnosti</button>
+    <button class="menu-button" onclick="window.location.href='/practice/category/'">📁 Podle kategorie</button>
+    <button class="menu-button" onclick="window.location.href='/practice/remix/'">🔀 reMIX (všechno)</button>
+  </div>
+
+</body>
+</html>
