@@ -5,17 +5,21 @@
   <title>Procvičování – {{ level|title }}</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(-45deg, #ffeaf5, #e0f7ff, #ffe9f1, #f3faff);
       background-size: 400% 400%;
       animation: dreamyBG 20s ease infinite;
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
       height: 100vh;
-      padding: 20px;
+      padding: 80px 30px;
       text-align: center;
     }
 
@@ -25,51 +29,70 @@
       100% {background-position: 0% 50%;}
     }
 
-    h1 {
+    .question-text {
       font-size: 2em;
-      margin-bottom: 40px;
-      color: #4c3a55;
+      color: #5a4e66;
+      margin-bottom: 14px;
     }
 
-    .choices {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    .word-box {
+      font-size: 4em;
+      font-weight: bold;
+      background: white;
+      padding: 40px 80px;
+      border-radius: 28px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      margin-bottom: 70px;
+      color: #5a4e66;
+    }
+
+    .answer-container {
+      background: #ffffffdd;
+      border: 3px solid #e3c6ff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-radius: 32px;
+      padding: 50px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 30px;
+      max-width: 900px;
+      width: 100%;
+      justify-items: center;
+      margin-top: 10px;
     }
 
     .choice-btn {
-      padding: 16px 28px;
+      padding: 24px 36px;
       background: linear-gradient(to right, #ffa3d1, #d09eff);
       border: none;
-      border-radius: 20px;
+      border-radius: 22px;
       color: white;
-      font-size: 1.2em;
+      font-size: 1.7em;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      min-width: 180px;
+      min-width: 300px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.1);
     }
 
     .choice-btn:hover {
       background: linear-gradient(to right, #e68ecb, #b98dff);
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
 
-    .word-box {
-      font-size: 2em;
-      margin-bottom: 30px;
-      padding: 20px 30px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      color: #5a4e66;
+    .choice-btn.correct {
+      background: #91e6b3 !important;
+    }
+
+    .choice-btn.wrong {
+      background: #ff8da1 !important;
     }
 
     .back-link {
-      margin-top: 30px;
+      margin-top: 60px;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1.2em;
       color: #c678dd;
     }
 
@@ -79,16 +102,15 @@
   </style>
 </head>
 <body>
-
+  <p>🌸🌟</p>
   {% if error %}
     <h1>{{ error }}</h1>
     <a class="back-link" href="{% url 'practice_difficulty' %}">← Zpět na výběr obtížnosti</a>
   {% else %}
-    <div class="word-box">
-      Jak přeložíš: <strong>{{ word.english }}</strong>?
-    </div>
+    <div class="question-text">Jak přeložíš:</div>
+    <div class="word-box" id="word-box">{{ word.english }}</div>
 
-    <div class="choices">
+    <div class="answer-container" id="choices-grid">
       {% for option in choices %}
         <button class="choice-btn" onclick="checkAnswer(this, '{{ option.czech }}', '{{ word.czech }}')">
           {{ option.czech }}
@@ -99,14 +121,26 @@
     <a class="back-link" href="{% url 'practice_difficulty' %}">← Zpět na výběr</a>
 
     <script>
+      let alreadyAnswered = false;
+
       function checkAnswer(button, selected, correct) {
-        if (selected === correct) {
-          button.style.background = '#91e6b3';  // zelená
-          alert('Správně! 🎉');
-        } else {
-          button.style.background = '#ff8da1';  // červená
-          alert('Špatně 😢. Správně bylo: ' + correct);
-        }
+        if (alreadyAnswered) return;
+
+        alreadyAnswered = true;
+
+        const buttons = document.querySelectorAll('.choice-btn');
+        buttons.forEach(btn => {
+          const btnText = btn.innerText.trim();
+          if (btnText === correct) {
+            btn.classList.add('correct');
+          } else if (btn === button && selected !== correct) {
+            btn.classList.add('wrong');
+          }
+        });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1400);
       }
     </script>
   {% endif %}
