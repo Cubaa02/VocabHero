@@ -62,6 +62,18 @@
     .menu-button:focus {
       outline: none;
     }
+
+    .back-link {
+      margin-top: 60px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #c678dd;
+    }
+
+    .back-link:hover {
+      color: #a347a0;
+    }
   </style>
 </head>
 <body>
@@ -69,10 +81,10 @@
   <h1>🧠 Vyber si režim procvičování</h1>
 
   <div class="menu-buttons">
-    <button class="menu-button" onclick="window.location.href='/practice/difficulty/'">🎯 Podle obtížnosti</button>
-    <button class="menu-button" onclick="window.location.href='/practice/category/'">📁 Podle kategorie</button>
-    <button class="menu-button" onclick="window.location.href='/practice/remix/'">🔀 reMIX (všechno)</button>
+    <button class="menu-button" onclick="window.location.href='{% url 'practice_difficulty' %}'">🎯 Podle obtížnosti</button>
+    <button class="menu-button" onclick="window.location.href='{% url 'practice_category' %}'">📁 Podle kategorie</button>
+    <button class="menu-button" onclick="window.location.href='{% url 'unified_practice_start' 'remix' 'all' %}'">🔀 reMIX (všechno)</button>
   </div>
-
 </body>
+<a class="back-link" href="{% url 'home' %}">← Zpět na úvodní stránku</a>
 </html>

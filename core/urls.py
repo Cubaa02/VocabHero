@@ -11,8 +11,14 @@ urlpatterns = [
     path('words/add/', views.add_word, name='add_word'),
     path('words/edit/<int:word_id>/', views.edit_word, name='edit_word'),
     path('words/delete/<int:word_id>/', views.delete_word, name='delete_word'),
+    
+    # Procvičování
     path('practice/', views.practice_menu, name='practice'),
+    path('practice/category/', views.practice_category, name='practice_category'),  # stránka s výběrem kategorií
     path('practice/difficulty/', views.practice_difficulty, name='practice_difficulty'),
-    path('practice/start/<str:level>/', views.practice_start, name='practice_start'),
-    path('practice/game/<str:level>/', views.practice_game, name='practice_game'),
+
+    
+    # Unified routes
+    path('practice/start/<str:mode>/<str:value>/', views.unified_practice_start, name='unified_practice_start'),
+    path('practice/game/<str:mode>/<str:value>/', views.practice_game, name='practice_game'),
 ]

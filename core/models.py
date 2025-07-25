@@ -11,11 +11,13 @@ class Word(models.Model):
         help_text="Zadej slovo v angličtině (bez speciálních znaků)",
         validators=[RegexValidator(r'^[a-zA-Z\s\-]+$', 'Pouze písmena, mezery a pomlčky')]
     )
+
     czech = models.CharField(
         max_length=100,
         verbose_name="Český překlad",
         help_text="Zadej český překlad"
     )
+
     difficulty = models.CharField(
         max_length=10,
         choices=[
@@ -26,6 +28,7 @@ class Word(models.Model):
         verbose_name="Obtížnost",
         help_text="Vyber obtížnost slova"
     )
+
     category = models.ForeignKey(
         'Category',
         on_delete=models.CASCADE,
@@ -61,6 +64,7 @@ class Word(models.Model):
             )
         ).order_by('difficulty_order', 'english')
     
+
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True)
@@ -73,6 +77,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
+    
 class GameResult(models.Model):
     user = models.ForeignKey(
         'UserProfile',
@@ -83,22 +88,26 @@ class GameResult(models.Model):
         null=True,  # ← dočasné!
         blank=True  # ← pro admin rozhraní, nepovinné
     )
+
     score = models.IntegerField(
         validators=[MinValueValidator(0)],
         verbose_name="Skóre",
         help_text="Počet bodů získaných ve hře"
     )
+
     duration = models.DurationField(
         verbose_name="Délka hry",
         help_text="Jak dlouho hra trvala",
         null=True,
         blank=True
     )
+
     mistakes = models.PositiveIntegerField(
         default=0,
         verbose_name="Počet chyb",
         help_text="Kolik chyb udělal hráč"
     )
+
     mode = models.CharField(
         max_length=10,
         choices=[('easy', 'Easy'), ('medium', 'Medium'), ('hard', 'Hard')],
@@ -106,6 +115,7 @@ class GameResult(models.Model):
         verbose_name="Režim hry",
         help_text="Zvolená obtížnost hry"
     )
+
     timestamp = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Datum a čas",
@@ -120,6 +130,7 @@ class GameResult(models.Model):
     def __str__(self):
         return f"{self.user} - {self.score} pts @ {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
     
+    
 class UserProfile(models.Model):
     user = models.OneToOneField(
         User,
@@ -128,12 +139,14 @@ class UserProfile(models.Model):
         null=True,  # ← dočasné!
         blank=True  # ← pro admin rozhraní, nepovinné
     )
+
     nickname = models.CharField(
         max_length=50,
         blank=True,
         null=True,
         verbose_name="Přezdívka"
     )
+    
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Vytvořeno"

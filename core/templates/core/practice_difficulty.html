@@ -5,6 +5,10 @@
   <title>Vyber obtížnost | VocabHero</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(-45deg, #fce5ff, #d8f3ff, #ffe6f0, #f0f8ff);
@@ -15,44 +19,67 @@
       align-items: center;
       height: 100vh;
       flex-direction: column;
+      padding: 40px 20px;
+      text-align: center;
     }
 
     @keyframes dreamy {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     h1 {
-      margin-bottom: 40px;
-      color: #5a4e66;
+      font-size: 2.8em;
+      margin-bottom: 50px;
+      color: #6c4c84;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
     .btn {
-      padding: 16px 32px;
-      margin: 15px;
+      display: inline-block;
+      padding: 20px 38px;
+      margin: 15px 20px;
       border: none;
-      border-radius: 24px;
-      font-size: 1.2em;
+      border-radius: 26px;
+      font-size: 1.4em;
       font-weight: bold;
       cursor: pointer;
       color: white;
       background: linear-gradient(to right, #ffa3d1, #d09eff);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+      transition: all 0.25s ease;
       text-decoration: none;
+      min-width: 220px;
     }
 
     .btn:hover {
-      transform: scale(1.07);
+      transform: translateY(-5px);
       background: linear-gradient(to right, #e68ecb, #b98dff);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .back-link {
+      margin-top: 60px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #c678dd;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: #a347a0;
     }
   </style>
 </head>
 <body>
-  <h1>Vyber úroveň obtížnosti</h1>
-  <a href="{% url 'practice_start' 'easy' %}" class="btn">🟢 Začátečník</a>
-  <a href="{% url 'practice_start' 'medium' %}" class="btn">🟡 Pokročilý</a>
-  <a href="{% url 'practice_start' 'hard' %}" class="btn">🔴 Expert</a>
+  <h1>✨ Vyber úroveň obtížnosti</h1>
+
+<a href="{% url 'unified_practice_start' 'difficulty' 'easy' %}" class="btn">🟢 Začátečník</a>
+<a href="{% url 'unified_practice_start' 'difficulty' 'medium' %}" class="btn">🟡 Pokročilý</a>
+<a href="{% url 'unified_practice_start' 'difficulty' 'hard' %}" class="btn">🔴 Expert</a>
+
+  <a class="back-link" href="{% url 'practice' %}">← Zpět na výběr režimu</a>
 </body>
 </html>

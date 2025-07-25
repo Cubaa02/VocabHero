@@ -2,97 +2,121 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Procvičování – {{ level|title }}</title>
+  <title>Začít procvičování | VocabHero</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(-45deg, #fce7f3, #e5f6ff, #fff0f7, #f8e1ff);
+      background: linear-gradient(-45deg, #fce5ff, #d8f3ff, #ffe6f0, #f0f8ff);
       background-size: 400% 400%;
-      animation: dreamyBG 20s ease infinite;
-      margin: 0;
-      padding: 40px;
-      color: #333;
+      animation: dreamy 20s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      padding: 40px 20px;
       text-align: center;
     }
 
-    @keyframes dreamyBG {
+    @keyframes dreamy {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
     h1 {
-      font-size: 2.5em;
-      color: #8844aa;
+      font-size: 2.6em;
       margin-bottom: 10px;
+      color: #6c4c84;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
-    p {
-      font-size: 1.1em;
-      color: #666;
-      margin-bottom: 30px;
+    h2 {
+      font-size: 1.6em;
+      color: #a366c4;
+      margin: 20px 0 30px;
     }
 
     .word-list {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 25px 35px;
+      max-height: 300px;
+      overflow-y: auto;
+      width: 100%;
       max-width: 600px;
-      margin: 0 auto 40px auto;
+      margin-bottom: 30px;
       text-align: left;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 18px;
-      padding: 20px 30px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .word-list ul {
-      list-style: none;
-      padding: 0;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.05);
     }
 
     .word-list li {
       margin-bottom: 10px;
-      font-size: 1.05em;
+      font-size: 1.2em;
+      color: #5a4e66;
     }
 
-    .start-button {
-      background: linear-gradient(to right, #ffa3d1, #d09eff);
-      color: white;
+    .btn {
+      display: inline-block;
       padding: 18px 36px;
-      border-radius: 18px;
-      font-size: 1.3em;
-      font-weight: bold;
+      margin: 10px 0;
       border: none;
+      border-radius: 26px;
+      font-size: 1.4em;
+      font-weight: bold;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      color: white;
+      background: linear-gradient(to right, #ffa3d1, #d09eff);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+      transition: all 0.25s ease;
+      text-decoration: none;
     }
 
-    .start-button:hover {
-      transform: scale(1.05);
+    .btn:hover {
+      transform: translateY(-5px);
       background: linear-gradient(to right, #e68ecb, #b98dff);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
     }
 
+    .back-link {
+      margin-top: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #c678dd;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: #a347a0;
+    }
   </style>
 </head>
 <body>
 
-  <h1>🎯 Procvičování: {{ level|title }}</h1>
-  <p>Vybraná obtížnost: <strong>{{ level }}</strong><br>
-    Budeš dostávat anglická slovíčka a vybírat správný český překlad ze 4 možností.<br></p>
+  <h1>✨ Režim: {{ mode_label }}</h1>
+  <h2>Seznam slovíček</h2>
 
-  <div class="word-list">
-    <h3>🔍 Slovíčka v této sadě:</h3>
-    <ul>
-      {% for word in words %}
-        <li>{{ word.english }} – {{ word.czech }}</li>
-      {% empty %}
-        <li>Žádná slovíčka v této kategorii!</li>
-      {% endfor %}
-    </ul>
-  </div>
+  <ul class="word-list">
+    {% for word in words %}
+      <li>{{ word.english }} – {{ word.czech }}</li>
+    {% endfor %}
+  </ul>
 
-  <form method="get" action="{% url 'practice_game' level %}">
-    <button type="submit" class="start-button">▶️ Začít procvičování</button>
-  </form>
+  <a href="{% url 'practice_game' mode value %}" class="btn">🚀 Začít procvičovat</a>
+  {% if mode == 'difficulty' %}
+    <a href="{% url 'practice_difficulty' %}" class="back-link">← Zpět na výběr obtížnosti</a>
+  {% elif mode == 'category' %}
+    <a href="{% url 'practice_category' %}" class="back-link">← Zpět na výběr kategorií</a>
+  {% elif mode == 'remix' %}
+    <a href="{% url 'practice' %}" class="back-link">← Zpět na výběr režimu</a>
+  {% endif %}
+
 
 </body>
 </html>

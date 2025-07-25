@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Procvičování dokončeno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(-45deg, #fce5ff, #d8f3ff, #ffe6f0, #f0f8ff);
+      background-size: 400% 400%;
+      animation: dreamy 20s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    @keyframes dreamy {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #6c4c84;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    p {
+      font-size: 1.3em;
+      color: #5a4e66;
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 18px 34px;
+      font-size: 1.3em;
+      border-radius: 24px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(to right, #ffa3d1, #d09eff);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+      transition: all 0.25s ease;
+      text-decoration: none;
+      min-width: 200px;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      background: linear-gradient(to right, #e68ecb, #b98dff);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+  </style>
+</head>
+<body>
+  <h1>Procvičování dokončeno! 🌟</h1>
+
+  {% if remix %}
+    <p>Projeli jsme všech <strong>{{ total }}</strong> slovíček z režimu <strong>reMIX 🔀</strong>.</p>
+    <div class="btn-group">
+      <a href="{% url 'unified_practice_start' 'remix' 'all' %}" class="btn">🔁 Procvičit znovu</a>
+      <a href="{% url 'practice' %}" class="btn">🛑 Ukončit</a>
+    </div>
+
+  {% elif category %}
+    <p>Projeli jsme všech <strong>{{ total }}</strong> slovíček kategorie <strong>{{ category.name }}</strong>.</p>
+    <div class="btn-group">
+      <a href="{% url 'unified_practice_start' 'category' category.id %}" class="btn">🔁 Procvičit znovu</a>
+      <a href="{% url 'practice_category' %}" class="btn">🛑 Ukončit</a>
+    </div>
+
+  {% elif level %}
+    <p>Projeli jsme všech <strong>{{ total }}</strong> slovíček z režimu <strong>{{ mode_label }}</strong>.</p>
+    <div class="btn-group">
+      <a href="{% url 'unified_practice_start' 'difficulty' level %}" class="btn">🔁 Procvičit znovu</a>
+      <a href="{% url 'practice_difficulty' %}" class="btn">🛑 Ukončit</a>
+    </div>
+  {% endif %}
+</body>
+</html>

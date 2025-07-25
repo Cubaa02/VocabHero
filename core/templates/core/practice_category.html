@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Výběr kategorie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(-45deg, #fbe8f5, #e7f8ff, #ffe6f2, #eef6ff);
+      background-size: 400% 400%;
+      animation: dreamyBG 20s ease infinite;
+      margin: 0;
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    @keyframes dreamyBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #6c4c84;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 960px;
+      padding: 20px;
+    }
+
+    .category-btn {
+      background: linear-gradient(to right, #ffa3d1, #c59dff);
+      color: white;
+      padding: 26px 32px;
+      border: none;
+      border-radius: 24px;
+      font-size: 1.35em;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.07);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .category-btn:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(to right, #e88fc7, #b38dff);
+    }
+
+    .back-link {
+      margin-top: 60px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #c678dd;
+    }
+
+    .back-link:hover {
+      color: #8c5fc1;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Vyber si kategorii</h1>
+
+  <div class="category-grid">
+    {% for category in categories %}
+      <a href="{% url 'unified_practice_start' 'category' category.id %}" class="category-btn">
+        {{ category.name }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <a href="{% url 'practice' %}" class="back-link">← Zpět na výběr režimu</a>
+</body>
+</html>
