@@ -6,7 +6,9 @@ from django.shortcuts import redirect, get_object_or_404
 from .models import Word, Category
 from django.http import HttpResponse, HttpResponseForbidden
 from .forms import WordForm  
-
+from django.http import JsonResponse
+from django.core.serializers import serialize
+from django.forms.models import model_to_dict
 
 
 
@@ -16,15 +18,27 @@ def add_word(request):
         form = WordForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('word_list')  # název url pro /words
+            return redirect('word_list')  
     else:
         form = WordForm()
     return render(request, 'core/add_word.html', {'form': form})
 
 
-def game_view(request):
-    word = random.choice(Word.objects.all())  
-    return render(request, 'core/game.html', {'word': word})
+def hero_mode(request):
+    easy = list(Word.objects.filter(difficulty="easy"))
+    medium = list(Word.objects.filter(difficulty="medium"))
+    hard = list(Word.objects.filter(difficulty="hard"))
+
+    easy_words = [model_to_dict(w, fields=["english", "czech"]) for w in easy]
+    medium_words = [model_to_dict(w, fields=["english", "czech"]) for w in medium]
+    hard_words = [model_to_dict(w, fields=["english", "czech"]) for w in hard]
+
+    context = {
+        "easy_words": easy_words[:10],
+        "medium_words": medium_words[:10],
+        "hard_words": hard_words[:10],
+    }
+    return render(request, 'core/hero_mode.html', context)
 
 
 def word_list(request):

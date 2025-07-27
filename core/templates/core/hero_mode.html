@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>VocabHero: Hero Mode</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 40px; }
+        .heart { font-size: 24px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>🔥 HERO MODE 🔥</h1>
+
+    <p><strong>Level:</strong> <span id="level">1</span></p>
+    <p><strong>Životy:</strong> <span id="lives">❤️❤️❤️</span></p>
+    <p><strong>XP:</strong> <span id="xp">0</span> / <span id="xpTarget">50</span></p>
+    <p><strong>Čas:</strong> <span id="timer">30</span> s</p>
+
+    <h2 id="wordDisplay">Načítání...</h2>
+
+    <input type="text" id="answerInput" placeholder="Zadej český překlad">
+    <button onclick="submitAnswer()">Odpovědět</button>
+
+    <p id="feedback"></p>
+
+    <script>
+        const wordPools = {
+            1: {{ easy_words|safe }},
+            2: {{ medium_words|safe }},
+            3: {{ hard_words|safe }}
+        };
+    </script>
+
+    <script>
+        let currentLevel = 1;
+        let xp = 0;
+        let xpPerCorrect = 10;
+        const levelXPGoals = { 1: 50, 2: 70, 3: 100 };
+        let lives = 3;
+        let timer = 30;
+        let interval = null;
+        let currentIndex = 0;
+        let words = wordPools[currentLevel];
+
+        const xpDisplay = document.getElementById("xp");
+        const xpTargetDisplay = document.getElementById("xpTarget");
+        const levelDisplay = document.getElementById("level");
+        const livesDisplay = document.getElementById("lives");
+        const timerDisplay = document.getElementById("timer");
+        const wordDisplay = document.getElementById("wordDisplay");
+        const answerInput = document.getElementById("answerInput");
+        const feedback = document.getElementById("feedback");
+
+        function showWord() {
+            if (currentIndex >= words.length) {
+                feedback.textContent = "🎉 Všechna slovíčka hotová! Získáváš bonus XP!";
+                xp += 20;
+                checkLevelUp();
+                return;
+            }
+
+            wordDisplay.textContent = "Přelož: " + words[currentIndex].english;
+            answerInput.value = "";
+        }
+
+        function submitAnswer() {
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = words[currentIndex].czech.trim().toLowerCase();
+
+            if (userAnswer === correctAnswer) {
+                xp += xpPerCorrect;
+                xpDisplay.textContent = xp;
+                feedback.textContent = "✅ Správně!";
+            } else {
+                lives--;
+                updateLives();
+                feedback.textContent = "❌ Špatně! Správně bylo: " + correctAnswer;
+            }
+
+            currentIndex++;
+            if (lives <= 0) {
+                gameOver();
+            } else {
+                checkLevelUp();
+            }
+        }
+
+        function checkLevelUp() {
+            const goal = levelXPGoals[currentLevel];
+
+            if (xp >= goal) {
+                currentLevel++;
+                if (currentLevel > 3) {
+                    feedback.textContent = "🏆 Vyhrál jsi hru! Gratulace!";
+                    clearInterval(interval);
+                    answerInput.disabled = true;
+                    return;
+                }
+
+                feedback.textContent = `⬆️ LEVEL ${currentLevel}!`;
+                levelDisplay.textContent = currentLevel;
+                xp = 0;
+                xpDisplay.textContent = xp;
+                xpTargetDisplay.textContent = levelXPGoals[currentLevel];
+                livesDisplay.textContent = "❤️❤️❤️"; 
+                lives = 3;
+                timer = 30 - (currentLevel * 5);
+                timerDisplay.textContent = timer;
+                currentIndex = 0;
+                words = wordPools[currentLevel];
+
+                clearInterval(interval);
+                startTimer();
+                showWord();
+            } else {
+                showWord();
+            }
+        }
+
+        function updateLives() {
+            if (lives === 3) livesDisplay.textContent = "❤️❤️❤️";
+            else if (lives === 2) livesDisplay.textContent = "❤️❤️🤍";
+            else if (lives === 1) livesDisplay.textContent = "❤️🤍🤍";
+            else livesDisplay.textContent = "💀💀💀";
+        }
+
+        function startTimer() {
+            interval = setInterval(() => {
+                timer--;
+                timerDisplay.textContent = timer;
+                if (timer <= 0) {
+                    clearInterval(interval);
+                    gameOver();
+                }
+            }, 1000);
+        }
+
+        function gameOver() {
+            feedback.textContent = "💀 GAME OVER 💀";
+            answerInput.disabled = true;
+        }
+
+        window.onload = () => {
+            xpTargetDisplay.textContent = levelXPGoals[currentLevel];
+            levelDisplay.textContent = currentLevel;
+            showWord();
+            startTimer();
+        };
+    </script>
+</body>
+</html>

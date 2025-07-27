@@ -107,7 +107,6 @@
     background: linear-gradient(to right, #e68ecb, #b98dff);
   }
 
-  /* Rozmístění tlačítek */
   .menu-active .option1 {
     top: calc(50% - 120px);
     left: calc(50% + 180px);
@@ -136,12 +135,12 @@
     pointer-events: auto;
   }
   .menu-active .play-circle {
-  left: calc(50% - 100px); /* Posunutí kruhu doleva při aktivním menu */
+  left: calc(50% - 100px); 
   }
 
   .user-info {
   position: absolute;
-  top: calc(50% + 405px); /* těsně pod kruhem */
+  top: calc(50% + 405px); 
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.1em;
@@ -168,8 +167,7 @@
   </div>
     {% endif %}
 
-    <!-- Menu Options -->
-    <button class="menu-option option1" onclick="window.location.href='/game/'">🎮 Hrát</button>
+    <button class="menu-option option1" onclick="window.location.href='/hero-mode/'">🎮 Hrát</button>
     <button class="menu-option option2" onclick="window.location.href='/practice/'">📚 Procvičování</button>
     <button class="menu-option option3" onclick="window.location.href='/words/'">🗂️ Databáze</button>
 
