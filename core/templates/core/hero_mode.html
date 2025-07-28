@@ -1,152 +1,193 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <title>VocabHero: Hero Mode</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 40px; }
-        .heart { font-size: 24px; }
-        .hidden { display: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <title>VocabHero: Hero Mode</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; }
+    .heart { font-size: 24px; }
+    .hidden { display: none; }
+  </style>
 </head>
 <body>
-    <h1>🔥 HERO MODE 🔥</h1>
+  <h1>🔥 HERO MODE 🔥</h1>
 
-    <p><strong>Level:</strong> <span id="level">1</span></p>
-    <p><strong>Životy:</strong> <span id="lives">❤️❤️❤️</span></p>
-    <p><strong>XP:</strong> <span id="xp">0</span> / <span id="xpTarget">50</span></p>
-    <p><strong>Čas:</strong> <span id="timer">30</span> s</p>
+  <p><strong>Level:</strong> <span id="level">1</span></p>
+  <p><strong>Životy:</strong> <span id="lives">❤️❤️❤️</span></p>
+  <p><strong>XP:</strong> <span id="xp">0</span> / <span id="xpTarget">50</span></p>
+  <p><strong>Čas:</strong> <span id="timer">40</span> s</p>
+  <p><strong>Combo:</strong> <span id="comboDisplay">0</span></p> <!-- 🔥 COMBO ZOBRAZENÍ -->
 
-    <h2 id="wordDisplay">Načítání...</h2>
+  <h2 id="wordDisplay">Načítání...</h2>
 
-    <input type="text" id="answerInput" placeholder="Zadej český překlad">
-    <button onclick="submitAnswer()">Odpovědět</button>
+  <input type="text" id="answerInput" placeholder="Zadej český překlad" />
+  <button onclick="submitAnswer()">Odpovědět</button>
 
-    <p id="feedback"></p>
+  <p id="feedback"></p>
 
-    <script>
-        const wordPools = {
-            1: {{ easy_words|safe }},
-            2: {{ medium_words|safe }},
-            3: {{ hard_words|safe }}
-        };
-    </script>
+  <script>
+    const wordPools = {
+      1: {{ easy_words|safe }},
+      2: {{ medium_words|safe }},
+      3: {{ hard_words|safe }}
+    };
+  </script>
 
-    <script>
-        let currentLevel = 1;
-        let xp = 0;
-        let xpPerCorrect = 10;
-        const levelXPGoals = { 1: 50, 2: 70, 3: 100 };
-        let lives = 3;
-        let timer = 30;
-        let interval = null;
-        let currentIndex = 0;
-        let words = wordPools[currentLevel];
+  <script>
+    let currentLevel = 1;
+    let xp = 0;
+    const xpPerCorrect = 10;
+    const levelXPGoals = { 1: 50, 2: 70, 3: 100 };
+    const baseTimes = { 1: 40, 2: 35, 3: 30 };
+    let lives = 3;
+    let timer = baseTimes[currentLevel];
+    let interval = null;
+    let currentIndex = 0;
+    let combo = 0; // 🔥 COMBO PROMĚNNÁ
+    let words = wordPools[currentLevel];
 
-        const xpDisplay = document.getElementById("xp");
-        const xpTargetDisplay = document.getElementById("xpTarget");
-        const levelDisplay = document.getElementById("level");
-        const livesDisplay = document.getElementById("lives");
-        const timerDisplay = document.getElementById("timer");
-        const wordDisplay = document.getElementById("wordDisplay");
-        const answerInput = document.getElementById("answerInput");
-        const feedback = document.getElementById("feedback");
+    const xpDisplay = document.getElementById("xp");
+    const xpTargetDisplay = document.getElementById("xpTarget");
+    const levelDisplay = document.getElementById("level");
+    const livesDisplay = document.getElementById("lives");
+    const timerDisplay = document.getElementById("timer");
+    const wordDisplay = document.getElementById("wordDisplay");
+    const answerInput = document.getElementById("answerInput");
+    const feedback = document.getElementById("feedback");
+    const comboDisplay = document.getElementById("comboDisplay");
 
-        function showWord() {
-            if (currentIndex >= words.length) {
-                feedback.textContent = "🎉 Všechna slovíčka hotová! Získáváš bonus XP!";
-                xp += 20;
-                checkLevelUp();
-                return;
-            }
+    function showWord() {
+      if (currentIndex >= words.length) {
+        feedback.textContent = "🎉 Všechna slovíčka hotová! Získáváš bonus XP!";
+        xp += 20;
+        checkLevelUp();
+        return;
+      }
 
-            wordDisplay.textContent = "Přelož: " + words[currentIndex].english;
-            answerInput.value = "";
+      wordDisplay.textContent = "Přelož: " + words[currentIndex].english;
+      answerInput.value = "";
+      answerInput.focus();
+    }
+
+    function submitAnswer() {
+      const userAnswer = answerInput.value.trim().toLowerCase();
+      const correctAnswer = words[currentIndex].czech.trim().toLowerCase();
+
+      if (userAnswer === correctAnswer) {
+        xp += xpPerCorrect;
+        xpDisplay.textContent = xp;
+        timer += 2;
+        timerDisplay.textContent = timer;
+        combo++; // 🔥 COMBO INCREMENT
+        comboDisplay.textContent = combo;
+        feedback.textContent = "✅ Správně!";
+
+        // 🔥 COMBO BONUSY
+        if (combo === 3) {
+          xp += 5;
+          xpDisplay.textContent = xp;
+          feedback.textContent += " 🔥 COMBO x3! +5 XP!";
+        }
+        if (combo === 5 && lives < 3) {
+          lives++;
+          updateLives();
+          feedback.textContent += " 💖 COMBO x5! +1 život!";
+        }
+        if (combo === 10) {
+          timer += 5;
+          timerDisplay.textContent = timer;
+          feedback.textContent += " 🕒 COMBO x10! +5s!";
         }
 
-        function submitAnswer() {
-            const userAnswer = answerInput.value.trim().toLowerCase();
-            const correctAnswer = words[currentIndex].czech.trim().toLowerCase();
+      } else {
+        lives--;
+        updateLives();
+        feedback.textContent = "❌ Špatně! Správně bylo: " + correctAnswer;
+        combo = 0; // 🔥 COMBO RESET
+        comboDisplay.textContent = combo;
+      }
+      
 
-            if (userAnswer === correctAnswer) {
-                xp += xpPerCorrect;
-                xpDisplay.textContent = xp;
-                feedback.textContent = "✅ Správně!";
-            } else {
-                lives--;
-                updateLives();
-                feedback.textContent = "❌ Špatně! Správně bylo: " + correctAnswer;
-            }
+      currentIndex++;
+      if (lives <= 0) {
+        gameOver();
+      } else {
+        checkLevelUp();
+      }
+    }
 
-            currentIndex++;
-            if (lives <= 0) {
-                gameOver();
-            } else {
-                checkLevelUp();
-            }
+    function checkLevelUp() {
+      const goal = levelXPGoals[currentLevel];
+
+      if (xp >= goal) {
+        currentLevel++;
+        if (currentLevel > 3) {
+          feedback.textContent = "🏆 Vyhrál jsi hru! Gratulace!";
+          clearInterval(interval);
+          answerInput.disabled = true;
+          return;
         }
 
-        function checkLevelUp() {
-            const goal = levelXPGoals[currentLevel];
+        feedback.textContent = `⬆️ LEVEL ${currentLevel}!`;
+        levelDisplay.textContent = currentLevel;
+        xp = 0;
+        xpDisplay.textContent = xp;
+        xpTargetDisplay.textContent = levelXPGoals[currentLevel];
+        livesDisplay.textContent = "❤️❤️❤️";
+        lives = 3;
+        timer = baseTimes[currentLevel];
+        timerDisplay.textContent = timer;
+        currentIndex = 0;
+        combo = 0;
+        comboDisplay.textContent = combo;
+        words = wordPools[currentLevel];
 
-            if (xp >= goal) {
-                currentLevel++;
-                if (currentLevel > 3) {
-                    feedback.textContent = "🏆 Vyhrál jsi hru! Gratulace!";
-                    clearInterval(interval);
-                    answerInput.disabled = true;
-                    return;
-                }
+        clearInterval(interval);
+        startTimer();
+        showWord();
+      } else {
+        showWord();
+      }
+    }
 
-                feedback.textContent = `⬆️ LEVEL ${currentLevel}!`;
-                levelDisplay.textContent = currentLevel;
-                xp = 0;
-                xpDisplay.textContent = xp;
-                xpTargetDisplay.textContent = levelXPGoals[currentLevel];
-                livesDisplay.textContent = "❤️❤️❤️"; 
-                lives = 3;
-                timer = 30 - (currentLevel * 5);
-                timerDisplay.textContent = timer;
-                currentIndex = 0;
-                words = wordPools[currentLevel];
+    function updateLives() {
+      if (lives === 3) livesDisplay.textContent = "❤️❤️❤️";
+      else if (lives === 2) livesDisplay.textContent = "❤️❤️🤍";
+      else if (lives === 1) livesDisplay.textContent = "❤️🤍🤍";
+      else livesDisplay.textContent = "💀💀💀";
+    }
 
-                clearInterval(interval);
-                startTimer();
-                showWord();
-            } else {
-                showWord();
-            }
+    function startTimer() {
+      interval = setInterval(() => {
+        timer--;
+        timerDisplay.textContent = timer;
+        if (timer <= 0) {
+          clearInterval(interval);
+          gameOver();
         }
+      }, 1000);
+    }
 
-        function updateLives() {
-            if (lives === 3) livesDisplay.textContent = "❤️❤️❤️";
-            else if (lives === 2) livesDisplay.textContent = "❤️❤️🤍";
-            else if (lives === 1) livesDisplay.textContent = "❤️🤍🤍";
-            else livesDisplay.textContent = "💀💀💀";
+    function gameOver() {
+      feedback.textContent = "💀 GAME OVER 💀";
+      answerInput.disabled = true;
+    }
+
+    window.onload = () => {
+      xpTargetDisplay.textContent = levelXPGoals[currentLevel];
+      levelDisplay.textContent = currentLevel;
+      timerDisplay.textContent = timer;
+      showWord();
+      startTimer();
+
+      // ✅ ENTER KEY = SUBMIT
+      answerInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          submitAnswer();
         }
-
-        function startTimer() {
-            interval = setInterval(() => {
-                timer--;
-                timerDisplay.textContent = timer;
-                if (timer <= 0) {
-                    clearInterval(interval);
-                    gameOver();
-                }
-            }, 1000);
-        }
-
-        function gameOver() {
-            feedback.textContent = "💀 GAME OVER 💀";
-            answerInput.disabled = true;
-        }
-
-        window.onload = () => {
-            xpTargetDisplay.textContent = levelXPGoals[currentLevel];
-            levelDisplay.textContent = currentLevel;
-            showWord();
-            startTimer();
-        };
-    </script>
+      });
+    };
+  </script>
 </body>
 </html>
