@@ -9,7 +9,7 @@ class Word(models.Model):
         max_length=100,
         verbose_name="Anglické slovo",
         help_text="Zadej slovo v angličtině (bez speciálních znaků)",
-        validators=[RegexValidator(r'^[a-zA-Z\s\-]+$', 'Pouze písmena, mezery a pomlčky')]
+        validators=[RegexValidator(r'^[a-zA-Z\s\-\(\)]+$', 'Pouze písmena, mezery, pomlčky a závorky')]
     )
 
     czech = models.CharField(

@@ -29,16 +29,21 @@ def hero_mode(request):
     medium = list(Word.objects.filter(difficulty="medium"))
     hard = list(Word.objects.filter(difficulty="hard"))
 
-    easy_words = [model_to_dict(w, fields=["english", "czech"]) for w in easy]
-    medium_words = [model_to_dict(w, fields=["english", "czech"]) for w in medium]
-    hard_words = [model_to_dict(w, fields=["english", "czech"]) for w in hard]
+    def to_dict_list(words):
+        return [model_to_dict(w, fields=["english", "czech"]) for w in words]
 
-    context = {
-        "easy_words": easy_words[:10],
-        "medium_words": medium_words[:10],
-        "hard_words": hard_words[:10],
+    level_data = {
+        1: to_dict_list(easy),
+        2: to_dict_list(easy + medium),
+        3: to_dict_list(medium),
+        4: to_dict_list(medium + hard),
+        5: to_dict_list(hard)
     }
-    return render(request, 'core/hero_mode.html', context)
+
+    return render(request, 'core/hero_mode.html', {
+        "level_data": level_data
+    })
+
 
 
 def word_list(request):
@@ -209,13 +214,13 @@ def unified_practice_start(request, mode, value=None):
         category = get_object_or_404(Category, pk=value)
         progress_key = f'practice_category_progress_{value}'
         request.session[progress_key] = []
-        words = Word.objects.filter(category=category)
+        words = Word.ordered_by_difficulty().filter(category=category)
         context['category'] = category
 
     elif mode == 'remix':
         progress_key = 'practice_remix_progress'
         request.session[progress_key] = []
-        words = Word.objects.all()
+        words = Word.ordered_by_difficulty()
         context['remix'] = True
 
     else:
