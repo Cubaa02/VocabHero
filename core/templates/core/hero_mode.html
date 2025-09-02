@@ -317,7 +317,7 @@ html, body {
 const wordPools = {{ level_data|safe }};
 let currentLevel = 1;
 let xp = 0;
-let totalXP = 0;       // ← používá se v Game Over modalu (součet za celou hru)
+let totalXP = 0;       
 let xpBonus = 0;
 let miniEventBonus = 0;
 let glassCannon = false;
@@ -422,7 +422,6 @@ function showWord() {
   if (isGameOver) return;
   words = getFilteredWords();
   if (!words || words.length === 0) {
-    // FIX: bonus za vyčerpání slov jde i do totalXP, aby se modal nelišil
     const bonus = 20;
     feedback.textContent = "🎉 Všechna slovíčka hotová! Získáváš bonus +" + bonus + " XP!";
     xp += bonus; totalXP += bonus;
@@ -454,7 +453,7 @@ function submitAnswer() {
     } else feedback.textContent = "✅ Správně!";
     if (doubleXPActive) { gainedXP *= 2; doubleXPActive = false; }
     xp += gainedXP;
-    totalXP += gainedXP; // ← FIX: vždy přidáváme do totalXP přesně to, co šlo do xp
+    totalXP += gainedXP; 
     if (temporalContract) addTime(3); 
   } else {
     wrongCount++;
@@ -463,7 +462,6 @@ function submitAnswer() {
     lives -= damage;
     feedback.textContent = "❌ Špatně! Správně bylo: " + correctAnswer;
 
-    // Phoenix oživení
     if (lives <= 0 && phoenixFeather && !phoenixUsed) {
       phoenixUsed = true;
       phoenixFeather = false;
@@ -471,7 +469,6 @@ function submitAnswer() {
       feedback.textContent += " 🔥 Phoenix Feather tě oživila!";
     }
 
-    // Time Warp: jednorázové zmrazení času po chybě
     if (timeWarp && timeWarpReady) {
       timeWarpReady = false;
       freezeTime(2);
@@ -482,7 +479,6 @@ function submitAnswer() {
   maybeTriggerMiniEvent();
   updateDisplays();
 
-  // Prohra ztrátou životů (pokud Phoenix nezachránil)
   if (lives <= 0 && !(!phoenixUsed && phoenixFeather)) {
     gameOver("Došly ti životy!");
     return;
@@ -544,7 +540,7 @@ function checkLevelUp() {
       answerInput.disabled = true;
       return;
     }
-    openLevelCompleteModal(); // ← teď: nejdřív Level Complete modal
+    openLevelCompleteModal(); 
   } else {
     showWord();
   }
@@ -559,9 +555,8 @@ function openLevelCompleteModal() {
 }
 
 function continueToItemSelection() {
-  // zavřít level complete modal a otevřít výběr itemů
   document.getElementById("levelCompleteModal").classList.add("hidden");
-  openItemModal(); // openItemModal se postará o pauzu a zobrazení itemů
+  openItemModal(); 
 }
 
 /* ==== ITEM MODAL ==== */
@@ -576,11 +571,9 @@ const ITEM_DESCRIPTIONS = {
 };
 
 function openItemModal() {
-  // pauza času + blokace inputu
   if (interval) { clearInterval(interval); interval = null; }
   answerInput.disabled = true;
 
-  // vyber 2 nevybrané itemy
   const allItems = [
     "Omniscient Reader","Blessing in Disguise","Glass Cannon",
     "Temporal Contract","Phoenix Feather","Adrenaline Rush","Time Warp"
@@ -589,7 +582,6 @@ function openItemModal() {
   shuffle(available);
   const options = available.slice(0, 2);
 
-  // vykresli karty
   itemGrid.innerHTML = "";
   options.forEach(name => {
     const card = document.createElement("div");
@@ -620,15 +612,13 @@ function applyItem(item) {
     case "Time Warp": timeWarp = true; timeWarpReady = true; break;
   }
 
-  // Připravení na další level (zvýšíme úroveň teď, next modal potvrdí start)
   currentLevel++;
-  xp = 0; // XP v levelu reset, totalXP zůstává
+  xp = 0; 
   lives = 3;
   timeWarpReady = timeWarp;
   timer = baseTimes[currentLevel] || timer;
   clampTimer();
 
-  // Zavře item modal → otevře next level modal
   itemModal.classList.add("hidden");
   document.getElementById("nextLevelNum").textContent = currentLevel;
   document.getElementById("nextLevelModal").classList.remove("hidden");
