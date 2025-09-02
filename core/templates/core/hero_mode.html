@@ -2,233 +2,705 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <title>VocabHero: Hero Mode</title>
+  <title>VocabHero: Hero Mode 2.0</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 40px; }
-    .heart { font-size: 24px; }
-    .hidden { display: none; }
+:root {
+  --bg1:#ffeaf5; --bg2:#fbe5ff; --bg3:#e7f7ff; --bg4:#fff0f7;
+  --accent1:#ffa3d1; --accent2:#d09eff; --accent3:#f8b8ff;
+  --muted:#6b5b7b; --radius:20px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  background: linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
+  background-size: 400% 400%;
+  animation: dreamyBG 22s ease infinite;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  color: #4a3b4e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes dreamyBG {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.hero-wrap {
+  width:min(1100px,95vw);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding-block: 12px;
+}
+
+.panel {
+  flex:1;
+  background:linear-gradient(
+    to bottom right,
+    rgba(255,255,255,0.75),
+    rgba(255,255,255,0.55)
+  );
+  backdrop-filter:blur(18px) saturate(160%);
+  border-radius:var(--radius);
+  padding:36px;
+  min-height:85vh; 
+  box-shadow:0 5px 5px rgba(50,40,70,.1);
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  animation:fadeIn .8s ease;
+  position:relative;
+}
+@keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
+
+.header {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  margin-bottom:28px;
+}
+.header h1 {
+  font-size:2.35rem;margin:0;
+  background:linear-gradient(to right,var(--accent1),var(--accent2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  text-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+.meta {
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  gap:12px;
+  align-items:center;
+  color:var(--muted);
+  font-weight:600;
+  font-size:1rem;
+}
+
+.timer-circle {
+  position:absolute; top:20px; right:20px;
+  width:110px;height:110px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:conic-gradient(var(--accent1) 0deg,var(--accent2) 0deg);
+  box-shadow:0 6px 16px rgba(130,70,160,.15);
+  z-index:10;
+}
+.timer-inner {
+  width:78%;height:78%;border-radius:50%;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(6px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-weight:700;color:var(--accent2);font-size:1.05rem;
+  box-shadow:inset 0 3px 8px rgba(0,0,0,.05)
+}
+
+.xp-bar-wrap {
+  width:100%;height:24px;
+  background:rgba(0,0,0,.06);
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:70px;
+}
+.xp-bar {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  transition:width .5s ease;
+}
+.xp-info {display:flex;justify-content:space-between;font-size:1.05rem;color:var(--muted);margin-top:8px}
+
+.word-card {
+  margin-top:42px;
+  border-radius:18px;padding:26px;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(10px);
+  text-align:center;font-size:1.8rem;font-weight:700;color:#2b2530;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  min-height:120px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.input-row {display:flex;gap:12px;margin-top:26px}
+.input-row input {
+  flex:1;padding:16px 16px;border-radius:16px;
+  border:1px solid rgba(0,0,0,.05);
+  font-size:1.05rem;box-shadow:inset 0 2px 6px rgba(0,0,0,.05);
+  min-height:50px;
+}
+.input-row button {
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  color:#fff;border:none;padding:14px 18px;border-radius:16px;font-weight:700;cursor:pointer;
+  transition:transform .2s ease, filter .2s ease;
+  box-shadow:0 6px 16px rgba(0,0,0,.1);
+  min-height:50px;
+}
+.input-row button:hover {transform:translateY(-2px) scale(1.04);filter:brightness(1.08)}
+
+#feedback {margin-top:18px;min-height:26px;font-weight:700;color:var(--muted);text-shadow:0 1px 2px rgba(255,255,255,.7)}
+
+.back-link {
+  display:block;
+  margin-top:16px;
+  text-align:center;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:1.05em;
+  color:#c678dd;
+  transition:color 0.2s ease;
+}
+.back-link:hover {color:#a347a0}
+
+.hidden{display:none}
+
+/* ===== Modal Game Over & Item Modal ===== */
+#gameOverModal,
+#itemModal,
+#levelCompleteModal,
+#nextLevelModal{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.55); z-index:999;
+}
+#gameOverModal.hidden, #itemModal.hidden, #levelCompleteModal.hidden, #nextLevelModal.hidden {display:none}
+
+.modal-card{
+  width:min(560px,92vw);
+  background:linear-gradient(to bottom right,rgba(255,255,255,.95),rgba(255,255,255,.85));
+  border-radius:22px; padding:28px; box-shadow:0 12px 32px rgba(0,0,0,.25);
+  text-align:center; backdrop-filter:blur(10px); 
+}
+.modal-title{
+  margin:0 0 6px 0; font-size:1.6rem;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.modal-stats{color:#584a64; font-weight:600; line-height:1.6}
+.modal-stats b{color:#2b2530}
+.modal-actions{margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+.modal-actions button, .modal-actions a{
+  border:none; cursor:pointer; font-weight:800; padding:12px 16px; border-radius:14px; text-decoration:none;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff; box-shadow:0 6px 16px rgba(0,0,0,.12);
+}
+.modal-actions button:hover, .modal-actions a:hover{filter:brightness(1.08); transform:translateY(-1px)}
+
+/* Item cards */
+.item-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;
+}
+.item-card{
+  display:flex; flex-direction:column; gap:8px; align-items:flex-start;
+  padding:16px; border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.85));
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  text-align:left;
+}
+.item-card h4{
+  margin:0; font-size:1.05rem;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.item-card p{margin:0; color:#5c4f68; font-weight:600; line-height:1.4}
+.item-card button{
+  margin-top:8px; align-self:stretch;
+  padding:10px 14px; border:none; border-radius:12px; cursor:pointer; font-weight:800;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff;
+  transition:transform .15s ease, filter .15s ease;
+}
+.item-card button:hover{transform:translateY(-2px); filter:brightness(1.08)}
   </style>
 </head>
 <body>
-  <h1>🔥 HERO MODE 🔥</h1>
+  <div class="hero-wrap">
+    <div class="panel">
+      <!-- Header -->
+      <div class="header">
+        <div class="meta">
+          <div>Level: <strong id="level">1</strong></div>
+          <div id="lives">💗💗💗</div>
+        </div>
+        <h1>🌸 VOCAB HERO</h1>
+      </div>
 
-  <p><strong>Level:</strong> <span id="level">1</span></p>
-  <p><strong>Životy:</strong> <span id="lives">❤️❤️❤️</span></p>
-  <p><strong>XP:</strong> <span id="xp">0</span> / <span id="xpTarget">100</span></p>
-  <p><strong>Čas:</strong> <span id="timer">60</span> s</p>
+      <!-- Timer -->
+      <div class="timer-circle" id="timerCircle">
+        <div class="timer-inner">
+          <div id="timerNumber">50</div>
+        </div>
+      </div>
 
-  <h2 id="wordDisplay">Načítání...</h2>
+      <!-- XP Bar -->
+      <div class="xp-bar-wrap">
+        <div class="xp-bar" id="xpBar"></div>
+      </div>
+      <div class="xp-info">
+        <div>XP: <span id="xp">0</span></div>
+        <div>/ <span id="xpTarget">100</span></div>
+      </div>
 
-  <input type="text" id="answerInput" placeholder="Zadej český překlad" />
-  <button onclick="submitAnswer()">Odpovědět</button>
+      <div class="word-card" id="wordDisplay">Načítání...</div>
+      <div class="input-row">
+        <input id="answerInput" type="text" placeholder="Zadej český překlad" autocomplete="off" />
+        <button id="answerBtn" onclick="submitAnswer()">Odpovědět</button>
+      </div>
+      <div id="feedback"></div>
 
-  <p id="feedback"></p>
+      <div style="margin-top:auto; text-align:center; color:var(--muted); font-size:0.95rem;">
+        XP cíl: <span id="xpGoalSmall">100</span><br>
+        Mini event šance: <span id="miniChance">12%</span>
+      </div>
 
-  <script>
-    const wordPools = {{ level_data|safe }};
+      <a href="{% url 'home' %}" class="back-link">← Zpět na úvodní stránku</a>
+    </div>
+  </div>
 
-    let currentLevel = 1;
-    let xp = 0;
-    const xpPerCorrect = 10;
+  <!-- ===== Modal (Game Over) ===== -->
+  <div id="gameOverModal" class="hidden">
+    <div class="modal-card">
+      <h2 id="gameOverTitle" class="modal-title">Konec hry!</h2>
+      <div id="gameOverStats" class="modal-stats"></div>
+      <div class="modal-actions">
+        <button onclick="restartGame()">Hrát znovu</button>
+        <button onclick="closeModal()">Zůstat</button>
+      </div>
+    </div>
+  </div>
 
-    const levelXPGoals = {
-      1: 110,
-      2: 130,
-      3: 160,
-      4: 190,
-      5: 210
-    };
+  <!-- ===== Modal (Level Complete) ===== -->
+  <div id="levelCompleteModal" class="hidden">
+    <div class="modal-card">
+      <h2 class="modal-title">⭐ Level Complete!</h2>
+      <div class="modal-stats">
+        Gratuluji! Dokončil jsi Level <b id="completeLevelNum">1</b> 🎉
+      </div>
+      <div class="modal-actions">
+        <button onclick="continueToItemSelection()">Pokračovat</button>
+      </div>
+    </div>
+  </div>
 
-    const baseTimes = {
-      1: 40,
-      2: 45,
-      3: 50,
-      4: 55,
-      5: 60
-    };
+  <!-- ===== Modal (Item Choice) ===== -->
+  <div id="itemModal" class="hidden">
+    <div class="modal-card">
+      <h2 class="modal-title">🎁 Vyber si odměnu!</h2>
+      <div id="itemGrid" class="item-grid"></div>
+    </div>
+  </div>
 
-    let lives = 3;
-    let timer = baseTimes[currentLevel];
-    let interval = null;
-    let currentWord = null;
-    let usedWords = []; // 🔥 NEW
-    let words = getFilteredWords(); // 🔥 NEW
-    shuffle(words);
+  <!-- ===== Modal (Next Level Start) ===== -->
+  <div id="nextLevelModal" class="hidden">
+    <div class="modal-card">
+      <h2 class="modal-title">⚔️ Level <span id="nextLevelNum">2</span> začíná!</h2>
+      <div class="modal-stats">
+        Připrav se — nový level začne hned po stisku Start!
+      </div>
+      <div class="modal-actions">
+        <button onclick="startNextLevel()">Start!</button>
+      </div>
+    </div>
+  </div>
 
-    let activeMiniEvent = null;
+<script>
+/* ==== DATA & STATE ==== */
+const wordPools = {{ level_data|safe }};
+let currentLevel = 1;
+let xp = 0;
+let totalXP = 0;       // ← používá se v Game Over modalu (součet za celou hru)
+let xpBonus = 0;
+let miniEventBonus = 0;
+let glassCannon = false;
+let temporalContract = false;
+let phoenixFeather = false;
+let adrenalineRush = false;
+let timeWarp = false;
+let phoenixUsed = false;
+let timeWarpReady = false;
+let pickedItems = [];
+let doubleXPActive = false;
+let lives = 3;
+let timer = 50;
+let interval = null;
+let currentWord = null;
+let usedWords = [];
+let words = [];
+let isGameOver = false;
+let correctCount = 0;
+let wrongCount = 0;
 
-    const xpDisplay = document.getElementById("xp");
-    const xpTargetDisplay = document.getElementById("xpTarget");
-    const levelDisplay = document.getElementById("level");
-    const livesDisplay = document.getElementById("lives");
-    const timerDisplay = document.getElementById("timer");
-    const wordDisplay = document.getElementById("wordDisplay");
-    const answerInput = document.getElementById("answerInput");
-    const feedback = document.getElementById("feedback");
+const xpPerCorrect = 8;
+const adrenalineBonus = 3;
+const levelXPGoals = { 1: 100, 2: 130, 3: 150, 4: 180, 5: 210, 6: 230, 7: 250 };
+const baseTimes   = { 1: 50, 2: 45, 3: 45, 4: 40, 5: 38, 6: 35, 7: 32 };
 
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
+/* ==== DOM ==== */
+const xpDisplay = document.getElementById("xp");
+const xpTargetDisplay = document.getElementById("xpTarget");
+const xpGoalSmall = document.getElementById("xpGoalSmall");
+const xpBar = document.getElementById("xpBar");
+const levelDisplay = document.getElementById("level");
+const livesDisplay = document.getElementById("lives");
+const timerCircle = document.getElementById("timerCircle");
+const timerNumber = document.getElementById("timerNumber");
+const wordDisplay = document.getElementById("wordDisplay");
+const answerInput = document.getElementById("answerInput");
+const feedback = document.getElementById("feedback");
+const miniChanceDisplay = document.getElementById("miniChance");
+const itemModal = document.getElementById("itemModal");
+const itemGrid = document.getElementById("itemGrid");
+
+/* ==== INPUT (Enter) – blokujeme při otevřeném item modalu ==== */
+document.addEventListener('keydown', (e) => {
+  const itemOpen = !itemModal.classList.contains('hidden');
+  const anyModalOpen = !document.getElementById("levelCompleteModal").classList.contains('hidden')
+                       || !document.getElementById("nextLevelModal").classList.contains('hidden')
+                       || itemOpen
+                       || !document.getElementById("gameOverModal").classList.contains('hidden');
+  if (e.key === 'Enter' && !answerInput.disabled && !anyModalOpen) {
+    submitAnswer();
+  }
+});
+
+/* ==== UTILS ==== */
+function clampTimer() { if (timer < 0) timer = 0; }
+function addTime(delta) { timer += delta; clampTimer(); }
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+function pickRandom(array, ratio) {
+  let count = Math.floor(array.length * ratio);
+  let copy = [...array];
+  shuffle(copy);
+  return copy.slice(0, count);
+}
+
+/* ==== WORDS ==== */
+function getFilteredWords() {
+  let pool = [];
+  if (wordPools && wordPools.easy) {
+    if (currentLevel === 1) pool = pool.concat(wordPools.easy);
+    else if (currentLevel === 2) pool = pool.concat(wordPools.easy, wordPools.medium);
+    else if (currentLevel === 3) pool = pool.concat(wordPools.medium);
+    else if (currentLevel === 4) pool = pool.concat(pickRandom(wordPools.medium, 0.5), pickRandom(wordPools.hard, 0.5));
+    else if (currentLevel === 5) pool = pool.concat(pickRandom(wordPools.medium, 0.3), pickRandom(wordPools.hard, 0.7));
+    else pool = pool.concat(wordPools.hard);
+  } else if (wordPools && (wordPools[currentLevel] || wordPools[String(currentLevel)])) {
+    const key = wordPools[currentLevel] ? currentLevel : String(currentLevel);
+    pool = (wordPools[key] || []).slice();
+  } else {
+    for (let k in wordPools) {
+      if (Array.isArray(wordPools[k])) pool = pool.concat(wordPools[k]);
+    }
+  }
+  let filtered = pool.filter(w => !usedWords.includes(w.english));
+  if (filtered.length === 0) {
+    let allWords = [];
+    for (let k in wordPools) {
+      if (Array.isArray(wordPools[k])) allWords = allWords.concat(wordPools[k]);
+    }
+    filtered = allWords.filter(w => !usedWords.includes(w.english));
+  }
+  return filtered;
+}
+
+function showWord() {
+  if (isGameOver) return;
+  words = getFilteredWords();
+  if (!words || words.length === 0) {
+    // FIX: bonus za vyčerpání slov jde i do totalXP, aby se modal nelišil
+    const bonus = 20;
+    feedback.textContent = "🎉 Všechna slovíčka hotová! Získáváš bonus +" + bonus + " XP!";
+    xp += bonus; totalXP += bonus;
+    updateDisplays();
+    checkLevelUp();
+    return;
+  }
+  shuffle(words);
+  currentWord = words[0];
+  if (currentWord && currentWord.english) usedWords.push(currentWord.english);
+  wordDisplay.textContent = "Přelož: " + (currentWord ? currentWord.english : "???");
+  answerInput.value = "";
+  answerInput.focus();
+}
+
+/* ==== ANSWERS & XP ==== */
+function submitAnswer() {
+  if (isGameOver) return;
+  if (!currentWord) { showWord(); return; }
+  const userAnswer = answerInput.value.trim().toLowerCase();
+  const correctAnswer = (currentWord.czech || "").trim().toLowerCase();
+
+  if (userAnswer === correctAnswer) {
+    correctCount++;
+    let gainedXP = xpPerCorrect + xpBonus;
+    if (adrenalineRush && lives === 1) {
+      gainedXP += adrenalineBonus;
+      feedback.textContent = `✅ Správně! (Adrenaline bonus +${adrenalineBonus} XP)`;
+    } else feedback.textContent = "✅ Správně!";
+    if (doubleXPActive) { gainedXP *= 2; doubleXPActive = false; }
+    xp += gainedXP;
+    totalXP += gainedXP; // ← FIX: vždy přidáváme do totalXP přesně to, co šlo do xp
+    if (temporalContract) addTime(3); 
+  } else {
+    wrongCount++;
+    const damage = glassCannon ? 2 : 1;
+    if (temporalContract) addTime(-6); 
+    lives -= damage;
+    feedback.textContent = "❌ Špatně! Správně bylo: " + correctAnswer;
+
+    // Phoenix oživení
+    if (lives <= 0 && phoenixFeather && !phoenixUsed) {
+      phoenixUsed = true;
+      phoenixFeather = false;
+      lives = 1; addTime(20);
+      feedback.textContent += " 🔥 Phoenix Feather tě oživila!";
     }
 
-    function getFilteredWords() {
-      return wordPools[currentLevel].filter(w => !usedWords.includes(w.english));
+    // Time Warp: jednorázové zmrazení času po chybě
+    if (timeWarp && timeWarpReady) {
+      timeWarpReady = false;
+      freezeTime(2);
+      feedback.textContent += " ❄️ Time Warp aktivován";
     }
+  }
 
-    function showWord() {
-      words = getFilteredWords(); // 🔥 NEW
-      if (words.length === 0) {
-        feedback.textContent = "🎉 Všechna slovíčka hotová! Získáváš bonus XP!";
-        xp += 20;
-        checkLevelUp();
-        return;
-      }
+  maybeTriggerMiniEvent();
+  updateDisplays();
 
-      shuffle(words);
-      currentWord = words[0];
-      wordDisplay.textContent = "Přelož: " + currentWord.english;
-      answerInput.value = "";
-      answerInput.focus();
-      maybeTriggerMiniEvent();
+  // Prohra ztrátou životů (pokud Phoenix nezachránil)
+  if (lives <= 0 && !(!phoenixUsed && phoenixFeather)) {
+    gameOver("Došly ti životy!");
+    return;
+  }
+
+  checkLevelUp();
+}
+
+/* ==== TIMER ==== */
+function freezeTime(seconds) {
+  if (interval) { clearInterval(interval); interval = null; }
+  setTimeout(() => { if (!answerInput.disabled && !isGameOver) startTimer(); }, seconds * 1000);
+}
+
+function startTimer() {
+  if (interval) clearInterval(interval);
+  if (isGameOver) return;
+
+  if (timer <= 0) { gameOver("Vypršel ti čas!"); return; }
+
+  interval = setInterval(() => {
+    timer--;
+    clampTimer();
+    updateDisplays();
+    if (timer <= 0) {
+      clearInterval(interval);
+      interval = null;
+      gameOver("Vypršel ti čas!");
     }
+  }, 1000);
+}
 
-    function submitAnswer() {
-      const userAnswer = answerInput.value.trim().toLowerCase();
-      const correctAnswer = currentWord.czech.trim().toLowerCase();
+/* ==== MINI EVENTS ==== */
+function maybeTriggerMiniEvent() {
+  const chance = Math.random();
+  if (chance <= 0.12 + miniEventBonus) {
+    const events = ["doubleXP", "bonusTime", "heal"];
+    const event = events[Math.floor(Math.random() * events.length)];
+    handleMiniEvent(event);
+  }
+}
 
-      usedWords.push(currentWord.english); // 🔥 NEW
+function handleMiniEvent(event) {
+  switch (event) {
+    case "doubleXP": doubleXPActive = true; feedback.textContent += " 🎁 DOUBLE XP!"; break;
+    case "bonusTime": addTime(5); feedback.textContent += " ⏳ +5s"; break;
+    case "heal": if (lives < 3) { lives++; feedback.textContent += " 💗 +1 život"; } break;
+  }
+}
 
-      if (userAnswer === correctAnswer) {
-        let gainedXP = xpPerCorrect;
-        if (activeMiniEvent === "doubleXP") {
-          gainedXP *= 2;
-        }
-        xp += gainedXP;
-        xpDisplay.textContent = xp;
-        feedback.textContent = "✅ Správně!" + (activeMiniEvent === "doubleXP" ? " (DOUBLE XP!)" : "");
-        timer += 2;
-        timerDisplay.textContent = timer;
-      } else {
-        lives--;
-        updateLives();
-        feedback.textContent = "❌ Špatně! Správně bylo: " + correctAnswer;
-      }
-
-      activeMiniEvent = null;
-
-      if (lives <= 0) {
-        gameOver();
-      } else {
-        checkLevelUp();
-      }
-    }
-
-    function checkLevelUp() {
-      const goal = levelXPGoals[currentLevel];
-
-      if (xp >= goal) {
-        currentLevel++;
-
-        if (!(currentLevel in wordPools)) {
-          feedback.textContent = "🏆 Vyhrál jsi hru! Gratulace!";
-          clearInterval(interval);
-          answerInput.disabled = true;
-          return;
-        }
-
-        feedback.textContent = `⬆️ LEVEL ${currentLevel}!`;
-        levelDisplay.textContent = currentLevel;
-        xp = 0;
-        xpDisplay.textContent = xp;
-        xpTargetDisplay.textContent = levelXPGoals[currentLevel];
-        lives = 3;
-        updateLives();
-        timer = baseTimes[currentLevel];
-        timerDisplay.textContent = timer;
-
-        words = getFilteredWords(); // 🔥 NEW
-        shuffle(words);
-
-        clearInterval(interval);
-        startTimer();
-        showWord();
-      } else {
-        showWord();
-      }
-    }
-
-    function updateLives() {
-      if (lives === 3) livesDisplay.textContent = "❤️❤️❤️";
-      else if (lives === 2) livesDisplay.textContent = "❤️❤️🤍";
-      else if (lives === 1) livesDisplay.textContent = "❤️🤍🤍";
-      else livesDisplay.textContent = "💀💀💀";
-    }
-
-    function startTimer() {
-      interval = setInterval(() => {
-        timer--;
-        timerDisplay.textContent = timer;
-        if (timer <= 0) {
-          clearInterval(interval);
-          gameOver();
-        }
-      }, 1000);
-    }
-
-    function gameOver() {
-      feedback.textContent = "💀 GAME OVER 💀";
+/* ==== LEVEL PROGRESSION ==== */
+function checkLevelUp() {
+  if (isGameOver) return;
+  const goal = levelXPGoals[currentLevel] || 999999;
+  if (xp >= goal) {
+    if (currentLevel >= 7) {
+      feedback.textContent = "🏆 Vyhrál jsi hru!";
+      clearInterval(interval);
       answerInput.disabled = true;
+      return;
     }
+    openLevelCompleteModal(); // ← teď: nejdřív Level Complete modal
+  } else {
+    showWord();
+  }
+}
 
-    function maybeTriggerMiniEvent() {
-      const chance = Math.random();
-      if (chance <= 0.10) {
-        const events = ["doubleXP", "bonusTime", "heal"];
-        activeMiniEvent = events[Math.floor(Math.random() * events.length)];
-        handleMiniEvent();
-      } else {
-        activeMiniEvent = null;
-      }
-    }
+/* ==== LEVEL COMPLETE FLOW ==== */
+function openLevelCompleteModal() {
+  if (interval) { clearInterval(interval); interval = null; }
+  answerInput.disabled = true;
+  document.getElementById("completeLevelNum").textContent = currentLevel;
+  document.getElementById("levelCompleteModal").classList.remove("hidden");
+}
 
-    function handleMiniEvent() {
-      switch (activeMiniEvent) {
-        case "doubleXP":
-          feedback.textContent = "🎁 MINI EVENT: Další správná odpověď ti dá DOUBLE XP!";
-          break;
-        case "bonusTime":
-          timer += 5;
-          timerDisplay.textContent = timer;
-          feedback.textContent = "⏳ MINI EVENT: Bonusových +5 sekund!";
-          break;
-        case "heal":
-          if (lives < 3) {
-            lives++;
-            updateLives();
-            feedback.textContent = "💗 MINI EVENT: Obnovil se ti jeden život!";
-          } else {
-            feedback.textContent = "💗 MINI EVENT: Život by se obnovil, ale už máš plno!";
-          }
-          break;
-      }
-    }
+function continueToItemSelection() {
+  // zavřít level complete modal a otevřít výběr itemů
+  document.getElementById("levelCompleteModal").classList.add("hidden");
+  openItemModal(); // openItemModal se postará o pauzu a zobrazení itemů
+}
 
-    window.onload = () => {
-      xpTargetDisplay.textContent = levelXPGoals[currentLevel];
-      levelDisplay.textContent = currentLevel;
-      timerDisplay.textContent = timer;
-      showWord();
-      startTimer();
+/* ==== ITEM MODAL ==== */
+const ITEM_DESCRIPTIONS = {
+  "Omniscient Reader": "Každá správná odpověď +5 XP navíc.",
+  "Blessing in Disguise": "Trvalé +10% k šanci na mini event.",
+  "Glass Cannon": "Správná odpověď +10 XP, ale chyby berou 2 životy.",
+  "Temporal Contract": "+3s za správně, −6s za špatně.",
+  "Phoenix Feather": "Jedno automatické oživení (+20s) při smrti.",
+  "Adrenaline Rush": "+3 XP navíc, pokud jsi na posledním srdíčku.",
+  "Time Warp": "První chyba v každém levelu zmrazí čas na 2s."
+};
 
-      answerInput.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          submitAnswer();
-        }
-      });
-    };
-  </script>
+function openItemModal() {
+  // pauza času + blokace inputu
+  if (interval) { clearInterval(interval); interval = null; }
+  answerInput.disabled = true;
+
+  // vyber 2 nevybrané itemy
+  const allItems = [
+    "Omniscient Reader","Blessing in Disguise","Glass Cannon",
+    "Temporal Contract","Phoenix Feather","Adrenaline Rush","Time Warp"
+  ];
+  const available = allItems.filter(i => !pickedItems.includes(i));
+  shuffle(available);
+  const options = available.slice(0, 2);
+
+  // vykresli karty
+  itemGrid.innerHTML = "";
+  options.forEach(name => {
+    const card = document.createElement("div");
+    card.className = "item-card";
+    const h4 = document.createElement("h4");
+    h4.textContent = name;
+    const p = document.createElement("p");
+    p.textContent = ITEM_DESCRIPTIONS[name] || "";
+    const btn = document.createElement("button");
+    btn.textContent = "Vybrat";
+    btn.onclick = () => applyItem(name);
+    card.appendChild(h4); card.appendChild(p); card.appendChild(btn);
+    itemGrid.appendChild(card);
+  });
+
+  itemModal.classList.remove("hidden");
+}
+
+function applyItem(item) {
+  pickedItems.push(item);
+  switch (item) {
+    case "Omniscient Reader": xpBonus += 5; break;
+    case "Blessing in Disguise": miniEventBonus += 0.10; break;
+    case "Glass Cannon": glassCannon = true; xpBonus += 10; break;
+    case "Temporal Contract": temporalContract = true; break;
+    case "Phoenix Feather": phoenixFeather = true; phoenixUsed = false; break;
+    case "Adrenaline Rush": adrenalineRush = true; break;
+    case "Time Warp": timeWarp = true; timeWarpReady = true; break;
+  }
+
+  // Připravení na další level (zvýšíme úroveň teď, next modal potvrdí start)
+  currentLevel++;
+  xp = 0; // XP v levelu reset, totalXP zůstává
+  lives = 3;
+  timeWarpReady = timeWarp;
+  timer = baseTimes[currentLevel] || timer;
+  clampTimer();
+
+  // Zavře item modal → otevře next level modal
+  itemModal.classList.add("hidden");
+  document.getElementById("nextLevelNum").textContent = currentLevel;
+  document.getElementById("nextLevelModal").classList.remove("hidden");
+}
+
+/* ==== Start dalšího levelu po Next modal ==== */
+function startNextLevel() {
+  document.getElementById("nextLevelModal").classList.add("hidden");
+  answerInput.disabled = false;
+  updateDisplays();
+  startTimer();
+  showWord();
+}
+
+/* ==== UI UPDATES ==== */
+function updateLives() {
+  if (lives <= 0) livesDisplay.textContent = "💀💀💀";
+  else if (lives === 1) livesDisplay.textContent = "💗🤍🤍";
+  else if (lives === 2) livesDisplay.textContent = "💗💗🤍";
+  else livesDisplay.textContent = "💗💗💗";
+}
+
+function updateDisplays() {
+  clampTimer();
+  xpDisplay.textContent = xp;
+  xpTargetDisplay.textContent = levelXPGoals[currentLevel] || xpTargetDisplay.textContent;
+  xpGoalSmall.textContent = xpTargetDisplay.textContent;
+  levelDisplay.textContent = currentLevel;
+  updateLives();
+
+  const goal = (levelXPGoals[currentLevel] || 1);
+  let xpPercent = Math.min((xp / goal) * 100, 100);
+  xpBar.style.width = xpPercent + "%";
+
+  timerNumber.textContent = timer;
+  const base = (baseTimes[currentLevel] || 50);
+  const percent = Math.max(0, Math.min(360, (timer / base) * 360));
+  timerCircle.style.background = `conic-gradient(var(--accent1) ${percent}deg,var(--accent2) ${percent}deg)`;
+
+  miniChanceDisplay.textContent = Math.round((0.12 + miniEventBonus) * 100) + "%";
+}
+
+/* ==== GAME OVER MODAL ==== */
+function gameOver(reason = "Konec hry!") {
+  if (isGameOver) return;
+  isGameOver = true;
+  clearInterval(interval);
+  interval = null;
+  answerInput.disabled = true;
+
+  const titleEl = document.getElementById("gameOverTitle");
+  const statsEl = document.getElementById("gameOverStats");
+  titleEl.textContent = reason;
+
+  const lastPair = currentWord ? (`<b>${currentWord.english}</b> → <b>${currentWord.czech}</b>`) : "???";
+  statsEl.innerHTML = `
+    Poslední slovo bylo: ${lastPair}<br>
+    Dobře: <b>${correctCount}</b>, Špatně: <b>${wrongCount}</b><br>
+    Získal jsi: <b>${totalXP} XP</b><br>
+    Level: <b>${currentLevel}</b>
+  `;
+
+  document.getElementById("gameOverModal").classList.remove("hidden");
+}
+
+function restartGame() { location.reload(); }
+function closeModal() { document.getElementById("gameOverModal").classList.add("hidden"); }
+
+/* ==== INIT ==== */
+updateDisplays();
+showWord();
+startTimer();
+</script>
 </body>
 </html>

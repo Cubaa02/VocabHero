@@ -34,7 +34,7 @@
       text-align: center;
       font-size: 2em;
       margin-bottom: 30px;
-      color: #5a4e66;
+      color: #8a3d8f;
     }
 
     .topbar {
@@ -233,6 +233,19 @@
       box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
     }
 
+    .back-link {
+      display:block;
+      margin-top:16px;
+      text-align:center;
+      text-decoration:none;
+      font-weight:bold;
+      font-size:1.05em;
+      color:#c678dd;
+      transition:color 0.2s ease;
+    }   
+    .back-link:hover {color:#a347a0}
+
+    
     @keyframes fadeInOverlay {
       from {
         opacity: 0;
@@ -272,9 +285,7 @@
 
   <h1>📚 Databáze slovíček</h1>
     <div style="text-align: center; margin-bottom: 30px;">
-    <a href="{% url 'home' %}" style="display: inline-block; background: linear-gradient(to right, #ffaad9, #b29eff); padding: 12px 24px; border-radius: 16px; color: white; font-weight: bold; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.2s ease;">
-    ⬅️ Zpět na úvodní stránku
-    </a>
+    <a href="{% url 'home' %}" class="back-link">← Zpět na úvodní stránku</a>
     </div>
 
   {% if user.is_staff or user.is_superuser %}

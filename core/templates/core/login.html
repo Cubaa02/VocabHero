@@ -170,6 +170,19 @@
       font-size: 0.85em;
       color: #777;
     }
+
+    .back-link {
+      display:block;
+      margin-top:16px;
+      text-align:center;
+      text-decoration:none;
+      font-weight:bold;
+      font-size:1.05em;
+      color:#c678dd;
+      transition:color 0.2s ease;
+    }
+    .back-link:hover {color:#a347a0}
+
   </style>
 </head>
 
@@ -181,6 +194,7 @@
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">Přihlásit se 💫</button>
+      <a href="{% url 'home' %}" class="back-link">← Zpět na úvodní stránku</a>
     </form>
   </div>
 </body>
