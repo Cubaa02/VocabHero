@@ -9,11 +9,30 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg1:#ffeaf5; --bg2:#fbe5ff; --bg3:#e7f7ff; --bg4:#fff0f7;
+      --accent1:#ffa3d1; --accent2:#d09eff; --accent3:#f8b8ff;
+      --muted:#6b5b7b; --radius:20px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      background: linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
+      background-size: 400% 400%;
+      animation: dreamyBG 22s ease infinite;
+    }
+
+    @keyframes dreamyBG {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
     body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(-45deg, #fce5ff, #d8f3ff, #ffe6f0, #f0f8ff);
-      background-size: 400% 400%;
-      animation: dreamy 20s ease infinite;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -23,11 +42,6 @@
       text-align: center;
     }
 
-    @keyframes dreamy {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
 
     h1 {
       font-size: 2.6em;

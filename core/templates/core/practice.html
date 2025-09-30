@@ -5,25 +5,39 @@
   <title>VocabHero | Procvičování</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    
+    :root {
+      --bg1:#ffeaf5; --bg2:#fbe5ff; --bg3:#e7f7ff; --bg4:#fff0f7;
+      --accent1:#ffa3d1; --accent2:#d09eff; --accent3:#f8b8ff;
+      --muted:#6b5b7b; --radius:20px;
+    } 
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      background: linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
+      background-size: 400% 400%;
+      animation: dreamyBG 22s ease infinite;
+    }
+
+    @keyframes dreamyBG {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
     body {
       margin: 0;
       padding: 0;
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(-45deg, #ffeaf5, #fbe5ff, #e7f7ff, #fff0f7);
-      background-size: 400% 400%;
-      animation: dreamyBG 20s ease infinite;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       color: #4a3b4e;
-    }
-
-    @keyframes dreamyBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     h1 {
@@ -85,6 +99,6 @@
     <button class="menu-button" onclick="window.location.href='{% url 'practice_category' %}'">📁 Podle kategorie</button>
     <button class="menu-button" onclick="window.location.href='{% url 'unified_practice_start' 'remix' 'all' %}'">🔀 reMIX (všechno)</button>
   </div>
+    <a class="back-link" href="{% url 'home' %}">← Zpět na úvodní stránku</a>
 </body>
-<a class="back-link" href="{% url 'home' %}">← Zpět na úvodní stránku</a>
 </html>

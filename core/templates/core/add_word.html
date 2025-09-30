@@ -7,50 +7,45 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pink: #ffd5ec;
-      --blue: #cceeff;
-      --white: #fff;
-      --glass: rgba(255, 255, 255, 0.5);
-      --border: rgba(255, 255, 255, 0.25);
+      --bg1:#ffeaf5; --bg2:#fbe5ff; --bg3:#e7f7ff; --bg4:#fff0f7;
+      --accent1:#ffa3d1; --accent2:#d09eff; --accent3:#f8b8ff;
+      --muted:#6b5b7b; --radius:20px;
     }
 
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      background: linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
+      background-size: 400% 400%;
+      animation: dreamyBG 22s ease infinite;
+    }
+
+    @keyframes dreamyBG {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
     }
 
     body {
       font-family: 'Quicksand', sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(-45deg, var(--pink), var(--blue), #ffeaf5, #fbe5ff);
-      background-size: 400% 400%;
-      animation: dreamyBG 20s ease infinite;
-      min-height: 100vh;
+      padding: 40px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    @keyframes dreamyBG {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+      min-height: 100vh;
     }
 
     .form-box {
-      background: var(--glass);
+      background: rgba(255,255,255,0.5);
       padding: 40px;
       border-radius: 24px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       width: 100%;
@@ -123,9 +118,7 @@
       transition: 0.2s;
     }
 
-    .back-link:hover {
-      color: #c678dd;
-    }
+    .back-link:hover { color: #c678dd; }
   </style>
 </head>
 
@@ -140,5 +133,4 @@
     <a href="{% url 'word_list' %}" class="back-link">← Zpět na seznam slovíček</a>
   </div>
 </body>
-
 </html>
