@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Tvůj profil | VocabHero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg1:#ffeaf5; --bg2:#fbe5ff; --bg3:#e7f7ff; --bg4:#fff0f7;
+      --accent1:#ffa3d1; --accent2:#d09eff; --accent3:#f8b8ff;
+      --muted:#6b5b7b; --radius:20px;
+      --glass: rgba(255, 255, 255, 0.45);
+      --border: rgba(255, 255, 255, 0.25);
+      --blur: blur(20px);
+    }
+
+    * { box-sizing: border-box; }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      background: linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
+      background-size: 400% 400%;
+      animation: dreamyBG 22s ease infinite;
+      opacity: 0;
+      animation: dreamyBG 22s ease infinite, fadeInBody 1.5s ease forwards;
+    }
+
+    @keyframes dreamyBG {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    @keyframes fadeInBody {
+      from {opacity:0;}
+      to {opacity:1;}
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .profile-box {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border-radius: 24px;
+      padding: 40px 50px;
+      max-width: 520px;
+      width: 92%;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      animation: fadeInBox 1s ease forwards;
+    }
+
+    @keyframes fadeInBox {
+      from {opacity:0; transform:translateY(10px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    .sparkle {
+      font-size: 2.4em;
+      animation: sparkleAnim 1.6s infinite alternate ease-in-out;
+    }
+
+    @keyframes sparkleAnim {
+      from { transform: scale(1) rotate(0deg); }
+      to   { transform: scale(1.08) rotate(3deg); }
+    }
+
+    h2 {
+      font-size: 1.9em;
+      font-weight: 600;
+      margin: 12px 0 28px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stats {
+      margin-bottom: 28px;
+      font-size: 1.05em;
+      color: var(--muted);
+    }
+
+    .stats p {
+      margin: 8px 0;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #4a3b4e;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: rgba(255,255,255,0.6);
+      padding: 10px 14px;
+      border-radius: 14px;
+      margin: 6px 0;
+      font-size: 0.95em;
+      font-weight: 500;
+      color: #4a3b4e;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: 0.2s ease;
+    }
+
+    li:hover {
+      background: rgba(255,255,255,0.8);
+      transform: translateY(-2px);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 25px;
+      text-decoration: none;
+      background: linear-gradient(to right, var(--accent1), var(--accent2));
+      color: white;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="profile-box">
+    <div class="sparkle">💫</div>
+    <h2>Profil: {{ profile.nickname|default:profile.user.username }}</h2>
+
+    <div class="stats">
+      <p><strong>Celkový počet slov:</strong> {{ total_words }}</p>
+      <p><strong>Celkový počet chyb:</strong> {{ total_mistakes }}</p>
+    </div>
+
+    <h3>Top 5 nejčastějších chyb:</h3>
+    <ul>
+      {% for mistake in top_mistakes %}
+        <li>🔸 <strong>{{ mistake.word.english }}</strong> → {{ mistake.word.czech }} ({{ mistake.incorrect_count }}×)</li>
+      {% empty %}
+        <li>Žádné chyby zatím nejsou 🎉</li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'home' %}" class="back-btn">← Zpět na úvodní stránku</a>
+  </div>
+</body>
+</html>

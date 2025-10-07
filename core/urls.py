@@ -19,4 +19,6 @@ urlpatterns = [
     
     path('practice/start/<str:mode>/<str:value>/', views.unified_practice_start, name='unified_practice_start'),
     path('practice/game/<str:mode>/<str:value>/', views.practice_game, name='practice_game'),
+    path('api/mistake/', views.record_mistake, name='record_mistake'),
+    path('profile/', views.profile_view, name='profile'),
 ]

@@ -4,12 +4,11 @@ import json
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect, get_object_or_404
-from .models import Word, Category
-from django.http import HttpResponse, HttpResponseForbidden
+from .models import Word, Category, Mistake, UserProfile
+from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 from .forms import WordForm  
 from django.http import JsonResponse
-from django.core.serializers import serialize
-from django.forms.models import model_to_dict
 
 
 @login_required
@@ -25,9 +24,9 @@ def add_word(request):
 
 
 def hero_mode(request):
-    easy_words = list(Word.objects.filter(difficulty="easy").values("english", "czech"))
-    medium_words = list(Word.objects.filter(difficulty="medium").values("english", "czech"))
-    hard_words = list(Word.objects.filter(difficulty="hard").values("english", "czech"))
+    easy_words = list(Word.objects.filter(difficulty="easy").values("id","english", "czech"))
+    medium_words = list(Word.objects.filter(difficulty="medium").values("id","english", "czech"))
+    hard_words = list(Word.objects.filter(difficulty="hard").values("id","english", "czech"))
 
     level_data = {
         "easy": easy_words,
@@ -178,3 +177,62 @@ def unified_practice_start(request, mode, value=None):
 
 def practice_difficulty(request):
     return render(request, 'core/practice_difficulty.html')
+
+@login_required
+@require_POST
+def record_mistake(request):
+    """
+    Endpoint: POST JSON { word_id: <int> } 
+    Inkrementuje nebo vytvoří Mistake pro přihlášeného uživatele a dané slovo.
+    """
+    # načíst JSON tělo
+    try:
+        data = json.loads(request.body.decode('utf-8') or "{}")
+    except Exception:
+        data = {}
+
+    word_id = data.get('word_id') or data.get('id')
+    english = data.get('english')
+
+    # vyřešit koho použít do FK (User vs UserProfile)
+    user_field_model = Mistake._meta.get_field('user').remote_field.model
+    if user_field_model.__name__ == 'UserProfile':
+        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        user_for_fk = profile
+    else:
+        user_for_fk = request.user
+
+    # najít Word
+    word = None
+    if word_id:
+        try:
+            word = Word.objects.get(pk=word_id)
+        except Word.DoesNotExist:
+            return JsonResponse({'ok': False, 'error': 'word not found (id)'}, status=404)
+    elif english:
+        word = Word.objects.filter(english__iexact=english).first()
+        if not word:
+            return JsonResponse({'ok': False, 'error': 'word not found (english)'}, status=404)
+    else:
+        return JsonResponse({'ok': False, 'error': 'no word identifier provided'}, status=400)
+
+    # get_or_create Mistake a bump
+    mistake, created = Mistake.objects.get_or_create(user=user_for_fk, word=word)
+    mistake.bump()
+
+    return JsonResponse({'ok': True, 'incorrect_count': mistake.incorrect_count})
+
+@login_required
+def profile_view(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    total_mistakes = Mistake.objects.filter(user=profile).count()
+    total_words = Word.objects.count()
+    top_mistakes = Mistake.objects.filter(user=profile).select_related('word').order_by('-incorrect_count')[:5]
+
+    return render(request, 'core/profile.html', {
+        'profile': profile,
+        'total_mistakes': total_mistakes,
+        'total_words': total_words,
+        'top_mistakes': top_mistakes
+    })

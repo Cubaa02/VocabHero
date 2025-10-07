@@ -437,6 +437,37 @@ function showWord() {
   answerInput.focus();
 }
 
+/* ==== TRACKING (Mistakes) ==== */
+function recordMistake(word) {
+  if (!word || !word.id) return;
+
+  fetch("/api/mistake/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFToken(),
+    },
+    body: JSON.stringify({ word_id: word.id })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (!data.ok) console.warn("❌ Chyba při odeslání mistake:", data.error);
+    else console.log(`📉 Mistake zaznamenán (${word.english}) → ${data.incorrect_count}x`);
+  })
+  .catch(err => console.error("⚠️ Fetch chyba:", err));
+}
+
+/* ==== CSRF pomocná funkce ==== */
+function getCSRFToken() {
+  const name = "csrftoken";
+  const cookies = document.cookie.split(';');
+  for (let c of cookies) {
+    const trimmed = c.trim();
+    if (trimmed.startsWith(name + "=")) return decodeURIComponent(trimmed.substring(name.length + 1));
+  }
+  return "";
+}
+
 /* ==== ANSWERS & XP ==== */
 function submitAnswer() {
   if (isGameOver) return;
@@ -457,6 +488,7 @@ function submitAnswer() {
     if (temporalContract) addTime(3); 
   } else {
     wrongCount++;
+    recordMistake(currentWord);
     const damage = glassCannon ? 2 : 1;
     if (temporalContract) addTime(-6); 
     lives -= damage;

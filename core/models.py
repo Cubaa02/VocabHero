@@ -3,6 +3,8 @@ from django.core.validators import RegexValidator
 from django.db.models import Case, When, Value, IntegerField, QuerySet
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 class Word(models.Model):
     english = models.CharField(
@@ -78,59 +80,6 @@ class Category(models.Model):
         return self.name
     
     
-class GameResult(models.Model):
-    user = models.ForeignKey(
-        'UserProfile',
-        on_delete=models.CASCADE,
-        related_name='results',
-        verbose_name="Uživatel",
-        help_text="Profil uživatele, který hrál hru",
-        null=True,  # ← dočasné!
-        blank=True  # ← pro admin rozhraní, nepovinné
-    )
-
-    score = models.IntegerField(
-        validators=[MinValueValidator(0)],
-        verbose_name="Skóre",
-        help_text="Počet bodů získaných ve hře"
-    )
-
-    duration = models.DurationField(
-        verbose_name="Délka hry",
-        help_text="Jak dlouho hra trvala",
-        null=True,
-        blank=True
-    )
-
-    mistakes = models.PositiveIntegerField(
-        default=0,
-        verbose_name="Počet chyb",
-        help_text="Kolik chyb udělal hráč"
-    )
-
-    mode = models.CharField(
-        max_length=10,
-        choices=[('easy', 'Easy'), ('medium', 'Medium'), ('hard', 'Hard')],
-        default='medium',
-        verbose_name="Režim hry",
-        help_text="Zvolená obtížnost hry"
-    )
-
-    timestamp = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Datum a čas",
-        help_text="Kdy byla hra dokončena"
-    )
-
-    class Meta:
-        verbose_name = "Výsledek hry"
-        verbose_name_plural = "Výsledky her"
-        ordering = ['-timestamp']
-
-    def __str__(self):
-        return f"{self.user} - {self.score} pts @ {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
-    
-    
 class UserProfile(models.Model):
     user = models.OneToOneField(
         User,
@@ -158,3 +107,49 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.nickname if self.nickname else self.user.username
+    
+
+class Mistake(models.Model):
+    user = models.ForeignKey(
+        UserProfile,
+        on_delete=models.CASCADE,
+        related_name='mistakes',
+        verbose_name="Uživatel"
+    )
+    word = models.ForeignKey(
+        Word,
+        on_delete=models.CASCADE,
+        related_name='mistakes',
+        verbose_name="Slovo"
+    )
+    incorrect_count = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Počet chyb"
+    )
+    first_incorrect = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="První chyba"
+    )
+    last_incorrect = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Poslední chyba"
+    )
+
+    class Meta:
+        verbose_name = "Chyba"
+        verbose_name_plural = "Chyby"
+        unique_together = ('user', 'word')
+        ordering = ['-incorrect_count', '-last_incorrect']
+
+    def __str__(self):
+        return f"{self.user} – {self.word} ({self.incorrect_count})"
+
+    def bump(self):
+        now = timezone.now()
+        if not self.first_incorrect:
+            self.first_incorrect = now
+        self.last_incorrect = now
+        self.incorrect_count += 1
+        self.save(update_fields=['incorrect_count', 'last_incorrect', 'first_incorrect'])

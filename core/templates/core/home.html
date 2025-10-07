@@ -154,12 +154,29 @@
     z-index: 15;
     text-align: center;
   }
+
+  .profile-link {
+  position: fixed;
+  top: 20px;
+  right: 26px;
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: #c678dd;
+  transition: 0.25s ease;
+  }
+  
+  .profile-link:hover {
+    transform: scale(1.1) rotate(3deg);
+    filter: brightness(1.2);
+  }
+
 </style>
 </head>
 <body>
 
   <div class="menu-container" id="menuContainer">
     <div class="play-circle" onclick="toggleMenu()">VOCABHERO</div>
+    <a href="{% url 'profile' %}" class="profile-link">👤</a>
 
     {% if user.is_authenticated %}
       <div class="user-info">
