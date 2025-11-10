@@ -4,7 +4,16 @@ from django.db.models import Case, When, Value, IntegerField, QuerySet
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
 from django.utils import timezone
+import unicodedata
 
+
+def normalize_text(s: str) -> str:
+    if s is None:
+        return ""
+    s = s.strip().lower()
+    s = "".join(ch for ch in unicodedata.normalize("NFKD", s) if unicodedata.category(ch) != "Mn")
+    s = " ".join(s.split())
+    return s
 
 class Word(models.Model):
     english = models.CharField(
@@ -47,6 +56,14 @@ class Word(models.Model):
         help_text="Věta, kde se používá anglické slovo"
     )
     
+    def acceptable_normalized_set(self):
+        base = {normalize_text(self.czech)}
+        variants = {t.normalized for t in self.accepted_translations.all()}
+        return base | variants
+
+    def acceptable_display_list(self):
+        return [self.czech] + [t.text for t in self.accepted_translations.all()]
+
     class Meta:
         verbose_name = "Slovo"
         verbose_name_plural = "Slova"
@@ -66,6 +83,34 @@ class Word(models.Model):
             )
         ).order_by('difficulty_order', 'english')
     
+    
+class AcceptedTranslation(models.Model):
+    word = models.ForeignKey(
+        Word,
+        related_name="accepted_translations",
+        on_delete=models.CASCADE
+    )
+    text = models.CharField(
+        max_length=100,
+        verbose_name="Alternativní překlad"
+    )
+    normalized = models.CharField(
+        max_length=120,
+        editable=False,
+        db_index=True
+    )
+
+    class Meta:
+        verbose_name = "Akceptovaná varianta"
+        verbose_name_plural = "Akceptované varianty"
+        unique_together = (("word", "normalized"),)
+
+    def save(self, *args, **kwargs):
+        self.normalized = normalize_text(self.text)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.text
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)

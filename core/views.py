@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import random
 import json
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -24,9 +23,21 @@ def add_word(request):
 
 
 def hero_mode(request):
-    easy_words = list(Word.objects.filter(difficulty="easy").values("id","english", "czech"))
-    medium_words = list(Word.objects.filter(difficulty="medium").values("id","english", "czech"))
-    hard_words = list(Word.objects.filter(difficulty="hard").values("id","english", "czech"))
+    def words_with_alts(qs):
+        qs = qs.prefetch_related('accepted_translations')
+        return [
+            {
+                "id": w.id,
+                "english": w.english,
+                "czech": w.czech,
+                "alts": [t.text for t in w.accepted_translations.all()],
+            }
+            for w in qs
+        ]
+
+    easy_words = words_with_alts(Word.objects.filter(difficulty="easy"))
+    medium_words = words_with_alts(Word.objects.filter(difficulty="medium"))
+    hard_words = words_with_alts(Word.objects.filter(difficulty="hard"))
 
     level_data = {
         "easy": easy_words,
@@ -39,12 +50,11 @@ def hero_mode(request):
     })
 
 
-
 def word_list(request):
     query = request.GET.get("q", "")
     difficulty = request.GET.get("difficulty", "")  
 
-    words = Word.ordered_by_difficulty()  
+    words = Word.ordered_by_difficulty().prefetch_related('accepted_translations', 'category')
 
     if query:
         words = words.filter(

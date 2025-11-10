@@ -343,6 +343,7 @@ const xpPerCorrect = 8;
 const adrenalineBonus = 3;
 const levelXPGoals = { 1: 100, 2: 130, 3: 150, 4: 180, 5: 210, 6: 230, 7: 250 };
 const baseTimes   = { 1: 50, 2: 45, 3: 45, 4: 40, 5: 38, 6: 35, 7: 32 };
+const SPLIT = /[;,\/]/; 
 
 /* ==== DOM ==== */
 const xpDisplay = document.getElementById("xp");
@@ -389,6 +390,16 @@ function pickRandom(array, ratio) {
   return copy.slice(0, count);
 }
 
+function normalize(s) {
+  if (!s) return "";
+  return s
+    .normalize("NFD")                 // rozloží diakritiku
+    .replace(/[\u0300-\u036f]/g, "")  // smaže diakritiku
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, " ");            // zkolabuje vícenásobné mezery
+}
+
 /* ==== WORDS ==== */
 function getFilteredWords() {
   let pool = [];
@@ -407,13 +418,13 @@ function getFilteredWords() {
       if (Array.isArray(wordPools[k])) pool = pool.concat(wordPools[k]);
     }
   }
-  let filtered = pool.filter(w => !usedWords.includes(w.english));
+  let filtered = pool.filter(w => !usedWords.includes(w.id));
   if (filtered.length === 0) {
     let allWords = [];
     for (let k in wordPools) {
       if (Array.isArray(wordPools[k])) allWords = allWords.concat(wordPools[k]);
     }
-    filtered = allWords.filter(w => !usedWords.includes(w.english));
+    filtered = allWords.filter(w => !usedWords.includes(w.id));
   }
   return filtered;
 }
@@ -431,7 +442,7 @@ function showWord() {
   }
   shuffle(words);
   currentWord = words[0];
-  if (currentWord && currentWord.english) usedWords.push(currentWord.english);
+  if (currentWord && currentWord.id) usedWords.push(currentWord.id);
   wordDisplay.textContent = "Přelož: " + (currentWord ? currentWord.english : "???");
   answerInput.value = "";
   answerInput.focus();
@@ -472,27 +483,54 @@ function getCSRFToken() {
 function submitAnswer() {
   if (isGameOver) return;
   if (!currentWord) { showWord(); return; }
-  const userAnswer = answerInput.value.trim().toLowerCase();
-  const correctAnswer = (currentWord.czech || "").trim().toLowerCase();
 
-  if (userAnswer === correctAnswer) {
+  
+  const userNorm = normalize(answerInput.value);
+  if (!userNorm) {
+    feedback.textContent = "📝 Napiš překlad.";
+    return;
+  }
+
+const baseCzech = (currentWord.czech || "")
+  .split(SPLIT).map(s => normalize(s)).filter(Boolean);
+
+const altCzech = (currentWord.alts || [])
+  .flatMap(a => String(a).split(SPLIT))
+  .map(normalize).filter(Boolean);
+
+const acceptable = new Set([...baseCzech, ...altCzech]);
+const parts = userNorm.split(SPLIT).map(p => p.trim()).filter(Boolean);
+const isCorrect = parts.some(p => acceptable.has(p));
+
+
+  if (isCorrect) {
     correctCount++;
     let gainedXP = xpPerCorrect + xpBonus;
+
     if (adrenalineRush && lives === 1) {
       gainedXP += adrenalineBonus;
       feedback.textContent = `✅ Správně! (Adrenaline bonus +${adrenalineBonus} XP)`;
-    } else feedback.textContent = "✅ Správně!";
+    } else {
+      feedback.textContent = "✅ Správně!";
+    }
+
     if (doubleXPActive) { gainedXP *= 2; doubleXPActive = false; }
     xp += gainedXP;
-    totalXP += gainedXP; 
-    if (temporalContract) addTime(3); 
+    totalXP += gainedXP;
+    if (temporalContract) addTime(3);
+
   } else {
     wrongCount++;
     recordMistake(currentWord);
+
     const damage = glassCannon ? 2 : 1;
-    if (temporalContract) addTime(-6); 
+    if (temporalContract) addTime(-6);
     lives -= damage;
-    feedback.textContent = "❌ Špatně! Správně bylo: " + correctAnswer;
+
+    const altsText = (currentWord.alts && currentWord.alts.length)
+      ? ` (také: ${currentWord.alts.join(", ")})`
+      : "";
+    feedback.textContent = "❌ Špatně! Správně bylo: " + currentWord.czech + altsText;
 
     if (lives <= 0 && phoenixFeather && !phoenixUsed) {
       phoenixUsed = true;
@@ -519,6 +557,7 @@ function submitAnswer() {
   checkLevelUp();
 }
 
+
 /* ==== TIMER ==== */
 function freezeTime(seconds) {
   if (interval) { clearInterval(interval); interval = null; }
@@ -529,17 +568,38 @@ function startTimer() {
   if (interval) clearInterval(interval);
   if (isGameOver) return;
 
-  if (timer <= 0) { gameOver("Vypršel ti čas!"); return; }
+  if (timer <= 0) {
+  if (phoenixFeather && !phoenixUsed) {
+    phoenixUsed = true;
+    phoenixFeather = false;
+    lives = Math.max(lives, 1);
+    timer = 20;
+    updateDisplays();
+  } else {
+    gameOver("Vypršel ti čas!");
+    return;
+  }
+}
 
   interval = setInterval(() => {
-    timer--;
-    clampTimer();
+  timer--;
+  clampTimer();
+  updateDisplays();
+  if (timer <= 0) {
+  clearInterval(interval);
+  interval = null;
+  if (phoenixFeather && !phoenixUsed) {
+    phoenixUsed = true;
+    phoenixFeather = false;
+    lives = Math.max(lives, 1);
+    timer = 20;
     updateDisplays();
-    if (timer <= 0) {
-      clearInterval(interval);
-      interval = null;
-      gameOver("Vypršel ti čas!");
-    }
+    startTimer();
+    feedback.textContent += " 🔥 Phoenix Feather tě oživila!";
+  } else {
+    gameOver("Vypršel ti čas!");
+  }
+}
   }, 1000);
 }
 
@@ -648,6 +708,7 @@ function applyItem(item) {
   xp = 0; 
   lives = 3;
   timeWarpReady = timeWarp;
+  doubleXPActive = false;
   timer = baseTimes[currentLevel] || timer;
   clampTimer();
 

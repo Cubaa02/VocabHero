@@ -341,7 +341,9 @@
 
   <div class="card-container">
     {% for word in words %}
-    <div class="word-card difficulty-{{ word.difficulty }}" data-english="{{ word.english }}" data-czech="{{ word.czech }}" data-difficulty="{{ word.difficulty }}" data-example="{{ word.example_sentence|default:" No example yet." }}" data-category="{% if word.category %}{{ word.category.name }}{% else %}Bez kategorie{% endif %}">
+    <div class="word-card difficulty-{{ word.difficulty }}" data-english="{{ word.english }}" data-czech="{{ word.czech }}" data-difficulty="{{ word.difficulty }}" data-example="{{ word.example_sentence|default:" No example yet." }}" data-category="{% if word.category %}{{ word.category.name }}{% else %}Bez kategorie{% endif %}" 
+    data-alts="{% for alt in word.accepted_translations.all %}{{ alt.text }}{% if not forloop.last %}, {% endif %}{% endfor %}">
+
       <h2>{{ word.english }}</h2>
       <p>{{ word.czech }}</p>
       <span class="label">
@@ -362,6 +364,9 @@
       <span id="closeModal" class="modal-close">&times;</span>
       <h2 id="modalEnglish" class="modal-title"></h2>
       <p><strong>Překlad:</strong> <span id="modalCzech" class="modal-highlight"></span></p>
+      <p id="modalAltsRow" style="display:none;">
+      <strong>Alternativy:</strong> <span id="modalAlts" class="modal-highlight"></span>
+      </p>
       <p><strong>Obtížnost:</strong> <span id="modalDifficulty" class="modal-diff"></span></p>
       <p><strong>Kategorie:</strong> <span id="modalCategory" class="modal-cat"></span></p>
       <p><strong>Příklad věty:</strong></p>
@@ -394,6 +399,8 @@
     const modalDifficulty = document.getElementById('modalDifficulty');
     const modalExample = document.getElementById('modalExample');
     const modalCategory = document.getElementById('modalCategory');
+    const modalAltsRow = document.getElementById('modalAltsRow');
+    const modalAlts = document.getElementById('modalAlts');
 
     document.querySelectorAll('.word-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -401,6 +408,15 @@
         modalCzech.textContent = card.dataset.czech;
         modalCategory.textContent = card.dataset.category;
         modalExample.textContent = card.dataset.example;
+
+        const alts = (card.dataset.alts || '').trim();
+        if (alts.length > 0) {
+          modalAlts.textContent = alts;
+          modalAltsRow.style.display = 'block';
+        } else {
+          modalAlts.textContent = '';
+          modalAltsRow.style.display = 'none';
+        }
 
         const difficultyMap = {
           'easy': { label: 'Začátečník', color: '#78e2c6' },
