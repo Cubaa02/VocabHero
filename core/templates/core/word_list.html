@@ -297,7 +297,7 @@
     <a href="{% url 'home' %}" class="back-link">← Zpět na úvodní stránku</a>
     </div>
 
-  {% if user.is_staff or user.is_superuser %}
+  {% if can_manage %}
   <div style="text-align: center; margin-bottom: 30px;">
     <button onclick="toggleAddForm()" style="background: linear-gradient(to right, #ffa3d1, #d09eff); border: none; padding: 12px 24px; border-radius: 14px; color: white; font-weight: bold; cursor: pointer;">+ Přidat nové slovíčko</button>
   </div>
@@ -315,7 +315,13 @@
           <option value="medium">Pokročilý</option>
           <option value="hard">Expert</option>
         </select>
-        <input type="text" name="category" placeholder="Kategorie (nepovinné)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+        <select name="category" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #e6a6c9;">
+        <option value="">-- Vyber kategorii --</option>
+        {% for cat in categories %}
+          <option value="{{ cat.id }}">{{ cat.name }}</option>
+        {% endfor %}
+        </select>
+        <input type="text" name="alt_translations" placeholder="Alternativní překlady (odděl čárkou)" style="width:100%; padding:10px; margin-bottom:10px; border-radius:12px; border:1px solid #e6a6c9;">
         <textarea name="example_sentence" placeholder="Příklad věty (nepovinný)" style="width: 100%; max-width: 100%; resize: vertical; padding: 10px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #e6a6c9;"></textarea>
         <button type="submit" style="width: 100%; background: linear-gradient(to right, #ffa3d1, #d09eff); color: white; padding: 12px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;">Přidat slovíčko 🌸</button>
       </form>
@@ -352,8 +358,8 @@
         {% elif word.difficulty == "hard" %}Expert
         {% else %}?{% endif %}
       </span>
-      {% if user.is_staff or user.is_superuser %}
-      <a href="{% url 'edit_word' word.id %}" style="display: block; margin-top: 10px; color: #c678dd; text-decoration: underline;">Upravit ✏️</a>
+      {% if can_manage %}
+        <a href="{% url 'edit_word' word.id %}" style="display: block; margin-top: 10px; color: #c678dd; text-decoration: underline;">Upravit ✏️</a>
       {% endif %}
     </div>
     {% endfor %}

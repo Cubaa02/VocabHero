@@ -10,7 +10,14 @@ from .forms import WordForm
 from django.http import JsonResponse
 
 
+def is_contributor(user):
+    return user.is_authenticated and user.groups.filter(name='contributor').exists()
+
+def can_manage_words(user):
+    return user.is_authenticated and (user.is_staff or user.groups.filter(name='contributor').exists())
+
 @login_required
+@user_passes_test(can_manage_words)
 def add_word(request):
     if request.method == 'POST':
         form = WordForm(request.POST)
@@ -52,7 +59,7 @@ def hero_mode(request):
 
 def word_list(request):
     query = request.GET.get("q", "")
-    difficulty = request.GET.get("difficulty", "")  
+    difficulty = request.GET.get("difficulty", "")
 
     words = Word.ordered_by_difficulty().prefetch_related('accepted_translations', 'category')
 
@@ -65,17 +72,24 @@ def word_list(request):
     if difficulty:
         words = words.filter(difficulty=difficulty)
 
+    categories = Category.objects.all().order_by('name')
+
+    can_manage = False
+    if request.user.is_authenticated:
+        can_manage = request.user.is_staff or request.user.groups.filter(name='contributor').exists()
+
     return render(request, 'core/word_list.html', {
         'words': words,
-        'selected_difficulty': difficulty
+        'selected_difficulty': difficulty,
+        'categories': categories,
+        'can_manage': can_manage,
     })
-
 
 def is_admin(user):
     return user.is_staff or user.is_superuser
 
 @login_required
-@user_passes_test(is_admin)
+@user_passes_test(can_manage_words)
 def edit_word(request, word_id):
     word = Word.objects.get(id=word_id)
     if request.method == 'POST':
