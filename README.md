@@ -1,36 +1,59 @@
 # 🌸 VocabHero
 
-VocabHero je webová aplikace pro procvičování anglické slovní zásoby prostřednictvím herních režimů.  
-Projekt vznikl jako závěrečná školní práce.
+VocabHero je webová aplikace pro procvičování anglické slovní zásoby skrze herní režimy inspirované jazykovými aplikacemi a moderní estetikou.  
+Projekt vznikl jako závěrečná školní práce a kombinuje pastelový, dreamy vibe s rychlým a přehledným UI.
 
 ---
 
 ## ✨ Funkce
-- 🎮 **Hero Mode** – intenzivní výzva s progresivní obtížností 
-- 📖 **Practice Mode** – trénink podle kategorie, obtížnosti nebo remixu
-- 📚 **Databáze slovíček** – přehledná karta pro každé slovíčko s překladem, obtížností a kategorií  
-- 🛠️ **Admin tools** – editace, mazání a přidávání slovíček  
-- 🌈 **Jednotný vzhled** – sjednocený design napříč aplikací  
-- 🔒 **Login systém** – správa uživatelů a přístupová práva  
+
+- 🎮 **Hero Mode** – intenzivní časovaná výzva s progresivní obtížností  
+- 📖 **Practice Mode** – procvičování podle úrovně, kategorie nebo náhodného remixu  
+- 🗂️ **Detail slovíčka** – karta obsahující překlad, alternativní překlady, kategorii a obtížnost  
+- 🛠️ **Admin Tools** – přidávání, úprava a mazání slovíček (role admin)  
+- 👤 **Contributor Role** – omezený účet umožňující přidávání slovíček bez přístupu do administrace  
+- 🎨 **Jednotný design** – pastelový, jemný vizuál inspirovaný TXT/Le Sserafim  
+- 🔒 **Autentizace a oprávnění** – login systém se správou uživatelů  
+- 🐳 **Docker + PostgreSQL** – jednoduše spustitelné prostředí přes Docker Compose  
 
 ---
 
 ## 🛠️ Použité technologie
-- **Python / Django** – backend a šablony  
-- **SQLite** – databáze  
+
+- **Python / Django** – backend, views, šablony  
+- **PostgreSQL** – databáze (Docker)  
 - **HTML, CSS, JavaScript** – frontend  
-- **Google Fonts (Quicksand)** – typografie  
+- **Google Fonts – Quicksand** – typografie aplikace  
+- **Docker & Docker Compose** – deployment-ready vývojové prostředí  
 
 ---
 
-## 📚 Zdroje
-- [Django Documentation](https://docs.djangoproject.com/) – práce s frameworkem a šablonami  
-- [W3Schools](https://www.w3schools.com/) – HTML, CSS a JavaScript ukázky
-- [Stack Overflow](https://stackoverflow.com/) – řešení konkrétních problémů
-- ChatGPT – asistence při návrhu a ladění kódu 
+## 🐳 Spuštění přes Docker
 
-## 🚀 Instalace
-1. Naklonuj repozitář:
-   ```bash
-   git clone https://github.com/uzivatel/vocabhero.git
-   cd vocabhero
+### 1️⃣ Naklonuj repozitář
+```bash
+git clone https://github.com/uzivatel/vocabhero.git
+cd vocabhero
+
+## 2️⃣ Vytvoř `.env` soubor v kořenovém adresáři
+
+```env
+POSTGRES_DB=vocabhero
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
+## 3️⃣ Spuštění aplikace
+
+```bash
+docker compose up --build
+
+Aplikace poběží na adrese:  
+➡️ **http://localhost:8000**
+
+## 📚 Zdroje
+
+- **Django Documentation** – https://docs.djangoproject.com/
+- **PostgreSQL Docs** – https://www.postgresql.org/docs/
+- **Docker Docs** – https://docs.docker.com/

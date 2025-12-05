@@ -1,0 +1,4571 @@
+[
+  {
+    "model": "auth.group",
+    "fields": {
+      "name": "contributor",
+      "permissions": [
+        [
+          "add_acceptedtranslation",
+          "core",
+          "acceptedtranslation"
+        ],
+        [
+          "change_acceptedtranslation",
+          "core",
+          "acceptedtranslation"
+        ],
+        [
+          "add_word",
+          "core",
+          "word"
+        ],
+        [
+          "change_word",
+          "core",
+          "word"
+        ]
+      ]
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$jGc7gGUHTjIFeob00Uk1QD$RhOZWCcXS7+cAiqO4LFfAV/sx0Z/5qm3Q47rom0l+DU=",
+      "last_login": "2025-11-30T12:48:36.071Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@admin.admin",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-05-22T06:29:58.717Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$HwZaqTlxf8FwuJKixeiq3o$Ek54MiHsroTPavPotFlpK6jWrkaXTOUY6/FEoZpnOxg=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "Cuba",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-30T15:27:17.852Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$8RNx0FF81nVoj7Dhi8zt2p$GP4wf92EdufnS7k55OQYeAJRnn1/E2HWfXuiosY1B9I=",
+      "last_login": "2025-11-30T12:49:01.925Z",
+      "is_superuser": false,
+      "username": "user123456",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-30T15:28:08.205Z",
+      "groups": [
+        [
+          "contributor"
+        ]
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$jOsjoJTiEJVA5YtOwlczFw$HRY4SvbWztXQ4y846lvZqRbuCF19cWM8J4zPjsWfBW4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "Anonymous256",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-30T15:29:34.213Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 1,
+    "fields": {
+      "english": "cat",
+      "czech": "kočka",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "We have two cats at home."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 3,
+    "fields": {
+      "english": "moon",
+      "czech": "měsíc",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "The moon is full tonight."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 4,
+    "fields": {
+      "english": "dog",
+      "czech": "pes",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "Dog is my favorite animal."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 5,
+    "fields": {
+      "english": "house",
+      "czech": "dům",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "Our house has a big garden."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 6,
+    "fields": {
+      "english": "book",
+      "czech": "kniha",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "In school, we read a lot of books."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 7,
+    "fields": {
+      "english": "apple",
+      "czech": "jablko",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "I eat apples everyday."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 8,
+    "fields": {
+      "english": "water",
+      "czech": "voda",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "Water is essential for life."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 9,
+    "fields": {
+      "english": "school",
+      "czech": "škola",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "I'm going to school tomorrow."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 10,
+    "fields": {
+      "english": "pen",
+      "czech": "pero",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "I write my homeworks with a pen."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 11,
+    "fields": {
+      "english": "car",
+      "czech": "auto",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "I parked my car in front of the house."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 12,
+    "fields": {
+      "english": "chair",
+      "czech": "židle",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "I sit on a chair."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 13,
+    "fields": {
+      "english": "decision",
+      "czech": "rozhodnutí",
+      "difficulty": "medium",
+      "category": 15,
+      "example_sentence": "It was a hard decision to make."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 14,
+    "fields": {
+      "english": "hospital",
+      "czech": "nemocnice",
+      "difficulty": "medium",
+      "category": 9,
+      "example_sentence": "He works in a hospital."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 15,
+    "fields": {
+      "english": "mountain",
+      "czech": "hora",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "We climbed a tall mountain."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 16,
+    "fields": {
+      "english": "believe",
+      "czech": "věřit",
+      "difficulty": "medium",
+      "category": 15,
+      "example_sentence": ""
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 17,
+    "fields": {
+      "english": "dangerous",
+      "czech": "nebezpečný",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "It's dangerous to drive fast in the rain."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 18,
+    "fields": {
+      "english": "explain",
+      "czech": "vysvětlit",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "Can you explain the question again?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 19,
+    "fields": {
+      "english": "suddenly",
+      "czech": "najednou",
+      "difficulty": "medium",
+      "category": 15,
+      "example_sentence": "Suddenly, the lights went out."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 20,
+    "fields": {
+      "english": "message",
+      "czech": "zpráva",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "I sent you a message yesterday."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 21,
+    "fields": {
+      "english": "neighbor",
+      "czech": "soused",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "My neighbor brought us cookies."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 22,
+    "fields": {
+      "english": "remember",
+      "czech": "pamatovat si",
+      "difficulty": "medium",
+      "category": 15,
+      "example_sentence": "I remember that day clearly."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 23,
+    "fields": {
+      "english": "consequence",
+      "czech": "následek",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "There are consequences to every action."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 24,
+    "fields": {
+      "english": "exaggerate",
+      "czech": "přehánět",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "Don't exaggerate, it wasn't that bad."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 25,
+    "fields": {
+      "english": "enviroment",
+      "czech": "životní prostředí",
+      "difficulty": "hard",
+      "category": 14,
+      "example_sentence": "We must protect the environment."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 26,
+    "fields": {
+      "english": "commitment",
+      "czech": "závazek",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "His commitment to the team is strong."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 27,
+    "fields": {
+      "english": "hesitation",
+      "czech": "váhání",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "He spoke without hesitation."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 28,
+    "fields": {
+      "english": "appreciate",
+      "czech": "vážit si",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "I appreciate your help."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 29,
+    "fields": {
+      "english": "consciousness",
+      "czech": "vědomí",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "She regained consciousness after the accident."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 30,
+    "fields": {
+      "english": "opportunity",
+      "czech": "příležitost",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "This is a great opportunity for you."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 31,
+    "fields": {
+      "english": "disappointment",
+      "czech": "zklamání",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "The result was a big disappointment."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 32,
+    "fields": {
+      "english": "eventually",
+      "czech": "nakonec",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "Eventually, he passed the test."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 33,
+    "fields": {
+      "english": "plain",
+      "czech": "letadlo",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "The plain took off on time."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 34,
+    "fields": {
+      "english": "ambitious",
+      "czech": "ambiciózní",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "She is very ambitious and wants to succeed."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 35,
+    "fields": {
+      "english": "horse",
+      "czech": "kůň",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "She rides a horse every weekend."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 36,
+    "fields": {
+      "english": "ostrich",
+      "czech": "pštros",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "An ostrich can't fly."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 37,
+    "fields": {
+      "english": "red",
+      "czech": "červená",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "The apple is red."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 38,
+    "fields": {
+      "english": "blue",
+      "czech": "modrá",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "The sky is blue."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 39,
+    "fields": {
+      "english": "green",
+      "czech": "zelená",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "She has green eyes."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 40,
+    "fields": {
+      "english": "yellow",
+      "czech": "žlutá",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "I like yellow flowers."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 41,
+    "fields": {
+      "english": "black",
+      "czech": "černá",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "He is wearing a black T-shirt."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 42,
+    "fields": {
+      "english": "white",
+      "czech": "bílá",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "The snow is white."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 43,
+    "fields": {
+      "english": "orange (color)",
+      "czech": "oranžová",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "She bought an orange dress"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 44,
+    "fields": {
+      "english": "pink",
+      "czech": "růžová",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "My phone case is pink."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 45,
+    "fields": {
+      "english": "brown",
+      "czech": "hnědá",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "He has brown hair."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 46,
+    "fields": {
+      "english": "gray",
+      "czech": "šedá",
+      "difficulty": "easy",
+      "category": 12,
+      "example_sentence": "The sky turned gray."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 47,
+    "fields": {
+      "english": "turquoise",
+      "czech": "tyrkysová",
+      "difficulty": "medium",
+      "category": 12,
+      "example_sentence": "Her scarf is turquoise."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 48,
+    "fields": {
+      "english": "beige",
+      "czech": "béžová",
+      "difficulty": "medium",
+      "category": 12,
+      "example_sentence": "I painted the walls beige."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 49,
+    "fields": {
+      "english": "navy",
+      "czech": "námořnická modř",
+      "difficulty": "medium",
+      "category": 12,
+      "example_sentence": "He wore a navy suit."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 50,
+    "fields": {
+      "english": "violet",
+      "czech": "fialová",
+      "difficulty": "medium",
+      "category": 12,
+      "example_sentence": "Violet is a mix of red and blue."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 52,
+    "fields": {
+      "english": "golden",
+      "czech": "zlatý",
+      "difficulty": "medium",
+      "category": 12,
+      "example_sentence": "She wore a golden bracelet."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 53,
+    "fields": {
+      "english": "maroon",
+      "czech": "vínová",
+      "difficulty": "medium",
+      "category": 12,
+      "example_sentence": "He chose a maroon tie."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 54,
+    "fields": {
+      "english": "magenta",
+      "czech": "purpurová",
+      "difficulty": "hard",
+      "category": 12,
+      "example_sentence": "The logo is magenta."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 55,
+    "fields": {
+      "english": "teal",
+      "czech": "modrozelená",
+      "difficulty": "hard",
+      "category": 12,
+      "example_sentence": "Gummy bears are commonly teal."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 56,
+    "fields": {
+      "english": "ochre",
+      "czech": "okrová",
+      "difficulty": "hard",
+      "category": 12,
+      "example_sentence": "He used ochre in his painting"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 57,
+    "fields": {
+      "english": "indigo",
+      "czech": "indigová",
+      "difficulty": "hard",
+      "category": 12,
+      "example_sentence": "Indigo is a deep blue color."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 58,
+    "fields": {
+      "english": "crimson",
+      "czech": "karmínová",
+      "difficulty": "hard",
+      "category": 12,
+      "example_sentence": "Her lips were painted crimson."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 59,
+    "fields": {
+      "english": "cerulean",
+      "czech": "blankytní",
+      "difficulty": "hard",
+      "category": 12,
+      "example_sentence": "The ocean looked cerulean."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 60,
+    "fields": {
+      "english": "teacher",
+      "czech": "učitel",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "My teacher is very kind."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 61,
+    "fields": {
+      "english": "student",
+      "czech": "student",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "The student is writing a test"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 62,
+    "fields": {
+      "english": "desk",
+      "czech": "lavice",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "I sat at my desk."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 63,
+    "fields": {
+      "english": "homework",
+      "czech": "domácí úkol",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "I finished my homework."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 64,
+    "fields": {
+      "english": "test",
+      "czech": "test",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "We have a test today."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 65,
+    "fields": {
+      "english": "class",
+      "czech": "třída",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "Our class starts at 8 a.m."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 66,
+    "fields": {
+      "english": "backpack",
+      "czech": "batoh",
+      "difficulty": "easy",
+      "category": 4,
+      "example_sentence": "My backpack is heavy."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 67,
+    "fields": {
+      "english": "subject",
+      "czech": "předmět",
+      "difficulty": "medium",
+      "category": 4,
+      "example_sentence": "Math is my favorite subject."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 68,
+    "fields": {
+      "english": "principal",
+      "czech": "ředitel",
+      "difficulty": "medium",
+      "category": 4,
+      "example_sentence": "The principal talked to the students."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 69,
+    "fields": {
+      "english": "schedule",
+      "czech": "rozvrh",
+      "difficulty": "medium",
+      "category": 4,
+      "example_sentence": "I checked my school schedule."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 70,
+    "fields": {
+      "english": "notebook",
+      "czech": "sešit",
+      "difficulty": "medium",
+      "category": 4,
+      "example_sentence": "I wrote it in my notebook."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 71,
+    "fields": {
+      "english": "exam",
+      "czech": "zkouška",
+      "difficulty": "medium",
+      "category": 4,
+      "example_sentence": "The final exam is next week."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 72,
+    "fields": {
+      "english": "grade",
+      "czech": "známka",
+      "difficulty": "medium",
+      "category": 4,
+      "example_sentence": "I got a good grade."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 73,
+    "fields": {
+      "english": "classroom",
+      "czech": "učebna",
+      "difficulty": "medium",
+      "category": 4,
+      "example_sentence": "The classroom is big and bright."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 74,
+    "fields": {
+      "english": "assignment",
+      "czech": "zadání",
+      "difficulty": "medium",
+      "category": 4,
+      "example_sentence": "We have a new assignment."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 75,
+    "fields": {
+      "english": "curriculum",
+      "czech": "učební plán",
+      "difficulty": "hard",
+      "category": 4,
+      "example_sentence": "The curriculum includes science and history."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 76,
+    "fields": {
+      "english": "procrastinate",
+      "czech": "odkládat",
+      "difficulty": "hard",
+      "category": 4,
+      "example_sentence": "I tend to procrastinate before exams."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 77,
+    "fields": {
+      "english": "extracurricular",
+      "czech": "mimoškolní",
+      "difficulty": "hard",
+      "category": 4,
+      "example_sentence": "I'm in many extracurricular activities."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 78,
+    "fields": {
+      "english": "scholarship",
+      "czech": "stipendium",
+      "difficulty": "hard",
+      "category": 4,
+      "example_sentence": "She got a scholarship for college."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 79,
+    "fields": {
+      "english": "plagiarism",
+      "czech": "plagiátorství",
+      "difficulty": "hard",
+      "category": 4,
+      "example_sentence": "Plagiarism is not allowed."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 80,
+    "fields": {
+      "english": "thesis",
+      "czech": "diplomová práce",
+      "difficulty": "hard",
+      "category": 4,
+      "example_sentence": "I'm working on my master's thesis."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 81,
+    "fields": {
+      "english": "enrollment",
+      "czech": "zápis",
+      "difficulty": "hard",
+      "category": 4,
+      "example_sentence": "Enrollment for the new semester begins soon."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 82,
+    "fields": {
+      "english": "happy",
+      "czech": "šťastný",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "She is always happy when she's with her friends."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 83,
+    "fields": {
+      "english": "sad",
+      "czech": "smutný",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "He felt sad after watching the movie."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 84,
+    "fields": {
+      "english": "angry",
+      "czech": "naštvaný",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "My brother gets angry when he loses a game."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 85,
+    "fields": {
+      "english": "tired",
+      "czech": "unavený",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "I'm so tired after school."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 86,
+    "fields": {
+      "english": "nice",
+      "czech": "milý",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "Our teacher is very nice."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 87,
+    "fields": {
+      "english": "shy",
+      "czech": "stydlivý",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "He is shy around new people."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 88,
+    "fields": {
+      "english": "funny",
+      "czech": "vtipný",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "That movie was really funny!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 89,
+    "fields": {
+      "english": "scared",
+      "czech": "vystrašený",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "She looked scared in the dark."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 90,
+    "fields": {
+      "english": "bored",
+      "czech": "znuděný",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "I'm bored during math class."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 91,
+    "fields": {
+      "english": "kind",
+      "czech": "laskavý",
+      "difficulty": "easy",
+      "category": 16,
+      "example_sentence": "He was kind to the lost dog."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 92,
+    "fields": {
+      "english": "curious",
+      "czech": "zvědavý",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "Children are naturally curious."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 93,
+    "fields": {
+      "english": "confident",
+      "czech": "sebevědomý",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "She's confident when speaking English."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 94,
+    "fields": {
+      "english": "jealous",
+      "czech": "žárlivý",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "He felt jealous of his friend's success."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 95,
+    "fields": {
+      "english": "nervous",
+      "czech": "nervózní",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "I'm nervous before exams."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 96,
+    "fields": {
+      "english": "grateful",
+      "czech": "vděčný",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "She was grateful for the gift."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 97,
+    "fields": {
+      "english": "stubborn",
+      "czech": "tvrdohlavý",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "My cat is very stubborn."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 98,
+    "fields": {
+      "english": "lonely",
+      "czech": "osamělý",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "He felt lonely after moving to a new city."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 99,
+    "fields": {
+      "english": "lazy",
+      "czech": "líný",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "Don't be lazy, do your homework!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 100,
+    "fields": {
+      "english": "worried",
+      "czech": "ustaraný",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "Mom looked worried about the test."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 101,
+    "fields": {
+      "english": "helpful",
+      "czech": "nápomocný",
+      "difficulty": "medium",
+      "category": 16,
+      "example_sentence": "He was helpful during the school trip."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 102,
+    "fields": {
+      "english": "devastated",
+      "czech": "zničený",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "She was devastated after the breakup."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 103,
+    "fields": {
+      "english": "resentful",
+      "czech": "zahořklý",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "He felt resentful for being left out."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 104,
+    "fields": {
+      "english": "euphoric",
+      "czech": "euforický",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "The crowd was euphoric after the win."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 105,
+    "fields": {
+      "english": "anxious",
+      "czech": "úzkostlivý",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "He's been anxious all week."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 106,
+    "fields": {
+      "english": "empathetic",
+      "czech": "empatický",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "She is very empathetic towards others."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 107,
+    "fields": {
+      "english": "withdrawn",
+      "czech": "uzavřený",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "He became withdrawn after the accident."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 108,
+    "fields": {
+      "english": "insecure",
+      "czech": "nejistý",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "Many teenagers feel insecure about their looks."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 109,
+    "fields": {
+      "english": "overwhelmed",
+      "czech": "zahlcený",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "I feel overwhelmed with all the tasks."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 110,
+    "fields": {
+      "english": "miserable",
+      "czech": "bídný",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "His life was miserable."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 111,
+    "fields": {
+      "english": "affectionate",
+      "czech": "láskyplný",
+      "difficulty": "hard",
+      "category": 16,
+      "example_sentence": "He's an affectionate person who hugs everyone."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 112,
+    "fields": {
+      "english": "hiking",
+      "czech": "turistika",
+      "difficulty": "easy",
+      "category": 10,
+      "example_sentence": "I love hiking in the mountains."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 113,
+    "fields": {
+      "english": "swimming",
+      "czech": "plavání",
+      "difficulty": "easy",
+      "category": 10,
+      "example_sentence": "Swimming is great for your health."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 114,
+    "fields": {
+      "english": "baking",
+      "czech": "pečení",
+      "difficulty": "easy",
+      "category": 10,
+      "example_sentence": "She enjoys baking cookies."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 115,
+    "fields": {
+      "english": "dancing",
+      "czech": "tanec",
+      "difficulty": "easy",
+      "category": 10,
+      "example_sentence": "Dancing makes me happy."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 116,
+    "fields": {
+      "english": "painting",
+      "czech": "malování",
+      "difficulty": "easy",
+      "category": 10,
+      "example_sentence": "He spends weekends painting."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 117,
+    "fields": {
+      "english": "fishing",
+      "czech": "rybaření",
+      "difficulty": "easy",
+      "category": 10,
+      "example_sentence": "My grandpa taught me fishing."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 118,
+    "fields": {
+      "english": "camping",
+      "czech": "kempování",
+      "difficulty": "easy",
+      "category": 10,
+      "example_sentence": "We're going camping this weekend."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 119,
+    "fields": {
+      "english": "chess",
+      "czech": "šachy",
+      "difficulty": "easy",
+      "category": null,
+      "example_sentence": "Chess is a game of strategy."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 120,
+    "fields": {
+      "english": "knitting",
+      "czech": "pletení",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "My aunt taught me knitting."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 121,
+    "fields": {
+      "english": "photography",
+      "czech": "focení",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "She loves photography."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 122,
+    "fields": {
+      "english": "archery",
+      "czech": "lukostřelba",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "He practices archery every Thursda"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 123,
+    "fields": {
+      "english": "calligraphy",
+      "czech": "kaligrafie",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "Calligraphy is a beautiful art."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 124,
+    "fields": {
+      "english": "programming",
+      "czech": "programování",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "He learned programming online."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 125,
+    "fields": {
+      "english": "gardening",
+      "czech": "zahradničení",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "Gardening relaxes me."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 126,
+    "fields": {
+      "english": "figure skating",
+      "czech": "krasobruslení",
+      "difficulty": "hard",
+      "category": 10,
+      "example_sentence": "Figure skating combines skill and elegance."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 127,
+    "fields": {
+      "english": "fencing",
+      "czech": "šerm",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "Fencing is a fast sport"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 128,
+    "fields": {
+      "english": "sailing",
+      "czech": "plachtění",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "Sailing requires knowledge of the wind and sea."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 129,
+    "fields": {
+      "english": "climbing",
+      "czech": "horolezectví",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": "Climbing pushes your strength and courage."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 130,
+    "fields": {
+      "english": "gymnastics",
+      "czech": "gymnastika",
+      "difficulty": "medium",
+      "category": 10,
+      "example_sentence": ""
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 131,
+    "fields": {
+      "english": "crocheting",
+      "czech": "háčkování",
+      "difficulty": "hard",
+      "category": 10,
+      "example_sentence": "Her passion for crocheting blossomed."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 133,
+    "fields": {
+      "english": "running",
+      "czech": "běhání",
+      "difficulty": "easy",
+      "category": 10,
+      "example_sentence": "He's running a marathon."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 134,
+    "fields": {
+      "english": "tree",
+      "czech": "strom",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "A tree grows in the forest."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 135,
+    "fields": {
+      "english": "flower",
+      "czech": "květina",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "The sun is shining today."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 136,
+    "fields": {
+      "english": "sun",
+      "czech": "slunce",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "The sun is shining today."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 137,
+    "fields": {
+      "english": "rain",
+      "czech": "déšť",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "I love the sound of rain."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 138,
+    "fields": {
+      "english": "river",
+      "czech": "řeka",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "We swam in the river."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 139,
+    "fields": {
+      "english": "stone",
+      "czech": "kámen",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "He threw a stone into the lake."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 140,
+    "fields": {
+      "english": "cloud",
+      "czech": "mrak",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "That cloud looks like a dragon."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 141,
+    "fields": {
+      "english": "grass",
+      "czech": "tráva",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "The grass is green and soft."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 142,
+    "fields": {
+      "english": "leaf",
+      "czech": "list",
+      "difficulty": "easy",
+      "category": 14,
+      "example_sentence": "A leaf fell from the tree."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 143,
+    "fields": {
+      "english": "valley",
+      "czech": "údolí",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "We hiked through the valley."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 144,
+    "fields": {
+      "english": "storm",
+      "czech": "bouře",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "A storm is coming tonight."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 145,
+    "fields": {
+      "english": "desert",
+      "czech": "poušť",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "Camels live in the desert."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 146,
+    "fields": {
+      "english": "volcano",
+      "czech": "sopka",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "The volcano erupted last year."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 147,
+    "fields": {
+      "english": "earthquake",
+      "czech": "zemětřesení",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "The earthquake shook the ground."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 148,
+    "fields": {
+      "english": "tide",
+      "czech": "příliv",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "The tide comes in every morning."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 149,
+    "fields": {
+      "english": "fog",
+      "czech": "mlha",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "The fog made it hard to see."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 150,
+    "fields": {
+      "english": "cliff",
+      "czech": "útes",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "He stood on the edge of the cliff."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 151,
+    "fields": {
+      "english": "cave",
+      "czech": "jeskyně",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "They explored a dark cave."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 152,
+    "fields": {
+      "english": "island",
+      "czech": "ostrov",
+      "difficulty": "medium",
+      "category": 14,
+      "example_sentence": "We stayed on a tropical island."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 153,
+    "fields": {
+      "english": "wilderness",
+      "czech": "divočina",
+      "difficulty": "hard",
+      "category": 14,
+      "example_sentence": "They survived in the wilderness."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 154,
+    "fields": {
+      "english": "avalanche",
+      "czech": "lavina",
+      "difficulty": "hard",
+      "category": 14,
+      "example_sentence": "The avalanche buried the path."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 155,
+    "fields": {
+      "english": "drought",
+      "czech": "sucho",
+      "difficulty": "hard",
+      "category": 14,
+      "example_sentence": "The plants died during the drought."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 156,
+    "fields": {
+      "english": "ecosystem",
+      "czech": "ekosystém",
+      "difficulty": "hard",
+      "category": 14,
+      "example_sentence": "A forest is a complex ecosystem."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 157,
+    "fields": {
+      "english": "glacier",
+      "czech": "ledovec",
+      "difficulty": "hard",
+      "category": 14,
+      "example_sentence": "The glacier is slowly melting."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 158,
+    "fields": {
+      "english": "terrain",
+      "czech": "terén",
+      "difficulty": "hard",
+      "category": 14,
+      "example_sentence": "The terrain was rocky and uneven."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 159,
+    "fields": {
+      "english": "erosion",
+      "czech": "eroze",
+      "difficulty": "hard",
+      "category": 14,
+      "example_sentence": "Erosion shaped the canyon."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 160,
+    "fields": {
+      "english": "shirt",
+      "czech": "košile",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "He wears a white shirt to school."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 161,
+    "fields": {
+      "english": "pants",
+      "czech": "kalhoty",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "My pants are too short."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 162,
+    "fields": {
+      "english": "dress",
+      "czech": "šaty",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "She wore a red dress."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 163,
+    "fields": {
+      "english": "shoes",
+      "czech": "boty",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "These shoes are new."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 164,
+    "fields": {
+      "english": "hat",
+      "czech": "klobouk",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "I forgot my hat at home."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 165,
+    "fields": {
+      "english": "jacket",
+      "czech": "bunda",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "It's cold, wear a jacket!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 166,
+    "fields": {
+      "english": "socks",
+      "czech": "ponožky",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "My socks are colorful."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 167,
+    "fields": {
+      "english": "skirt",
+      "czech": "sukně",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "She has a long skirt."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 168,
+    "fields": {
+      "english": "gloves",
+      "czech": "rukavice",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "Put on your gloves, it's snowing."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 169,
+    "fields": {
+      "english": "coat",
+      "czech": "kabát",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "His coat is warm and black."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 170,
+    "fields": {
+      "english": "hoodie",
+      "czech": "mikina s kapucí",
+      "difficulty": "medium",
+      "category": 7,
+      "example_sentence": "He's always wearing his favorite hoodie."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 171,
+    "fields": {
+      "english": "jeans",
+      "czech": "džíny",
+      "difficulty": "medium",
+      "category": 7,
+      "example_sentence": "Her jeans are ripped."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 172,
+    "fields": {
+      "english": "scarf",
+      "czech": "šála",
+      "difficulty": "medium",
+      "category": 7,
+      "example_sentence": "She wrapped a scarf around her neck."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 173,
+    "fields": {
+      "english": "sneakers",
+      "czech": "tenisky",
+      "difficulty": "medium",
+      "category": 7,
+      "example_sentence": "I like your sneakers!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 174,
+    "fields": {
+      "english": "belt",
+      "czech": "pásek",
+      "difficulty": "medium",
+      "category": 7,
+      "example_sentence": "He tightened his belt."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 175,
+    "fields": {
+      "english": "suit",
+      "czech": "oblek",
+      "difficulty": "medium",
+      "category": 7,
+      "example_sentence": "He wore a suit to the interview."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 176,
+    "fields": {
+      "english": "blouse",
+      "czech": "halenka",
+      "difficulty": "medium",
+      "category": 7,
+      "example_sentence": "She bought a silk blouse."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 177,
+    "fields": {
+      "english": "tie",
+      "czech": "kravata",
+      "difficulty": "medium",
+      "category": 7,
+      "example_sentence": "He can't tie his tie."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 178,
+    "fields": {
+      "english": "shorts",
+      "czech": "kraťasy",
+      "difficulty": "easy",
+      "category": 7,
+      "example_sentence": "It's hot, so I'm wearing shorts."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 179,
+    "fields": {
+      "english": "turtleneck",
+      "czech": "rolák",
+      "difficulty": "hard",
+      "category": 7,
+      "example_sentence": "The black turtleneck looks elegant."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 180,
+    "fields": {
+      "english": "trench coat",
+      "czech": "trenčkot",
+      "difficulty": "hard",
+      "category": 7,
+      "example_sentence": "She wore a beige trench coat."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 181,
+    "fields": {
+      "english": "overalls",
+      "czech": "montérky",
+      "difficulty": "hard",
+      "category": 7,
+      "example_sentence": "He put on overalls for the job."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 182,
+    "fields": {
+      "english": "slippers",
+      "czech": "papuče",
+      "difficulty": "hard",
+      "category": 7,
+      "example_sentence": "She walked around in soft slippers"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 183,
+    "fields": {
+      "english": "beanie",
+      "czech": "kulich",
+      "difficulty": "hard",
+      "category": 7,
+      "example_sentence": "His red beanie was knitted."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 184,
+    "fields": {
+      "english": "cardigan",
+      "czech": "kardigan",
+      "difficulty": "hard",
+      "category": 7,
+      "example_sentence": "I bought a cozy cardigan."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 185,
+    "fields": {
+      "english": "heels",
+      "czech": "podpatky",
+      "difficulty": "hard",
+      "category": 7,
+      "example_sentence": "Her heels clicked on the floor."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 186,
+    "fields": {
+      "english": "leggings",
+      "czech": "legíny",
+      "difficulty": "hard",
+      "category": 7,
+      "example_sentence": "She wore leggings and a sweater."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 187,
+    "fields": {
+      "english": "day",
+      "czech": "den",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "Today is a sunny day."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 188,
+    "fields": {
+      "english": "week",
+      "czech": "týden",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "There are seven days in a week."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 189,
+    "fields": {
+      "english": "month",
+      "czech": "měsíc",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "My birthday is next month."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 190,
+    "fields": {
+      "english": "year",
+      "czech": "rok",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "We visited Korea last year."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 191,
+    "fields": {
+      "english": "morning",
+      "czech": "ráno",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "I wake up early in the morning."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 192,
+    "fields": {
+      "english": "night",
+      "czech": "noc",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "She heard a sound at night."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 193,
+    "fields": {
+      "english": "hour",
+      "czech": "hodina",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "It took an hour to get there."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 194,
+    "fields": {
+      "english": "minute",
+      "czech": "minuta",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "Wait a minute, please."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 195,
+    "fields": {
+      "english": "yesterday",
+      "czech": "včera",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "I saw him yesterday."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 196,
+    "fields": {
+      "english": "tomorrow",
+      "czech": "zítra",
+      "difficulty": "easy",
+      "category": 18,
+      "example_sentence": "We have a test tomorrow."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 197,
+    "fields": {
+      "english": "calendar",
+      "czech": "kalendář",
+      "difficulty": "medium",
+      "category": 18,
+      "example_sentence": "She marked the date on the calendar."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 198,
+    "fields": {
+      "english": "midnight",
+      "czech": "půlnoc",
+      "difficulty": "medium",
+      "category": 18,
+      "example_sentence": "He arrived at midnight."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 199,
+    "fields": {
+      "english": "early",
+      "czech": "brzy",
+      "difficulty": "medium",
+      "category": 18,
+      "example_sentence": "She gets up early every day."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 200,
+    "fields": {
+      "english": "late",
+      "czech": "pozdě",
+      "difficulty": "medium",
+      "category": 18,
+      "example_sentence": "He came to school late."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 201,
+    "fields": {
+      "english": "weekend",
+      "czech": "víkend",
+      "difficulty": "medium",
+      "category": 18,
+      "example_sentence": "We went hiking last weekend."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 202,
+    "fields": {
+      "english": "deadline",
+      "czech": "termín",
+      "difficulty": "medium",
+      "category": 18,
+      "example_sentence": "The deadline is next Friday."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 203,
+    "fields": {
+      "english": "daily",
+      "czech": "denní",
+      "difficulty": "medium",
+      "category": 18,
+      "example_sentence": "This is my daily routine."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 204,
+    "fields": {
+      "english": "soon",
+      "czech": "brzy",
+      "difficulty": "medium",
+      "category": 18,
+      "example_sentence": "Dinner will be ready soon."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 205,
+    "fields": {
+      "english": "century",
+      "czech": "století",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "This castle was built in the 12th century."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 206,
+    "fields": {
+      "english": "millennium",
+      "czech": "tisíciletí",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "A new millennium began in the year 2000."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 207,
+    "fields": {
+      "english": "decade",
+      "czech": "desetiletí",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "They've been friends for a decade."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 208,
+    "fields": {
+      "english": "eternity",
+      "czech": "věčnost",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "It felt like an eternity."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 209,
+    "fields": {
+      "english": "dawn",
+      "czech": "úsvit",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "The birds started singing at dawn."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 210,
+    "fields": {
+      "english": "dusk",
+      "czech": "soumrak",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "They walked home at dusk."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 211,
+    "fields": {
+      "english": "postpone",
+      "czech": "odložit",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "We had to postpone the meeting."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 212,
+    "fields": {
+      "english": "annual",
+      "czech": "každoroční",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "This is our annual tradition."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 213,
+    "fields": {
+      "english": "era",
+      "czech": "éra",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "We are living in the digital era."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 214,
+    "fields": {
+      "english": "timeline",
+      "czech": "časová osa",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "The story has a complicated timeline."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 215,
+    "fields": {
+      "english": "duration",
+      "czech": "trvání",
+      "difficulty": "hard",
+      "category": 18,
+      "example_sentence": "The duration of the movie is two hours."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 216,
+    "fields": {
+      "english": "bird",
+      "czech": "pták",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "A bird is singing outside."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 217,
+    "fields": {
+      "english": "fish",
+      "czech": "ryba",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "We have a fish in the aquarium."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 218,
+    "fields": {
+      "english": "cow",
+      "czech": "kráva",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "The cow gives us milk."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 219,
+    "fields": {
+      "english": "rabbit",
+      "czech": "králík",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "This rabbit loves carrots."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 220,
+    "fields": {
+      "english": "duck",
+      "czech": "kachna",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "The duck swam in the pond."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 221,
+    "fields": {
+      "english": "pig",
+      "czech": "prase",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "The pig rolled in the mud"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 222,
+    "fields": {
+      "english": "sheep",
+      "czech": "ovce",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "Sheep have thick wool."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 223,
+    "fields": {
+      "english": "tiger",
+      "czech": "tygr",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "The tiger is a dangerous animal."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 224,
+    "fields": {
+      "english": "elephant",
+      "czech": "slon",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "An elephant never forgets."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 225,
+    "fields": {
+      "english": "giraffe",
+      "czech": "žirafa",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "Giraffes have very long necks."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 226,
+    "fields": {
+      "english": "eagle",
+      "czech": "orel",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "The eagle flew high above the mountains."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 227,
+    "fields": {
+      "english": "monkey",
+      "czech": "opice",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "The monkey ate a banana."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 228,
+    "fields": {
+      "english": "wolf",
+      "czech": "vlk",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "We heard a wolf howling at night."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 229,
+    "fields": {
+      "english": "fox",
+      "czech": "liška",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "The fox is clever and quick."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 230,
+    "fields": {
+      "english": "owl",
+      "czech": "sova",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "The owl hoots at night."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 231,
+    "fields": {
+      "english": "dolphin",
+      "czech": "delfín",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "Dolphins are friendly and smart."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 232,
+    "fields": {
+      "english": "bear",
+      "czech": "medvěd",
+      "difficulty": "easy",
+      "category": 1,
+      "example_sentence": "The bear is sleeping in a cave."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 233,
+    "fields": {
+      "english": "armadillo",
+      "czech": "pásovec",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "The armadillo rolled into a ball for protection."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 234,
+    "fields": {
+      "english": "narwhal",
+      "czech": "narval",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "A narwhal is sometimes called the unicorn of the sea."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 235,
+    "fields": {
+      "english": "platypus",
+      "czech": "ptakopysk",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "The platypus lays eggs but is a mammal."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 236,
+    "fields": {
+      "english": "mongoose",
+      "czech": "mangusta",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "A mongoose can fight and kill a cobra."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 237,
+    "fields": {
+      "english": "wolverine",
+      "czech": "rosomák",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "The wolverine is small but extremely fierce."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 238,
+    "fields": {
+      "english": "cassowary",
+      "czech": "kasuár",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "The cassowary is one of the most dangerous birds."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 239,
+    "fields": {
+      "english": "axolotl",
+      "czech": "axolotl",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "The axolotl can regrow its limbs."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 240,
+    "fields": {
+      "english": "manatee",
+      "czech": "kapustňák",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "Manatees are gentle giants of the sea."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 241,
+    "fields": {
+      "english": "ibex",
+      "czech": "kozorožec",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "The ibex climbs steep cliffs with ease."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 242,
+    "fields": {
+      "english": "honey badger",
+      "czech": "medojed",
+      "difficulty": "hard",
+      "category": 1,
+      "example_sentence": "Honey badgers may look cute, but they are actually very dangerous."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 243,
+    "fields": {
+      "english": "hedgehog",
+      "czech": "ježek",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "A hedgehog curls into a ball when scared."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 244,
+    "fields": {
+      "english": "flamingo",
+      "czech": "plameňák",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "Flamingos stand on one leg."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 245,
+    "fields": {
+      "english": "raccoon",
+      "czech": "mýval",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "The raccoon searched the trash for food."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 246,
+    "fields": {
+      "english": "cheetah",
+      "czech": "gepard",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "The cheetah runs faster than any other land animal."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 247,
+    "fields": {
+      "english": "whale",
+      "czech": "velryba",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "The whale is the largest animal on Earth."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 248,
+    "fields": {
+      "english": "kangaroo",
+      "czech": "klokan",
+      "difficulty": "medium",
+      "category": 1,
+      "example_sentence": "A kangaroo carries its baby in a pouch."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 249,
+    "fields": {
+      "english": "say",
+      "czech": "říct",
+      "difficulty": "easy",
+      "category": 17,
+      "example_sentence": "He didn't say anything."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 250,
+    "fields": {
+      "english": "talk",
+      "czech": "mluvit",
+      "difficulty": "easy",
+      "category": 17,
+      "example_sentence": "Let's talk after class."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 251,
+    "fields": {
+      "english": "ask",
+      "czech": "zeptat se",
+      "difficulty": "easy",
+      "category": 17,
+      "example_sentence": "Can I ask you a question?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 252,
+    "fields": {
+      "english": "answer",
+      "czech": "odpověď",
+      "difficulty": "easy",
+      "category": 17,
+      "example_sentence": "He knows the correct answer."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 253,
+    "fields": {
+      "english": "call",
+      "czech": "zavolat",
+      "difficulty": "easy",
+      "category": 17,
+      "example_sentence": "I'll call you later."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 254,
+    "fields": {
+      "english": "write",
+      "czech": "psát",
+      "difficulty": "easy",
+      "category": 17,
+      "example_sentence": "Write your name here."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 255,
+    "fields": {
+      "english": "listen",
+      "czech": "poslouchat",
+      "difficulty": "easy",
+      "category": 17,
+      "example_sentence": "Listen carefully to the teacher."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 256,
+    "fields": {
+      "english": "shout",
+      "czech": "křičet",
+      "difficulty": "easy",
+      "category": 17,
+      "example_sentence": "He had to shout to be heard."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 257,
+    "fields": {
+      "english": "discuss",
+      "czech": "diskutovat",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "We need to discuss the topic in class."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 258,
+    "fields": {
+      "english": "whisper",
+      "czech": "šeptat",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "She whispered a secret to me."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 259,
+    "fields": {
+      "english": "translate",
+      "czech": "překládat",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "She can translate English to Korean."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 260,
+    "fields": {
+      "english": "interrupt",
+      "czech": "přerušit",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "Please don't interrupt me."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 261,
+    "fields": {
+      "english": "mention",
+      "czech": "zmínit",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "He didn't mention your name."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 262,
+    "fields": {
+      "english": "complain",
+      "czech": "stěžovat si",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "She complained about the noise."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 263,
+    "fields": {
+      "english": "describe",
+      "czech": "popsat",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "Can you describe what happened?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 264,
+    "fields": {
+      "english": "suggest",
+      "czech": "navrhnout",
+      "difficulty": "medium",
+      "category": 17,
+      "example_sentence": "I suggest we go home now."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 265,
+    "fields": {
+      "english": "persuade",
+      "czech": "přesvědčit",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "She tried to persuade him to stay."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 266,
+    "fields": {
+      "english": "negotiate",
+      "czech": "vyjednávat",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "They had to negotiate a new contract."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 267,
+    "fields": {
+      "english": "emphasize",
+      "czech": "zdůraznit",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "He emphasized the importance of studying."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 268,
+    "fields": {
+      "english": "clarify",
+      "czech": "objasnit",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "Let me clarify my point."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 269,
+    "fields": {
+      "english": "argue",
+      "czech": "hádat se",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "They argue about everything."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 270,
+    "fields": {
+      "english": "reassure",
+      "czech": "uklidnit",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "He reassured her that everything was fine."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 271,
+    "fields": {
+      "english": "confess",
+      "czech": "přiznat se",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "She confessed her feelings."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 272,
+    "fields": {
+      "english": "announce",
+      "czech": "oznámit",
+      "difficulty": "hard",
+      "category": 17,
+      "example_sentence": "The teacher announced a surprise test."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 273,
+    "fields": {
+      "english": "bread",
+      "czech": "chleba",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "Would you like some bread?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 274,
+    "fields": {
+      "english": "rice",
+      "czech": "rýže",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "We had rice for dinner."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 275,
+    "fields": {
+      "english": "egg",
+      "czech": "vejce",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "I like boiled eggs."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 276,
+    "fields": {
+      "english": "milk",
+      "czech": "mléko",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "Milk is in the fridge."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 277,
+    "fields": {
+      "english": "soup",
+      "czech": "polévka",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "This soup is hot!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 278,
+    "fields": {
+      "english": "meat",
+      "czech": "maso",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "He doesn't eat meat"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 279,
+    "fields": {
+      "english": "cheese",
+      "czech": "sýr",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "I love cheese on my sandwich."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 280,
+    "fields": {
+      "english": "banana",
+      "czech": "banán",
+      "difficulty": "easy",
+      "category": 2,
+      "example_sentence": "Monkeys love bananas."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 281,
+    "fields": {
+      "english": "noodles",
+      "czech": "nudle",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "We had spicy noodles for lunch."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 282,
+    "fields": {
+      "english": "vegetables",
+      "czech": "zelenina",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "Eat your vegetables!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 283,
+    "fields": {
+      "english": "sandwich",
+      "czech": "sendvič",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "She made a tuna sandwich."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 284,
+    "fields": {
+      "english": "pancake",
+      "czech": "palačinka",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "Do you want some pancakes?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 285,
+    "fields": {
+      "english": "lemonade",
+      "czech": "limonáda",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "Cold lemonade is perfect in summer."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 286,
+    "fields": {
+      "english": "spicy",
+      "czech": "pálivý",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "This dish is really spicy."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 287,
+    "fields": {
+      "english": "sweet",
+      "czech": "sladký",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "The cake is too sweet."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 288,
+    "fields": {
+      "english": "salty",
+      "czech": "slaný",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "These chips are too salty."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 289,
+    "fields": {
+      "english": "delicious",
+      "czech": "vynikající",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "Your cooking is delicious!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 290,
+    "fields": {
+      "english": "snack",
+      "czech": "svačina",
+      "difficulty": "medium",
+      "category": 2,
+      "example_sentence": "I need a snack between classes."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 291,
+    "fields": {
+      "english": "appetizer",
+      "czech": "předkrm",
+      "difficulty": "hard",
+      "category": 2,
+      "example_sentence": "We ordered an appetizer to start."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 292,
+    "fields": {
+      "english": "fermented",
+      "czech": "fermentovaný",
+      "difficulty": "hard",
+      "category": 2,
+      "example_sentence": "Kimchi is a fermented food."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 293,
+    "fields": {
+      "english": "ingredient",
+      "czech": "ingredience",
+      "difficulty": "hard",
+      "category": 2,
+      "example_sentence": "What ingredients are in this dish?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 294,
+    "fields": {
+      "english": "portion",
+      "czech": "porce",
+      "difficulty": "hard",
+      "category": 2,
+      "example_sentence": "That's a big portion of fries."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 295,
+    "fields": {
+      "english": "homemade",
+      "czech": "domácí",
+      "difficulty": "hard",
+      "category": 2,
+      "example_sentence": "I prefer homemade cookies."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 296,
+    "fields": {
+      "english": "undercooked",
+      "czech": "nedovařený",
+      "difficulty": "hard",
+      "category": 2,
+      "example_sentence": "The meat is undercooked."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 297,
+    "fields": {
+      "english": "refreshing",
+      "czech": "osvěžující",
+      "difficulty": "hard",
+      "category": 2,
+      "example_sentence": "This drink is so refreshing."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 298,
+    "fields": {
+      "english": "map",
+      "czech": "mapa",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "Can you read the map?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 299,
+    "fields": {
+      "english": "train",
+      "czech": "vlak",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "We took the train to Prague."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 300,
+    "fields": {
+      "english": "airport",
+      "czech": "letiště",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "The airport is very busy."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 301,
+    "fields": {
+      "english": "ticket",
+      "czech": "lístek",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "I bought a train ticket."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 302,
+    "fields": {
+      "english": "hotel",
+      "czech": "hotel",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "We stayed at a hotel by the sea."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 303,
+    "fields": {
+      "english": "bus",
+      "czech": "autobus",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "The bus leaves at 8 o'clock."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 304,
+    "fields": {
+      "english": "trip",
+      "czech": "výlet",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "We're going on a school trip."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 305,
+    "fields": {
+      "english": "camera",
+      "czech": "fotoaparát",
+      "difficulty": "easy",
+      "category": 8,
+      "example_sentence": "He brought a camera to take pictures."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 306,
+    "fields": {
+      "english": "passport",
+      "czech": "pas",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "Don't forget your passport!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 307,
+    "fields": {
+      "english": "luggage",
+      "czech": "zavazadlo",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "My luggage is very heavy."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 308,
+    "fields": {
+      "english": "departure",
+      "czech": "odjezd",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "Our departure is in two hours."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 309,
+    "fields": {
+      "english": "destination",
+      "czech": "destinace",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "Paris is a romantic destination."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 310,
+    "fields": {
+      "english": "adventure",
+      "czech": "dobrodružství",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "They went on a big adventure."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 311,
+    "fields": {
+      "english": "guide",
+      "czech": "průvodce",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "The guide told us many stories."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 312,
+    "fields": {
+      "english": "journey",
+      "czech": "cesta",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "The journey took all day."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 313,
+    "fields": {
+      "english": "travel insurance",
+      "czech": "cestovní pojištění",
+      "difficulty": "hard",
+      "category": 8,
+      "example_sentence": "Do you have travel insurance?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 314,
+    "fields": {
+      "english": "local",
+      "czech": "místní",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "We ate at a local restaurant."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 315,
+    "fields": {
+      "english": "accommodation",
+      "czech": "ubytování",
+      "difficulty": "hard",
+      "category": 8,
+      "example_sentence": "We need to find accommodation."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 316,
+    "fields": {
+      "english": "souvenir",
+      "czech": "suvenýr",
+      "difficulty": "hard",
+      "category": 8,
+      "example_sentence": "I bought a souvenir for my mom."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 317,
+    "fields": {
+      "english": "foreign",
+      "czech": "zahraniční",
+      "difficulty": "hard",
+      "category": 8,
+      "example_sentence": "She loves foreign cultures."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 318,
+    "fields": {
+      "english": "landmark",
+      "czech": "památka",
+      "difficulty": "medium",
+      "category": 8,
+      "example_sentence": "The Eiffel Tower is a famous landmark."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 319,
+    "fields": {
+      "english": "currency",
+      "czech": "měna",
+      "difficulty": "hard",
+      "category": 8,
+      "example_sentence": "What's the local currency?"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 320,
+    "fields": {
+      "english": "table",
+      "czech": "stůl",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "Dinner is on the table."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 321,
+    "fields": {
+      "english": "bed",
+      "czech": "postel",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "I'm going to bed."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 322,
+    "fields": {
+      "english": "door",
+      "czech": "dveře",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "Please, close the door."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 323,
+    "fields": {
+      "english": "window",
+      "czech": "okno",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "The window is open."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 324,
+    "fields": {
+      "english": "lamp",
+      "czech": "lampa",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "Turn on the lamp."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 325,
+    "fields": {
+      "english": "sofa",
+      "czech": "pohovka",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "They're sitting on the sofa."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 326,
+    "fields": {
+      "english": "mirror",
+      "czech": "zrcadlo",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "He looked in the mirror."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 327,
+    "fields": {
+      "english": "floor",
+      "czech": "podlaha",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "The floor is clean."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 328,
+    "fields": {
+      "english": "kitchen",
+      "czech": "kuchyně",
+      "difficulty": "easy",
+      "category": 13,
+      "example_sentence": "Mom is in the kitchen."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 329,
+    "fields": {
+      "english": "wardrobe",
+      "czech": "skříň",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "The clothes are in the wardrobe."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 330,
+    "fields": {
+      "english": "carpet",
+      "czech": "koberec",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "The carpet is soft and warm."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 331,
+    "fields": {
+      "english": "bathroom",
+      "czech": "koupelna",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "The bathroom is upstairs."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 332,
+    "fields": {
+      "english": "fridge",
+      "czech": "lednice",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "The milk is in the fridge."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 333,
+    "fields": {
+      "english": "microwave",
+      "czech": "mikrovlnka",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "He heated pizza in the microwave."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 334,
+    "fields": {
+      "english": "curtain",
+      "czech": "záclona",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "She opened the curtain."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 335,
+    "fields": {
+      "english": "pillow",
+      "czech": "polštář",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "I sleep with two pillows."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 336,
+    "fields": {
+      "english": "shelf",
+      "czech": "police",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "Books are on the shelf."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 337,
+    "fields": {
+      "english": "vacuum cleaner",
+      "czech": "vysavač",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "Use the vacuum cleaner, please."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 338,
+    "fields": {
+      "english": "sink",
+      "czech": "dřez",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "The dishes are in the sink."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 339,
+    "fields": {
+      "english": "ceiling",
+      "czech": "strop",
+      "difficulty": "hard",
+      "category": 13,
+      "example_sentence": "The ceiling is very high."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 340,
+    "fields": {
+      "english": "furniture",
+      "czech": "nábytek",
+      "difficulty": "hard",
+      "category": 13,
+      "example_sentence": "They bought new furniture."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 341,
+    "fields": {
+      "english": "attic",
+      "czech": "půda",
+      "difficulty": "hard",
+      "category": 13,
+      "example_sentence": "There are old boxes in the attic."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 342,
+    "fields": {
+      "english": "pantry",
+      "czech": "spíž",
+      "difficulty": "hard",
+      "category": 13,
+      "example_sentence": "The pantry was full of canned food."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 343,
+    "fields": {
+      "english": "fireplace",
+      "czech": "krb",
+      "difficulty": "hard",
+      "category": 13,
+      "example_sentence": "We sat by the fireplace."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 344,
+    "fields": {
+      "english": "dishwasher",
+      "czech": "myčka",
+      "difficulty": "hard",
+      "category": 13,
+      "example_sentence": "The dishwasher is full."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 346,
+    "fields": {
+      "english": "balcony",
+      "czech": "balkon",
+      "difficulty": "medium",
+      "category": 13,
+      "example_sentence": "They had coffee on the balcony."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 347,
+    "fields": {
+      "english": "drawer",
+      "czech": "zásuvka",
+      "difficulty": "hard",
+      "category": 13,
+      "example_sentence": "The key is in the drawer."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 348,
+    "fields": {
+      "english": "doctor",
+      "czech": "lékař",
+      "difficulty": "easy",
+      "category": 9,
+      "example_sentence": "The doctor is at the hospital."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 349,
+    "fields": {
+      "english": "nurse",
+      "czech": "sestra",
+      "difficulty": "easy",
+      "category": 9,
+      "example_sentence": "The nurse helps patients in a clinic."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 350,
+    "fields": {
+      "english": "clinic",
+      "czech": "klinika",
+      "difficulty": "easy",
+      "category": 9,
+      "example_sentence": "She works at the local clinic."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 351,
+    "fields": {
+      "english": "police officer",
+      "czech": "policista",
+      "difficulty": "medium",
+      "category": 9,
+      "example_sentence": "The police officer works at the police station."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 352,
+    "fields": {
+      "english": "police station",
+      "czech": "policejní stanice",
+      "difficulty": "medium",
+      "category": 9,
+      "example_sentence": "The car is parked near the police station."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 353,
+    "fields": {
+      "english": "chef",
+      "czech": "kuchař",
+      "difficulty": "easy",
+      "category": 9,
+      "example_sentence": "The chef cooks in a restaurant."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 354,
+    "fields": {
+      "english": "restaurant",
+      "czech": "restaurace",
+      "difficulty": "easy",
+      "category": 9,
+      "example_sentence": "Let's eat at a nice restaurant."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 355,
+    "fields": {
+      "english": "baker",
+      "czech": "pekař",
+      "difficulty": "easy",
+      "category": 9,
+      "example_sentence": "The baker wakes up early at the bakery."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 356,
+    "fields": {
+      "english": "bakery",
+      "czech": "pekárna",
+      "difficulty": "easy",
+      "category": null,
+      "example_sentence": "This bakery smells amazing."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 357,
+    "fields": {
+      "english": "mechanic",
+      "czech": "mechanik",
+      "difficulty": "medium",
+      "category": 9,
+      "example_sentence": "The mechanic works in the garage."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 358,
+    "fields": {
+      "english": "garage",
+      "czech": "garáž",
+      "difficulty": "medium",
+      "category": 9,
+      "example_sentence": "Take your car to the garage."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 359,
+    "fields": {
+      "english": "hairdresser",
+      "czech": "kadeřník",
+      "difficulty": "medium",
+      "category": 9,
+      "example_sentence": "The hairdresser works in a salon."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 360,
+    "fields": {
+      "english": "salon",
+      "czech": "salon",
+      "difficulty": "medium",
+      "category": 9,
+      "example_sentence": "She got her hair done at the salon."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 361,
+    "fields": {
+      "english": "builder",
+      "czech": "stavitel",
+      "difficulty": "medium",
+      "category": 9,
+      "example_sentence": "The builder is on the construction site."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 362,
+    "fields": {
+      "english": "construction site",
+      "czech": "staveniště",
+      "difficulty": "hard",
+      "category": 9,
+      "example_sentence": "The construction site is loud."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 364,
+    "fields": {
+      "english": "scientist",
+      "czech": "vědec",
+      "difficulty": "hard",
+      "category": 9,
+      "example_sentence": "The scientist works in a lab."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 365,
+    "fields": {
+      "english": "journalist",
+      "czech": "novinář",
+      "difficulty": "hard",
+      "category": 9,
+      "example_sentence": "The journalist writes at the office."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 366,
+    "fields": {
+      "english": "interpreter",
+      "czech": "tlumočník",
+      "difficulty": "hard",
+      "category": 9,
+      "example_sentence": "The interpreter translated at the conference."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 367,
+    "fields": {
+      "english": "flight attendant",
+      "czech": "letuška",
+      "difficulty": "hard",
+      "category": 9,
+      "example_sentence": "The flight attendant served drinks on the plane."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 368,
+    "fields": {
+      "english": "paramedic",
+      "czech": "zdravotník",
+      "difficulty": "hard",
+      "category": 9,
+      "example_sentence": "The paramedic rushed to the scene."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 369,
+    "fields": {
+      "english": "perception",
+      "czech": "vnímání",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "Our perception shapes reality."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 370,
+    "fields": {
+      "english": "resilience",
+      "czech": "odolnost",
+      "difficulty": "hard",
+      "category": 15,
+      "example_sentence": "Resilience helps in hard times."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 371,
+    "fields": {
+      "english": "truth",
+      "czech": "pravda",
+      "difficulty": "easy",
+      "category": 15,
+      "example_sentence": "Tell me the truth."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 372,
+    "fields": {
+      "english": "idea",
+      "czech": "nápad",
+      "difficulty": "easy",
+      "category": 15,
+      "example_sentence": "That's a great idea!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 373,
+    "fields": {
+      "english": "dream",
+      "czech": "sen",
+      "difficulty": "easy",
+      "category": 15,
+      "example_sentence": "I had a dream about flying."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 374,
+    "fields": {
+      "english": "choice",
+      "czech": "volba",
+      "difficulty": "medium",
+      "category": 15,
+      "example_sentence": "I make my choices!"
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 375,
+    "fields": {
+      "english": "desire",
+      "czech": "touha",
+      "difficulty": "medium",
+      "category": 15,
+      "example_sentence": "He had a strong desire to win."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 376,
+    "fields": {
+      "english": "memory",
+      "czech": "vzpomínka",
+      "difficulty": "medium",
+      "category": 15,
+      "example_sentence": "This photo brings back a memory."
+    }
+  },
+  {
+    "model": "core.word",
+    "pk": 377,
+    "fields": {
+      "english": "growth",
+      "czech": "růst",
+      "difficulty": "medium",
+      "category": 15,
+      "example_sentence": "Personal growth takes time."
+    }
+  },
+  {
+    "model": "core.acceptedtranslation",
+    "pk": 1,
+    "fields": {
+      "word": 144,
+      "text": "bouřka",
+      "normalized": "bourka"
+    }
+  },
+  {
+    "model": "core.acceptedtranslation",
+    "pk": 2,
+    "fields": {
+      "word": 52,
+      "text": "zlatá",
+      "normalized": "zlata"
+    }
+  },
+  {
+    "model": "core.acceptedtranslation",
+    "pk": 3,
+    "fields": {
+      "word": 52,
+      "text": "zlaté",
+      "normalized": "zlate"
+    }
+  },
+  {
+    "model": "core.acceptedtranslation",
+    "pk": 4,
+    "fields": {
+      "word": 252,
+      "text": "odpovědět",
+      "normalized": "odpovedet"
+    }
+  },
+  {
+    "model": "core.acceptedtranslation",
+    "pk": 5,
+    "fields": {
+      "word": 253,
+      "text": "volat",
+      "normalized": "volat"
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 1,
+    "fields": {
+      "name": "Zvířata",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 2,
+    "fields": {
+      "name": "Jídlo",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 4,
+    "fields": {
+      "name": "Škola",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 7,
+    "fields": {
+      "name": "Oblečení",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 8,
+    "fields": {
+      "name": "Cestování",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 9,
+    "fields": {
+      "name": "Povolání",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 10,
+    "fields": {
+      "name": "Sporty/zájmy",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 12,
+    "fields": {
+      "name": "Barvy",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 13,
+    "fields": {
+      "name": "Domácnost",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 14,
+    "fields": {
+      "name": "Příroda",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 15,
+    "fields": {
+      "name": "Abstrakta",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 16,
+    "fields": {
+      "name": "Vlastnosti/emoce",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 17,
+    "fields": {
+      "name": "Komunikace",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.category",
+    "pk": 18,
+    "fields": {
+      "name": "Čas",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.userprofile",
+    "pk": 1,
+    "fields": {
+      "user": [
+        "Cuba"
+      ],
+      "nickname": "Cuba02",
+      "created_at": "2025-05-30T15:33:34.523Z"
+    }
+  },
+  {
+    "model": "core.userprofile",
+    "pk": 2,
+    "fields": {
+      "user": [
+        "Anonymous256"
+      ],
+      "nickname": "xXSecret_HackerXx",
+      "created_at": "2025-05-30T15:33:40.812Z"
+    }
+  },
+  {
+    "model": "core.userprofile",
+    "pk": 3,
+    "fields": {
+      "user": [
+        "user123456"
+      ],
+      "nickname": "Guest0451",
+      "created_at": "2025-05-30T15:33:51.766Z"
+    }
+  },
+  {
+    "model": "core.userprofile",
+    "pk": 4,
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "nickname": null,
+      "created_at": "2025-10-05T10:06:10.205Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 1,
+    "fields": {
+      "user": 4,
+      "word": 44,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:06:10.218Z",
+      "last_incorrect": "2025-10-05T10:06:10.218Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "word": 4,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:06:12.450Z",
+      "last_incorrect": "2025-10-05T10:06:12.450Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "word": 36,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:07:00.683Z",
+      "last_incorrect": "2025-10-05T10:07:00.683Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 4,
+    "fields": {
+      "user": 4,
+      "word": 99,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:07:01.729Z",
+      "last_incorrect": "2025-10-05T10:07:01.729Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 5,
+    "fields": {
+      "user": 4,
+      "word": 165,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:07:02.660Z",
+      "last_incorrect": "2025-10-05T10:07:02.660Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 6,
+    "fields": {
+      "user": 4,
+      "word": 278,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:24:05.043Z",
+      "last_incorrect": "2025-10-05T10:24:05.043Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 7,
+    "fields": {
+      "user": 4,
+      "word": 305,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:24:06.672Z",
+      "last_incorrect": "2025-10-05T10:24:06.672Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 8,
+    "fields": {
+      "user": 4,
+      "word": 133,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:24:06.863Z",
+      "last_incorrect": "2025-10-05T10:24:06.863Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 9,
+    "fields": {
+      "user": 4,
+      "word": 136,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-10-05T10:24:33.656Z",
+      "last_incorrect": "2025-10-05T10:24:33.656Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 10,
+    "fields": {
+      "user": 4,
+      "word": 90,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-11-09T13:29:11.773Z",
+      "last_incorrect": "2025-11-09T13:29:11.773Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 11,
+    "fields": {
+      "user": 4,
+      "word": 112,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-11-09T13:29:24.795Z",
+      "last_incorrect": "2025-11-09T13:29:24.795Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 12,
+    "fields": {
+      "user": 4,
+      "word": 190,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-11-09T13:29:34.617Z",
+      "last_incorrect": "2025-11-09T13:29:34.617Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 13,
+    "fields": {
+      "user": 4,
+      "word": 252,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-11-09T13:30:18.260Z",
+      "last_incorrect": "2025-11-09T13:30:18.260Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 14,
+    "fields": {
+      "user": 4,
+      "word": 238,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-11-09T13:31:34.779Z",
+      "last_incorrect": "2025-11-09T13:31:34.779Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 15,
+    "fields": {
+      "user": 4,
+      "word": 342,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-11-09T13:32:01.498Z",
+      "last_incorrect": "2025-11-09T13:32:01.498Z"
+    }
+  },
+  {
+    "model": "core.mistake",
+    "pk": 16,
+    "fields": {
+      "user": 4,
+      "word": 263,
+      "incorrect_count": 1,
+      "first_incorrect": "2025-11-09T13:35:32.818Z",
+      "last_incorrect": "2025-11-09T13:35:32.818Z"
+    }
+  }
+]
