@@ -12,7 +12,7 @@ Projekt vznikl jako závěrečná školní práce a kombinuje pastelový, dreamy
 - 🗂️ **Detail slovíčka** – karta obsahující překlad, alternativní překlady, kategorii a obtížnost  
 - 🛠️ **Admin Tools** – přidávání, úprava a mazání slovíček (role admin)  
 - 👤 **Contributor Role** – omezený účet umožňující přidávání slovíček bez přístupu do administrace  
-- 🎨 **Jednotný design** – pastelový, jemný vizuál inspirovaný TXT/Le Sserafim  
+- 🎨 **Jednotný design** – pastelový, jemný vizuál 
 - 🔒 **Autentizace a oprávnění** – login systém se správou uživatelů  
 - 🐳 **Docker + PostgreSQL** – jednoduše spustitelné prostředí přes Docker Compose  
 
@@ -34,6 +34,8 @@ Projekt vznikl jako závěrečná školní práce a kombinuje pastelový, dreamy
 ```bash
 git clone https://github.com/uzivatel/vocabhero.git
 cd vocabhero
+```
+---
 
 ## 2️⃣ Vytvoř `.env` soubor v kořenovém adresáři
 
@@ -43,11 +45,15 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 POSTGRES_HOST=db
 POSTGRES_PORT=5432
+```
+---
 
 ## 3️⃣ Spuštění aplikace
 
 ```bash
 docker compose up --build
+```
+---
 
 Aplikace poběží na adrese:  
 ➡️ **http://localhost:8000**
