@@ -38,25 +38,16 @@ cd vocabhero
 ---
 
 ### 2️⃣ Vytvoření `.env` souboru
+
 Projekt používá konfigurační proměnné uložené v `.env` souboru.
 
-<<<<<<< HEAD
-```env
-POSTGRES_DB=vocabhero
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-POSTGRES_HOST=db
-POSTGRES_PORT=5432
-```
-=======
 1. V kořenovém adresáři projektu vytvoř soubor `.env`
 2. Zkopíruj obsah souboru `.env.example`
 3. Případně uprav hodnoty podle potřeby
->>>>>>> 731211d (Uprava env + readme)
+
 ---
 
-## 3️⃣ Spuštění aplikace
-
+### 3️⃣ Spuštění aplikace
 ```bash
 docker compose up --build
 ```
@@ -64,6 +55,26 @@ docker compose up --build
 
 Aplikace poběží na adrese:  
 ➡️ **http://localhost:8000**
+
+---
+
+## 📦 Inicializace databáze (vývojová data)
+
+Projekt obsahuje připravená vývojová data (slovíčka, kategorie, testovací účty a role),  
+která **nejsou automaticky nahrána při prvním spuštění**.
+
+### 1️⃣ Otevři shell běžícího Django kontejneru
+```bash
+docker compose exec web bash
+python manage.py loaddata data_fixed_onepass.json
+```
+---
+
+## ℹ️ Poznámka
+
+Vývojová data slouží pouze pro demonstrační a vývojové účely.  
+Hesla uživatelských účtů jsou bezpečně hashovaná a aplikace není určena pro produkční nasazení.
+
 
 ## 📚 Zdroje
 
