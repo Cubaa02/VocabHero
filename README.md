@@ -107,7 +107,6 @@ python manage.py changepassword admin
 Alternativně lze administrátorský účet vytvořit ručně pomocí:
 
 ```bash
-Zkopírovat kód
 docker compose exec web bash
 python manage.py createsuperuser
 ```
