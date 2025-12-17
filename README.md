@@ -35,6 +35,7 @@ Projekt vznikl jako závěrečná školní práce a kombinuje pastelový, dreamy
 git clone https://github.com/uzivatel/vocabhero.git
 cd vocabhero
 ```
+
 ---
 
 ### 2️⃣ Vytvoření `.env` souboru
@@ -51,6 +52,7 @@ Projekt používá konfigurační proměnné uložené v `.env` souboru.
 ```bash
 docker compose up --build
 ```
+
 ---
 
 Aplikace poběží na adrese:  
@@ -63,18 +65,61 @@ Aplikace poběží na adrese:
 Projekt obsahuje připravená vývojová data (slovíčka, kategorie, testovací účty a role),  
 která **nejsou automaticky nahrána při prvním spuštění**.
 
+Bez těchto dat není aplikace plně použitelná
+(procvičování a herní režimy vyžadují existující slovní zásobu).
+
 ### 1️⃣ Otevři shell běžícího Django kontejneru
 ```bash
 docker compose exec web bash
 python manage.py loaddata data_fixed_onepass.json
 ```
+
+---
+
+## 🔐 Správa uživatelů a oprávnění
+
+Aplikace **neobsahuje veřejnou registraci uživatelů**.  
+Uživatelské účty a jejich role jsou **spravovány výhradně administrátorem**.
+
+### Role v aplikaci
+- **Admin** – plný přístup ke správě aplikace a databáze
+- **Contributor** – může přidávat a upravovat slovíčka
+- **Běžný uživatel** – může aplikaci pouze používat (procvičování, herní režimy)
+
+Běžní uživatelé **nemohou sami přidávat slovíčka** ani měnit obsah databáze.
+
+---
+
+### Přístup k administrátorskému účtu
+
+Administrátorský účet je určen pouze pro správce aplikace  
+
+Pokud jsou do databáze nahrána vývojová data (`loaddata`),  
+admin účet již existuje, ale **heslo není veřejně uvedeno**.
+
+V takovém případě je nutné heslo **nastavit nebo změnit ručně**:
+
+```bash
+docker compose exec web bash
+python manage.py changepassword admin
+```
+
+Alternativně lze administrátorský účet vytvořit ručně pomocí:
+
+```bash
+Zkopírovat kód
+docker compose exec web bash
+python manage.py createsuperuser
+```
+
 ---
 
 ## ℹ️ Poznámka
 
-Vývojová data slouží pouze pro demonstrační a vývojové účely.  
+Vývojová data slouží pouze pro demonstrační a vývojové účely.
 Hesla uživatelských účtů jsou bezpečně hashovaná a aplikace není určena pro produkční nasazení.
 
+---
 
 ## 📚 Zdroje
 
