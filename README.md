@@ -37,8 +37,10 @@ cd vocabhero
 ```
 ---
 
-## 2️⃣ Vytvoř `.env` soubor v kořenovém adresáři
+### 2️⃣ Vytvoření `.env` souboru
+Projekt používá konfigurační proměnné uložené v `.env` souboru.
 
+<<<<<<< HEAD
 ```env
 POSTGRES_DB=vocabhero
 POSTGRES_USER=postgres
@@ -46,6 +48,11 @@ POSTGRES_PASSWORD=postgres
 POSTGRES_HOST=db
 POSTGRES_PORT=5432
 ```
+=======
+1. V kořenovém adresáři projektu vytvoř soubor `.env`
+2. Zkopíruj obsah souboru `.env.example`
+3. Případně uprav hodnoty podle potřeby
+>>>>>>> 731211d (Uprava env + readme)
 ---
 
 ## 3️⃣ Spuštění aplikace
