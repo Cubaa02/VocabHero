@@ -1,0 +1,558 @@
+% ŠABLONA PRO PSANÍ ZÁVĚREČNÉ STUDIJNÍ PRÁCE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Autor: Jakub Dokulil (kubadokulil99@gmail.com)
+% Tato šablona byla vytvořena tak, aby pomocí ní mohli v systému LaTeX soutěžící sázet své práce a zároveň odpovídala požadavkům na formátování vyplývajícím z wordové šablony umístěné na webu soc.cz.
+%
+\documentclass[12pt, a4paper,
+oneside,
+openany
+]{report}
+
+
+%% Nutné balíčky a nastavení
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Proměnné
+\newcommand\obor{INFORMAČNÍ TECHNOLOGIE} %% -- napiš číslo a název tvého oboru
+\newcommand\kodOboru{18-20-M/01} %% -- napiš číslo a název tvého oboru
+\newcommand\zamereni{se zaměřením na počítačové sítě a programování} %% -- napiš číslo a název tvého oboru
+\newcommand\skola{Střední škola průmyslová a umělecká, Opava} %% vyplň název školy
+\newcommand\trida{IT4} %% vyplň jméno svého konzultanta
+\newcommand\jmenoAutora{Jakub Plucnar}  %% vyplň své jméno
+\newcommand\skolniRok{2025/26} %% vyplň rok
+\newcommand\datumOdevzdani{1. 1. 2026} %% vyplň rok
+\newcommand\nazevPrace{Webová aplikace VocabHero pro procvičování anglické slovní zásoby} %% vyplň název své práce
+
+\title{Vocab Hero} %% -- Název tvé práce
+\author{Jakub Plucnar} %% -- tvé jméno
+\date{2026} %% -- rok, kdy píšeš SOČku
+
+\usepackage[top=2.5cm, bottom=2.5cm, left=3.5cm, right=1.5cm]{geometry} %% nastaví okraje, left -- vnitřní okraj, right -- vnější okraj
+
+\usepackage[czech]{babel} %% balík babel pro sazbu v češtině
+\usepackage[utf8]{inputenc} %% balíky pro kódování textu
+\usepackage[T1]{fontenc}
+\usepackage{cmap} %% balíček zajišťující, že vytvořené PDF bude prohledávatelné a kopírovatelné
+
+\usepackage{graphicx} %% balík pro vkládání obrázků
+
+\usepackage{subcaption} %% balíček pro vkládání podobrázků
+
+\usepackage{hyperref} %% balíček, který v PDF vytváří odkazy
+
+\linespread{1.25} %% řádkování
+\setlength{\parskip}{0.5em} %% odsazení mezi odstavci
+
+
+\usepackage[pagestyles]{titlesec} %% balíček pro úpravu stylu kapitol a sekcí
+\titleformat{\chapter}[block]{\scshape\bfseries\LARGE}{\thechapter}{10pt}{\vspace{0pt}}[\vspace{-22pt}]
+\titleformat{\section}[block]{\scshape\bfseries\Large}{\thesection}{10pt}{\vspace{0pt}}
+\titleformat{\subsection}[block]{\bfseries\large}{\thesubsection}{10pt}{\vspace{0pt}}
+
+
+\usepackage{tocloft} % Balíček umožní přizpůsobit vzhled tabulky obsahu
+\setlength{\cftbeforechapskip}{0pt}  % Menší rozestup pro kapitoly
+\setlength{\cftbeforesecskip}{0pt}   % Menší rozestup pro sekce
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{1}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.025pt}
+
+\usepackage{booktabs}
+
+\usepackage{url}
+
+%% Balíčky co se můžou hodit :) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pdfpages} %% Balíček umožňující vkládat stránky z PDF souborů, 
+
+\usepackage{upgreek} %% Balíček pro sazbu stojatých řeckých písmen, třeba u jednotky mikrometr. Například stojaté mí: \upmu, stojaté pí: \uppi
+
+\usepackage{amsmath}    %% Balíčky amsmath a amsfonts 
+\usepackage{amsfonts}   %% pro sazbu matematických symbolů
+\usepackage{esint}     %% pro sazbu různých integrálů (např \oiint)
+\usepackage{mathrsfs}
+\usepackage{helvet} % Helvet font
+\usepackage{mathptmx} % Times New Roman
+\makeatletter
+\@namedef{ver@figureversions.sty}{9999/99/99}
+\newcommand{\DeclareFigureVersion}[2]{}
+\newcommand{\figureversion}[1]{}
+\makeatother
+
+
+\makeatletter
+\providecommand{\superiorSup}{}
+\providecommand{\textOsF}{}
+\providecommand{\textTOsF}{}
+\providecommand{\liningLF}{}
+\providecommand{\liningTLF}{}
+\providecommand{\tabularTab}{}
+\providecommand{\proportionalProp}{}
+\makeatother
+\makeatletter
+\providecommand{\superiorSup}{}
+\providecommand{\textOsF}{}
+\providecommand{\textTOsF}{}
+\providecommand{\liningLF}{}
+\providecommand{\liningTLF}{}
+\providecommand{\tabularTab}{}
+\providecommand{\proportionalProp}{}
+\providecommand{\tabularmath}{}
+\providecommand{\proportionalmath}{}
+\makeatother
+
+
+
+
+%% makra pro sazbu matematiky
+\newcommand{\dif}{\mathrm{d}} %% makro pro sazbu diferenciálu, místo toho
+%% abych musel psát '\mathrm{d}' mi stačí napsat '\dif' což je mnohem 
+%% kratší a mohu si tak usnadnit práci
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+
+\renewcommand{\lstlistingname}{Kód}% Listing -> Algorithm
+\renewcommand{\lstlistlistingname}{Seznam programových kódů}% List of Listings -> List of Algorithms
+
+%% Definice 
+\lstdefinelanguage{JavaScript}{
+	morekeywords=[1]{break, continue, delete, else, for, function, if, in,
+		new, return, this, typeof, var, void, while, with},
+	% Literals, primitive types, and reference types.
+	morekeywords=[2]{false, null, true, boolean, number, undefined,
+		Array, Boolean, Date, Math, Number, String, Object},
+	% Built-ins.
+	morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
+	sensitive,
+	morecomment=[s]{/*}{*/},
+	morecomment=[l]//,
+	morecomment=[s]{/**}{*/}, % JavaDoc style comments
+	morestring=[b]',
+	morestring=[b]"
+}[keywords, comments, strings]
+
+
+\lstdefinelanguage[ECMAScript2015]{JavaScript}[]{JavaScript}{
+	morekeywords=[1]{await, async, case, catch, class, const, default, do,
+		enum, export, extends, finally, from, implements, import, instanceof,
+		let, static, super, switch, throw, try},
+	morestring=[b]` % Interpolation strings.
+}
+
+\lstalias[]{ES6}[ECMAScript2015]{JavaScript}
+
+% Nastavení barev
+% Requires package: color.
+\definecolor{mediumgray}{rgb}{0.3, 0.4, 0.4}
+\definecolor{mediumblue}{rgb}{0.0, 0.0, 0.8}
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
+\definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
+\definecolor{crimson}{rgb}{0.86, 0.8, 0.24}
+
+% Nastavení pro Python
+\lstdefinestyle{Python}{
+	language=Python,
+	backgroundcolor=\color{white},
+	basicstyle=\ttfamily,
+	breakatwhitespace=false,
+	breaklines=false,
+	captionpos=b,
+	columns=fullflexible,
+	commentstyle=\color{mediumgray}\upshape,
+	emph={},
+	emphstyle=\color{crimson},
+	extendedchars=true,  % requires inputenc
+	fontadjust=true,
+	frame=single,
+	identifierstyle=\color{black},
+	keepspaces=true,
+	keywordstyle=\color{mediumblue},
+	keywordstyle={[2]\color{darkviolet}},
+	keywordstyle={[3]\color{royalblue}},
+	literate=%
+	{á}{{\'a}}1 {č}{{\v{c}}}1 {ď}{{\v{d}}}1 {é}{{\'e}}1 {ě}{{\v{e}}}1
+	{í}{{\'i}}1 {ň}{{\v{n}}}1 {ó}{{\'o}}1 {ř}{{\v{r}}}1 {š}{{\v{s}}}1
+	{ť}{{\v{t}}}1 {ú}{{\'u}}1 {ů}{{\r{u}}}1 {ý}{{\'y}}1 {ž}{{\v{z}}}1,		
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{black},
+	rulecolor=\color{black},
+	showlines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{forestgreen},
+	tabsize=2,
+	title=\lstname,
+	upquote=true  % requires textcomp	
+}
+
+
+\lstdefinestyle{JSES6Base}{
+	backgroundcolor=\color{white},
+	basicstyle=\ttfamily,
+	breakatwhitespace=false,
+	breaklines=false,
+	captionpos=b,
+	columns=fullflexible,
+	commentstyle=\color{mediumgray}\upshape,
+	emph={},
+	emphstyle=\color{crimson},
+	extendedchars=true,  % requires inputenc
+	fontadjust=true,
+	frame=single,
+	identifierstyle=\color{black},
+	keepspaces=true,
+	keywordstyle=\color{mediumblue},
+	keywordstyle={[2]\color{darkviolet}},
+	keywordstyle={[3]\color{royalblue}},
+ literate=%
+{á}{{\'a}}1 {č}{{\v{c}}}1 {ď}{{\v{d}}}1 {é}{{\'e}}1 {ě}{{\v{e}}}1
+{í}{{\'i}}1 {ň}{{\v{n}}}1 {ó}{{\'o}}1 {ř}{{\v{r}}}1 {š}{{\v{s}}}1
+{ť}{{\v{t}}}1 {ú}{{\'u}}1 {ů}{{\r{u}}}1 {ý}{{\'y}}1 {ž}{{\v{z}}}1,		
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{black},
+	rulecolor=\color{black},
+	showlines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{forestgreen},
+	tabsize=2,
+	title=\lstname,
+	upquote=true  % requires textcomp
+}
+
+\lstdefinestyle{JavaScript}{
+	language=JavaScript,
+	style=JSES6Base,
+}
+\lstdefinestyle{ES6}{
+	language=ES6,
+	style=JSES6Base
+}
+
+\setlength{\headheight}{15pt}
+
+%% Začátek dokumentu
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+	\pagestyle{empty}
+	\pagenumbering{Roman}
+	
+	\cleardoublepage
+
+%% Titulní stránka s informacemi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	{\fontfamily{phv}\selectfont
+		%% Logo školy
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.6\linewidth]{image/logo-skoly.png} 
+		\end{figure}
+		
+		
+		%% Hlavička práce a její název (viz proměnná \nazev prace)
+		%% \sffamily %%% bezpatkové písmo - sans serif
+		{\bfseries %%% písmo na stránce je tučně
+			\begin{center}
+				\vspace{0.025 \textheight}
+				\LARGE{ZÁVĚREČNÁ STUDIJNÍ PRÁCE}\\
+				\large{dokumentace}\\
+				\vspace{0.075 \textheight}
+				\LARGE {\nazevPrace}\\
+			\end{center}  
+		}%%%
+		
+\begin{center}
+	\includegraphics[width=\linewidth, height=0.32\textheight, keepaspectratio]{image/vocabh-2x.jpg}
+\end{center}
+
+		
+		\vspace{0.02 \textheight}
+		\begin{table}[h!]
+			\begin{tabular}{ll}
+				\textbf{Autor:} & \jmenoAutora\\ 
+				\textbf{Obor:} & \kodOboru { } \obor\\
+				\textbf{} & \zamereni\\
+				\textbf{Třída:} & \trida\\
+				\textbf{Školní rok:} & \skolniRok\\
+			\end{tabular}
+			
+		\end{table}		
+	}
+	
+\cleardoublepage %% Zalomení dvojstránky
+	
+%% Stránka obsahující poděkování a prohlášení
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Prohlášení - povinné
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\noindent{\large{\bfseries{Prohlášení}\\}}  %% uprav si koncovky podle toho na jaký rod se cítíš, vypadá to pak lépe :) 
+	\noindent{Prohlašuji, že jsem závěrečnou práci vypracoval samostatně a uvedl veškeré použité 
+		informační zdroje.\\}
+	\noindent{Souhlasím, aby tato studijní práce byla použita k výukovým a prezentačním účelům na Střední průmyslové a umělecké škole v Opavě, Praskova 399/8.}
+	\vfill
+	\noindent{V Opavě \datumOdevzdani\\}
+	\noindent
+	\begin{minipage}{\linewidth}
+		\hspace{9.5cm} 
+		\begin{tabular}{@{}p{6cm}@{}}
+			\dotfill      \\
+			Podpis autora práce
+		\end{tabular}
+	\end{minipage}
+	
+	\cleardoublepage %% Zalomení dvojstránky
+
+%% Stránka obsahující abstrakt (anotaci)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+%% Abstrakt v češtině
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\noindent{\Large{\bfseries{Abstrakt}}}
+	
+	Tato závěrečná studijní práce se zabývá návrhem, vývojem a dokumentací webové aplikace VocabHero, která slouží k procvičování anglické slovní zásoby pomocí herních principů. Práce popisuje celý proces vzniku aplikace od úvodní analýzy požadavků přes návrh struktury až po samotnou implementaci řešení.
+
+	Výsledkem práce je funkční webová aplikace doplněná o přehlednou technickou dokumentaci, která popisuje průběh vývoje a může sloužit jako podklad pro další rozšiřování projektu nebo jako inspirace pro podobně zaměřené aplikace v oblasti vzdělávání.
+	\vspace{18pt}
+	
+	\noindent{\large{\bfseries{Klíčová slova}}}
+	
+	VocabHero, závěrečná práce, Django, Docker, SQLite, PostgreSQL, JavaScript, HTML, CSS, slovní zásoba, anglický jazyk, vzdělávání, gamifikace\dots 
+	
+	\vspace{18pt}
+
+%% Abstrakt v angličtině
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	\noindent{\Large{\bfseries{Abstract}}}
+	
+	This final thesis focuses on the design, development, and documentation of the VocabHero web application, which is intended for practicing English vocabulary using game-based principles. The thesis describes the complete development process, from initial requirement analysis through application design to final implementation.
+	
+	The result of this thesis is a fully functional web application accompanied by clear technical documentation that outlines the development process and provides a foundation for future expansion or inspiration for similar educational projects.
+
+	\vspace{18pt}
+	
+	\noindent{\large{\bfseries{Keywords}}}
+	
+	VocabHero, thesis, Django, Docker, SQLite, PostgreSQL, JavaScript, HTML, CSS, vocabulary, English language, education, gamification\dots  
+	
+	\clearpage %% Zalomení stránky
+
+%% Stránka s generovaným obsahem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	
+	\tableofcontents %% Vygeneruje tabulku s obsahem
+	\pagenumbering{arabic} %% Nastavení způsobu číslování stránek (alternativy roman | Roman)
+	\setcounter{page}{1} %% Nastavení počitadla stránek
+	
+	\pagestyle{plain}
+
+%% Stránka s úvodem - povinná část
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+\chapter*{Úvod}
+%Tento příkaz vytvoří novou kapitolu s názvem "Úvod" ve vašem dokumentu.
+%Hvězdička * u příkazu \chapter* znamená, že tato kapitola nebude mít číslo. Ve výsledném dokumentu se tedy objeví jako "Úvod" bez předcházejícího čísla kapitoly, které se obvykle zobrazuje u číslovaných kapitol.
+%Tento příkaz také znamená, že kapitola se automaticky neobjeví v obsahu, protože LaTeX standardně zahrnuje do obsahu pouze číslované kapitoly.
+\addcontentsline{toc}{chapter}{Úvod}
+%Tento příkaz ručně přidává záznam do obsahu.
+%První parametr toc označuje, že přidáváme záznam do Table of Contents (obsahu).
+%Druhý parametr chapter specifikuje úroveň záznamu. V tomto případě říkáme, že přidávaný záznam má být považován za kapitolu.
+%Třetí parametr Úvod je text, který se objeví v obsahu. V tomto případě bude v obsahu zobrazen název "Úvod".	
+Výuka cizích jazyků je dnes běžnou součástí vzdělávání a znalost anglické slovní zásoby patří mezi základní dovednosti potřebné pro studium, práci i každodenní komunikaci. Přestože existuje velké množství nástrojů a aplikací zaměřených na výuku jazyků, ne všechny dokážou uživatele dlouhodobě motivovat k pravidelnému procvičování. Často se zaměřují spíše na pasivní učení, které může být časem nezajímavé a méně efektivní.
+
+Tato závěrečná studijní práce se zaměřuje na návrh a realizaci webové aplikace VocabHero, jejímž cílem je usnadnit a zpříjemnit procvičování anglické slovní zásoby pomocí interaktivních herních režimů. Aplikace vznikla jako reakce na osobní zkušenost při hledání nástroje, který by umožňoval efektivní, zábavné, interaktivní a zároveň nenáročné procvičování cizího jazyka.
+
+Práce se věnuje použitým technologiím a popisu jejich role při vývoji aplikace, dále analýze požadavků a návrhu celkové struktury řešení. Následně je popsán samotný vývoj aplikace, včetně návrhu databázového modelu a implementace jednotlivých částí systému.
+
+%Tipy k psaní úvodu
+%Je povinný, nadpis neměňte, rozsah - max. 1 strana. 
+%Tato část práce obsahuje: 
+%* náhled do řešené problematiky, zdůvodnění volby problematiky, 
+%* předem definované cíle práce, 
+%* motivaci pro další čtení textu včetně stručného uvedení obsahu následujících kapitol 
+
+
+\chapter{Analýza, návrh a vývoj aplikace}
+\section{Analýza požadavků}
+Před zahájením samotného vývoje aplikace byla provedena analýza požadavků, jejímž cílem bylo stanovit hlavní funkce a směr celého projektu. Aplikace měla sloužit k procvičování anglické slovní zásoby zábavnou a přehlednou formou s důrazem na jednoduché ovládání a motivaci uživatele k pravidelnému používání.
+
+Mezi hlavní požadavky patřila práce se slovní zásobou, existence herních režimů, správa uživatelských účtů a možnost dalšího rozšiřování aplikace do budoucna.
+
+\section{Návaznost na předchozí projekt}
+Projekt VocabHero navazuje na školní projekt z předchozího ročníku, v jehož rámci vznikla první funkční verze aplikace. Tento základ umožnil ověřit hlavní myšlenku projektu a vytvořit funkční jádro aplikace.
+
+V rámci této práce byl projekt dále rozšířen, upraven a přepracován tak, aby odpovídal požadavkům závěrečné studijní práce. Původní prototyp se tak postupně proměnil v komplexnější a stabilnější webovou aplikaci.
+
+\section{Použité technologie}
+Při vývoji aplikace byly použity moderní technologie běžně využívané při tvorbě webových aplikací. Backendová část aplikace byla realizována pomocí webového frameworku Django.
+
+V průběhu vývoje došlo k přechodu z databázového systému SQLite na PostgreSQL, který lépe odpovídá požadavkům na rozšiřitelnost a stabilitu aplikace. Pro sjednocení vývojového prostředí a zjednodušení spuštění aplikace byla využita kontejnerizační technologie Docker.
+
+\clearpage
+
+\section{Průběh vývoje aplikace}
+Vývoj aplikace probíhal postupně a iterativně. Jednotlivé části systému byly navrhovány a upravovány na základě průběžného testování a aktuálních požadavků projektu.
+
+Důraz byl kladen na funkčnost herních režimů, správu slovní zásoby a přehlednost uživatelského rozhraní. V průběhu vývoje docházelo k úpravám databázové struktury, rozšiřování funkcionality a optimalizaci celkového řešení.
+
+\section{Struktura aplikace}
+Na základě provedené analýzy a návrhu řešení byla navržena struktura aplikace, která vymezuje základní vztahy mezi jednotlivými částmi systému. Diagram znázorňuje databázový model aplikace a vztahy mezi hlavními entitami, se kterými aplikace pracuje.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{image/ERDIAGRAM.png}
+	\caption{Diagram databázového modelu aplikace VocabHero}
+	\label{fig:erd}
+\end{figure}
+
+\clearpage
+
+\chapter{Ukázky aplikace}
+
+Tato kapitola představuje vizuální podobu výsledné webové aplikace VocabHero. Následující obrázky zachycují vybrané části uživatelského rozhraní a herních režimů aplikace.
+
+\section{Úvodní stránka}
+
+Úvodní obrazovka aplikace VocabHero představuje hlavní rozcestník, ze kterého má uživatel přístup ke všem klíčovým částem aplikace. Je navržena s důrazem na jednoduchý, přehledný a vizuálně příjemný design, který usnadňuje orientaci v aplikaci.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{image/homepage.png}
+	\caption{Úvodní stránka}
+\end{figure}
+
+\clearpage
+
+\section{Herní režim}
+Herní režim Hero Mode je hlavním herním prvkem aplikace VocabHero. Uživatel je testován ze slovní zásoby rozdělené do několika úrovní obtížnosti, které na sebe postupně navazují. Cílem režimu je správně přeložit určitý počet slov v omezeném čase a bez ztráty všech životů.
+
+Režim kombinuje časový limit, systém životů a progresivní zvyšování obtížnosti s dalšími herními prvky. V průběhu hry se mohou objevovat náhodné minieventy, které do hry vnášejí prvek náhody a zvyšují její variabilitu. Uživatel má zároveň možnost výběru herních předmětů, jež mohou dočasně ovlivnit průběh hry, například oživením nebo bonusovým časem, za každou správnou odpověď.
+
+Díky rozdělení hry do jednotlivých úrovní, postupnému zvyšování náročnosti a zapojení herních mechanik je režim navržen tak, aby podporoval dlouhodobou motivaci uživatele k opakovanému hraní a zlepšování jazykových dovedností.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{image/heromode.png}
+	\caption{Herní režim aplikace}
+\end{figure}
+
+\clearpage
+
+\section{Režim procvičování}
+Režim procvičování slouží k systematickému upevňování anglické slovní zásoby. Uživatel se může plně soustředit na správnost odpovědí jednotlivých slovíček bez omezení časem nebo počtem pokusů.
+
+Procvičování lze přizpůsobit podle zvolené kategorie slovní zásoby, například zvířata, povolání nebo jídlo, případně podle úrovně obtížnosti. Samotné procvičování probíhá formou výběru správné odpovědi ze čtyř nabízených možností, přičemž pouze jedna odpověď je správná.
+
+Tento režim je vhodný zejména pro začátečníky, ale také pro cílené opakování konkrétních tematických okruhů nebo obtížností, a slouží jako doplněk k dynamičtějším herním režimům aplikace.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{image/practice.png}
+	\caption{Režim procvičování}
+\end{figure}
+
+\clearpage
+
+\section{Přihlášení a správa slovní zásoby}
+Součástí aplikace je také přihlašovací systém, který umožňuje rozlišení běžných uživatelů a administrátorů. Administrátorská část aplikace slouží ke správě slovní zásoby, včetně přidávání, úprav a mazání jednotlivých položek.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{image/login.png}
+	\caption{Přihlašovací stránka}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{image/forms.png}
+	\caption{Formulář}
+\end{figure}
+
+\clearpage
+
+\section{Ukázky vybraných částí implementace}
+Tato část kapitoly prezentuje vybrané ukázky implementace aplikace, které ilustrují práci s aplikační logikou a daty. Ukázky neslouží k detailnímu popisu zdrojového kódu, ale k demonstraci způsobu řešení klíčových funkcí aplikace.
+
+\begin{lstlisting}[style=Python, caption={Ukázka části modelu slovní zásoby}]
+	class Word(models.Model):
+	english = models.CharField(max_length=100)
+	czech = models.CharField(max_length=100)
+	difficulty = models.CharField(
+	max_length=10,
+	choices=[('easy', 'Easy'), ('medium', 'Medium'), ('hard', 'Hard')]
+	)
+\end{lstlisting}
+
+\begin{lstlisting}[style=JavaScript, caption={Normalizace uživatelského vstupu}]
+	function normalize(input) {
+		return input
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, "")
+		.toLowerCase()
+		.trim();
+	}
+\end{lstlisting}
+
+
+
+\clearpage
+	
+\chapter*{Závěr}
+\addcontentsline{toc}{chapter}{Závěr}
+
+Cílem této závěrečné studijní práce bylo navrhnout a implementovat webovou aplikaci VocabHero, která by umožňovala efektivní a zároveň zábavné procvičování anglické slovní zásoby. Hlavním záměrem bylo vytvořit nástroj, jenž propojuje vzdělávání s herními prvky a dokáže uživatele motivovat k pravidelnému používání.
+
+Výsledkem práce je funkční webová aplikace, která může sloužit jako podpůrný nástroj při výuce anglického jazyka nebo jako inspirace pro další projekty zaměřené na gamifikaci vzdělávání. Zároveň práce poskytuje přehled celého procesu vývoje webové aplikace od návrhu až po implementaci.
+
+Do budoucna by bylo možné aplikaci dále rozšiřovat například o detailnější statistiky uživatelských výsledků, adaptivní obtížnost herních režimů nebo podporu dalších jazyků. Projekt tak představuje otevřený základ, který lze dále rozvíjet a přizpůsobovat podle potřeb uživatelů.
+
+%% literatura
+\begin{thebibliography}{99}
+	\bibitem{djangoDocs}
+	DJANGO SOFTWARE FOUNDATION.
+	\textit{Django Documentation} [online].
+	2024 [cit. 2026-01-05].
+	Dostupné z: \url{https://docs.djangoproject.com}
+	
+	\bibitem{postgresDocs}
+	POSTGRESQL GLOBAL DEVELOPMENT GROUP.
+	\textit{PostgreSQL Documentation} [online].
+	2024 [cit. 2026-01-05].
+	Dostupné z: \url{https://www.postgresql.org/docs/}
+	
+	\bibitem{dockerDocs}
+	DOCKER INC.
+	\textit{Docker Documentation} [online].
+	2024 [cit. 2026-01-05].
+	Dostupné z: \url{https://docs.docker.com}
+	
+	\bibitem{gamificationDeterding}
+	DETERDING, Sebastian, Dan DIXON, Rilla KHALED a Lennart NACKE.
+	From game design elements to gamefulness: defining “gamification”.
+	\textit{Proceedings of the 15th International Academic MindTrek Conference}.
+	New York: ACM, 2011, s. 9–15. ISBN 978-1-4503-0816-8.
+	
+	\bibitem{sqliteDocs}
+	SQLITE.
+	\textit{SQLite Documentation} [online].
+	2024 [cit. 2026-01-05].
+	Dostupné z: \url{https://www.sqlite.org/docs.html}
+	
+	
+\end{thebibliography}
+
+	
+\end{document}
